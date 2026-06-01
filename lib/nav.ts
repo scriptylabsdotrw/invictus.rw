@@ -1,0 +1,14 @@
+export interface NavLink {
+  label: string
+  href: string
+}
+
+/** Primary navigation — multi-page routes (Hostinger-style structure). */
+export const navLinks: NavLink[] = [
+  { label: 'Product', href: '/product' },
+  { label: 'Features', href: '/features' },
+  { label: 'How It Works', href: '/how-it-works' },
+  { label: 'Pricing', href: '/pricing' },
+  { label: 'FAQ', href: '/faq' },
+  { label: 'Contact', href: '/contact' },
+]

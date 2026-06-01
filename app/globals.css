@@ -1,0 +1,119 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+
+html {
+  scroll-behavior: smooth;
+  /* Offset anchor scrolling for the sticky navbar */
+  scroll-padding-top: 104px;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', var(--font-inter),
+    'Segoe UI', sans-serif;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #ffffff;
+  color: #0f172a;
+  overflow-x: hidden;
+}
+
+@layer base {
+  h1,
+  h2,
+  h3 {
+    @apply font-display font-bold tracking-tight text-ink;
+  }
+}
+
+@layer components {
+  /* Layout */
+  .container-px {
+    @apply mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-10;
+  }
+  .section {
+    @apply py-16 sm:py-20 lg:py-24;
+  }
+
+  /* Typography helpers — Apple-style large, tight, balanced display type */
+  .display {
+    @apply font-display font-bold tracking-[-0.025em] leading-[1.05];
+    text-wrap: balance;
+  }
+  .balance {
+    text-wrap: balance;
+  }
+  .eyebrow {
+    @apply inline-flex items-center gap-2 text-sm font-semibold tracking-tight text-emerald-700;
+  }
+  .lead {
+    @apply text-xl leading-relaxed text-muted sm:text-2xl;
+    text-wrap: balance;
+  }
+
+  /* Buttons */
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600 focus-visible:ring-offset-2;
+  }
+  .btn-primary {
+    @apply btn bg-emerald-800 text-white hover:bg-emerald-900;
+  }
+  .btn-secondary {
+    @apply btn border border-line bg-white text-ink hover:border-emerald-300 hover:bg-neutralbg;
+  }
+  .btn-ghost {
+    @apply btn text-ink hover:bg-neutralbg;
+  }
+
+  /* Cards — flat, Apple-style: hairline border, subtle fill, no shadow */
+  .card {
+    @apply rounded-3xl border border-line bg-white p-7;
+  }
+  .glass {
+    @apply border border-line bg-white/80 backdrop-blur-xl;
+  }
+  .pill {
+    @apply inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs font-semibold;
+  }
+  .gold-line {
+    @apply h-px w-10 bg-gold;
+  }
+
+  /* Soft fade on the left/right edges of horizontal marquees (Apple/Hostinger style). */
+  .mask-fade-x {
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent,
+      #000 8%,
+      #000 92%,
+      transparent
+    );
+    mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+  }
+
+  .hero-bg {
+    background-image: url('/hero-bg.svg');
+  }
+
+  .icon-tile {
+    @apply flex h-12 w-12 items-center justify-center rounded-2xl bg-emerald-800 text-white;
+  }
+}
+
+/* Subtle scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background: #d1d9e0;
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #b6c2cd;
+}
