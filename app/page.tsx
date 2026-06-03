@@ -5,6 +5,7 @@ import ProblemSection from '@/components/ProblemSection'
 import Features from '@/components/Features'
 import HowItWorks from '@/components/HowItWorks'
 import Testimonials from '@/components/Testimonials'
+import Partners from '@/components/Partners'
 import CTABand from '@/components/CTABand'
 
 export default function HomePage() {
@@ -21,6 +22,7 @@ export default function HomePage() {
       <HowItWorks />
       <Testimonials />
       <ClientsMarquee />
+      <Partners />
       <CTABand />
     </>
   )

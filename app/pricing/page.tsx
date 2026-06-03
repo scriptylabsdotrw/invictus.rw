@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import PageHeader from '@/components/PageHeader'
+import PageHero from '@/components/PageHero'
 import Pricing from '@/components/Pricing'
 import PricingAssurance from '@/components/PricingAssurance'
 import ROISection from '@/components/ROISection'
@@ -16,10 +16,11 @@ export const metadata: Metadata = {
 export default function PricingPage() {
   return (
     <>
-      <PageHeader
+      <PageHero
         eyebrow="Pricing"
         title="Flexible plans for growing institutions"
         subtitle="Start where you are and scale as you grow. Every plan is tailored to your institution — talk to us for a quote that fits."
+        chips={['No setup fees', 'Scale as you grow', 'Tailored quotes', 'Cancel anytime']}
       />
       <Pricing showHeader={false} />
       <PricingAssurance />

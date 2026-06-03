@@ -9,7 +9,7 @@
 html {
   scroll-behavior: smooth;
   /* Offset anchor scrolling for the sticky navbar */
-  scroll-padding-top: 104px;
+  scroll-padding-top: 128px;
 }
 
 body {

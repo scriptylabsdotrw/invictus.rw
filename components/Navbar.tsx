@@ -28,6 +28,13 @@ export default function Navbar() {
 
   const isActive = (href: string) => pathname === href
 
+  // "Hero mode": over a dark hero before scrolling. The bar is transparent and
+  // uses light text + the white logo. Scrolling (or a light-header page) flips
+  // it to the solid white bar with dark text + the green logo.
+  const darkHeroRoutes = ['/', '/features', '/pricing']
+  const heroMode = darkHeroRoutes.includes(pathname) && !scrolled
+  const showWhiteLogo = heroMode
+
   return (
     <header className="fixed inset-x-0 top-0 z-50">
       <motion.nav
@@ -37,12 +44,24 @@ export default function Navbar() {
         className={`transition-all duration-300 ${
           scrolled
             ? 'border-b border-line/80 bg-white/80 shadow-soft backdrop-blur-xl'
-            : 'border-b border-transparent bg-white/40 backdrop-blur-sm'
+            : 'border-b border-transparent bg-transparent'
         }`}
       >
-        <div className="container-px flex h-[92px] items-center justify-between">
-          <Link href="/" aria-label="Invictus home" className="shrink-0">
-            <Logo className="h-14" />
+        <div className="container-px flex h-[116px] items-center justify-between">
+          <Link href="/" aria-label="Invictus home" className="relative shrink-0">
+            {/* Green logo (default) — sizes the container */}
+            <Logo
+              className={`h-[88px] transition-opacity duration-300 ${
+                showWhiteLogo ? 'opacity-0' : 'opacity-100'
+              }`}
+            />
+            {/* White logo — fades in over the dark hero */}
+            <Logo
+              light
+              className={`absolute left-0 top-0 h-[88px] transition-opacity duration-300 ${
+                showWhiteLogo ? 'opacity-100' : 'opacity-0'
+              }`}
+            />
           </Link>
 
           <div className="hidden items-center gap-1 lg:flex">
@@ -51,9 +70,13 @@ export default function Navbar() {
                 key={l.href}
                 href={l.href}
                 className={`rounded-full px-3.5 py-2 text-sm font-medium transition-colors ${
-                  isActive(l.href)
-                    ? 'bg-emerald-50 text-emerald-800'
-                    : 'text-ink/80 hover:bg-emerald-50 hover:text-emerald-800'
+                  heroMode
+                    ? isActive(l.href)
+                      ? 'bg-white/15 text-white'
+                      : 'text-white/85 hover:bg-white/10 hover:text-white'
+                    : isActive(l.href)
+                      ? 'bg-emerald-50 text-emerald-800'
+                      : 'text-ink/80 hover:bg-emerald-50 hover:text-emerald-800'
                 }`}
               >
                 {l.label}
@@ -62,10 +85,18 @@ export default function Navbar() {
           </div>
 
           <div className="hidden items-center gap-2 lg:flex">
-            <Link href="/contact" className="btn-ghost">
+            <Link
+              href="/contact"
+              className={heroMode ? 'btn text-white hover:bg-white/10' : 'btn-ghost'}
+            >
               Login
             </Link>
-            <Link href="/contact" className="btn-primary">
+            <Link
+              href="/contact"
+              className={
+                heroMode ? 'btn bg-white text-emerald-900 hover:bg-emerald-50' : 'btn-primary'
+              }
+            >
               Request Demo
             </Link>
           </div>
@@ -75,7 +106,9 @@ export default function Navbar() {
             aria-label={open ? 'Close menu' : 'Open menu'}
             aria-expanded={open}
             onClick={() => setOpen((v) => !v)}
-            className="flex h-11 w-11 items-center justify-center rounded-full border border-line bg-white text-ink lg:hidden"
+            className={`flex h-11 w-11 items-center justify-center rounded-full border transition-colors lg:hidden ${
+              heroMode ? 'border-white/30 bg-white/10 text-white' : 'border-line bg-white text-ink'
+            }`}
           >
             {open ? <Icon icon={Cancel01Icon} size={20} /> : <Icon icon={Menu01Icon} size={20} />}
           </button>

@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import PageHeader from '@/components/PageHeader'
+import PageHero from '@/components/PageHero'
 import FeaturesShowcase, { LedgerSpotlight } from '@/components/FeaturesShowcase'
 import ProductPreview from '@/components/ProductPreview'
 import CTABand from '@/components/CTABand'
@@ -14,10 +14,11 @@ export const metadata: Metadata = {
 export default function FeaturesPage() {
   return (
     <>
-      <PageHeader
+      <PageHero
         eyebrow="Capabilities"
         title="Everything your institution needs"
         subtitle="A complete, secure core banking toolkit — organized into the three pillars that run a modern financial institution."
+        chips={['Accounts', 'Deposits', 'Lending', 'Transactions', 'Ledger', 'Branches', 'Portals']}
       />
       <FeaturesShowcase />
       <LedgerSpotlight />
