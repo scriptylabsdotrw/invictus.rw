@@ -1,4 +1,7 @@
+'use client'
+
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import Logo from './ui/Logo'
 
 // Brand/social glyphs as inline SVG (lucide removed brand icons).
@@ -24,7 +27,7 @@ const columns = [
   {
     title: 'Product',
     links: [
-      { label: 'Overview', href: '/product' },
+      { label: 'Features', href: '/features' },
       { label: 'How It Works', href: '/how-it-works' },
       { label: 'Pricing', href: '/pricing' },
       { label: 'Request Demo', href: '/contact' },
@@ -43,7 +46,7 @@ const columns = [
     title: 'Resources',
     links: [
       { label: 'FAQ', href: '/faq' },
-      { label: 'Core Banking', href: '/product' },
+      { label: 'Core Banking', href: '/features' },
       { label: 'For SACCOs', href: '/features' },
       { label: 'For Microfinance', href: '/features' },
     ],
@@ -51,14 +54,17 @@ const columns = [
   {
     title: 'Contact',
     links: [
-      { label: 'hello@invictus.rw', href: '/contact' },
-      { label: '+250 XXX XXX XXX', href: '/contact' },
+      { label: 'demo@invictus.rw', href: '/contact' },
+      { label: '+250 780 226 666', href: '/contact' },
       { label: 'Kigali, Rwanda', href: '/contact' },
     ],
   },
 ]
 
 export default function Footer() {
+  const pathname = usePathname()
+  if (pathname === '/login') return null
+
   return (
     <footer className="relative overflow-hidden bg-emerald-950 text-white">
       {/* gold accent line */}
@@ -108,17 +114,34 @@ export default function Footer() {
           ))}
         </div>
 
-        {/* Giant INVICTUS watermark */}
-        <div
-          className="pointer-events-none mt-12 select-none text-center font-display font-bold leading-none tracking-[-0.03em] text-white/[0.04]"
-          aria-hidden="true"
-        >
-          <span className="block text-[20vw] lg:text-[15rem]">INVICTUS</span>
+        {/* Giant INVICTUS watermark — stretched to fit the footer width exactly */}
+        <div className="pointer-events-none mt-10 select-none" aria-hidden="true">
+          <svg viewBox="0 0 1000 230" className="block w-full" role="presentation">
+            <text
+              x="0"
+              y="188"
+              textLength="1000"
+              lengthAdjust="spacingAndGlyphs"
+              fontSize="230"
+              className="font-display font-bold"
+              style={{ fill: 'rgba(255,255,255,0.06)' }}
+            >
+              INVICTUS
+            </text>
+          </svg>
         </div>
 
         {/* Bottom bar */}
         <div className="relative z-10 -mt-6 flex flex-col items-center justify-between gap-4 border-t border-white/10 py-8 text-center sm:flex-row sm:text-left">
-          <p className="text-sm text-emerald-100/70">© 2026 Invictus. All rights reserved.</p>
+          <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-sm text-emerald-100/70 sm:justify-start">
+            <span>© 2026 Invictus. All rights reserved.</span>
+            <Link href="/privacy" className="transition-colors hover:text-white">
+              Privacy Policy
+            </Link>
+            <Link href="/terms" className="transition-colors hover:text-white">
+              Terms &amp; Conditions
+            </Link>
+          </div>
 
           <span className="inline-flex items-center gap-2 rounded-full border border-emerald-400/30 bg-emerald-500/10 px-4 py-1.5 text-sm font-semibold text-emerald-300">
             <span className="relative flex h-2 w-2">
@@ -136,7 +159,7 @@ export default function Footer() {
               rel="noopener noreferrer"
               className="font-display font-bold tracking-tight text-white transition-colors hover:text-gold"
             >
-              ScriptyLabs
+              ScriptyLabs Inc
             </a>
           </p>
         </div>

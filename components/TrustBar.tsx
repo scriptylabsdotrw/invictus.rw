@@ -21,15 +21,15 @@ const items = [
 export default function TrustBar() {
   return (
     <section className="border-y border-line bg-white">
-      <div className="container-px py-10">
+      <div className="container-px py-8">
         <Reveal>
-          <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-4">
+          <div className="flex flex-wrap items-center justify-center gap-x-7 gap-y-4 sm:gap-x-9">
             {items.map(({ icon, label }) => (
               <span
                 key={label}
-                className="inline-flex items-center gap-2 text-sm font-semibold text-ink/70"
+                className="group inline-flex items-center gap-2.5 text-sm font-semibold text-ink/75"
               >
-                <span className="text-emerald-600">
+                <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-emerald-50 text-emerald-700 transition-colors duration-300 group-hover:bg-emerald-600 group-hover:text-white">
                   <Icon icon={icon} size={18} />
                 </span>
                 {label}

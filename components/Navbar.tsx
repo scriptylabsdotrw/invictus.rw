@@ -31,9 +31,12 @@ export default function Navbar() {
   // "Hero mode": over a dark hero before scrolling. The bar is transparent and
   // uses light text + the white logo. Scrolling (or a light-header page) flips
   // it to the solid white bar with dark text + the green logo.
-  const darkHeroRoutes = ['/', '/features', '/pricing']
+  const darkHeroRoutes = ['/', '/features', '/pricing', '/how-it-works', '/contact']
   const heroMode = darkHeroRoutes.includes(pathname) && !scrolled
   const showWhiteLogo = heroMode
+
+  // The login page is a standalone, chrome-less screen.
+  if (pathname === '/login') return null
 
   return (
     <header className="fixed inset-x-0 top-0 z-50">
@@ -47,18 +50,18 @@ export default function Navbar() {
             : 'border-b border-transparent bg-transparent'
         }`}
       >
-        <div className="container-px flex h-[116px] items-center justify-between">
+        <div className="container-px flex h-20 items-center justify-between lg:h-[116px]">
           <Link href="/" aria-label="Invictus home" className="relative shrink-0">
             {/* Green logo (default) — sizes the container */}
             <Logo
-              className={`h-[88px] transition-opacity duration-300 ${
+              className={`h-14 transition-opacity duration-300 lg:h-[88px] ${
                 showWhiteLogo ? 'opacity-0' : 'opacity-100'
               }`}
             />
             {/* White logo — fades in over the dark hero */}
             <Logo
               light
-              className={`absolute left-0 top-0 h-[88px] transition-opacity duration-300 ${
+              className={`absolute left-0 top-0 h-14 transition-opacity duration-300 lg:h-[88px] ${
                 showWhiteLogo ? 'opacity-100' : 'opacity-0'
               }`}
             />
@@ -86,7 +89,7 @@ export default function Navbar() {
 
           <div className="hidden items-center gap-2 lg:flex">
             <Link
-              href="/contact"
+              href="/login"
               className={heroMode ? 'btn text-white hover:bg-white/10' : 'btn-ghost'}
             >
               Login
@@ -139,7 +142,7 @@ export default function Navbar() {
                 </Link>
               ))}
               <div className="mt-2 grid grid-cols-2 gap-2 p-1">
-                <Link href="/contact" className="btn-secondary">
+                <Link href="/login" className="btn-secondary">
                   Login
                 </Link>
                 <Link href="/contact" className="btn-primary">

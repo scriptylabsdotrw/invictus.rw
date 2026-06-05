@@ -17,6 +17,16 @@ import {
   Analytics01Icon,
   Globe02Icon,
   Layers01Icon,
+  Calendar01Icon,
+  Clock01Icon,
+  Coins01Icon,
+  BalanceScaleIcon,
+  DashboardSquare01Icon,
+  Invoice01Icon,
+  SmartPhone01Icon,
+  DollarCircleIcon,
+  UserCircleIcon,
+  Notification01Icon,
   Tick02Icon,
 } from '@/lib/icons'
 
@@ -52,6 +62,12 @@ const pillars: Pillar[] = [
           'Run savings, current, and fixed-deposit products with automated interest accrual.',
       },
       {
+        icon: Calendar01Icon,
+        title: 'Fixed & Term Deposits',
+        description:
+          'Lock in term deposits with defined tenures, maturity handling, and automatic interest payout.',
+      },
+      {
         icon: BankIcon,
         title: 'Loans & Credit',
         description:
@@ -62,6 +78,12 @@ const pillars: Pillar[] = [
         title: 'Transactions & Payments',
         description:
           'Deposits, withdrawals, transfers, and payments processed in real time, straight to the ledger.',
+      },
+      {
+        icon: Clock01Icon,
+        title: 'Standing Orders & Schedules',
+        description:
+          'Automate recurring transfers, loan repayments, and scheduled postings without manual work.',
       },
     ],
   },
@@ -76,9 +98,19 @@ const pillars: Pillar[] = [
         description: 'Fast, controlled cash operations with day-open, day-close, and cash positions.',
       },
       {
+        icon: Coins01Icon,
+        title: 'Cash & Vault Management',
+        description: 'Track till floats, vault balances, and cash movements across every branch.',
+      },
+      {
         icon: PercentCircleIcon,
         title: 'Interest, Fees & Charges',
         description: 'Configure interest, fees, and penalties per product so income is always accurate.',
+      },
+      {
+        icon: BalanceScaleIcon,
+        title: 'Approvals & Maker–Checker',
+        description: 'Enforce dual control on sensitive actions so nothing posts without a second sign-off.',
       },
       {
         icon: SecurityCheckIcon,
@@ -108,6 +140,16 @@ const pillars: Pillar[] = [
         description: 'Portfolio, deposits, transactions, and income reports ready on demand.',
       },
       {
+        icon: DashboardSquare01Icon,
+        title: 'Real-Time Dashboards',
+        description: 'Live KPIs on deposits, portfolio, income, and growth for leadership at a glance.',
+      },
+      {
+        icon: Invoice01Icon,
+        title: 'Compliance Reporting',
+        description: 'Generate regulatory-style returns and statements built from your live ledger.',
+      },
+      {
         icon: Globe02Icon,
         title: 'Branded Customer Portals',
         description: 'Each institution gets a professional portal on its own subdomain.',
@@ -116,6 +158,38 @@ const pillars: Pillar[] = [
         icon: Layers01Icon,
         title: 'Multi-Tenant Architecture',
         description: 'Serve many institutions from one platform with fully isolated data.',
+      },
+    ],
+  },
+  {
+    label: '04 — Channels & Integrations',
+    title: 'Reach customers & connect systems',
+    summary: 'Meet customers where they are and plug into the national systems you rely on.',
+    items: [
+      {
+        icon: SmartPhone01Icon,
+        title: 'Mobile & USSD Banking',
+        description: 'Let customers check balances, transfer, and transact from any phone, smart or basic.',
+      },
+      {
+        icon: DollarCircleIcon,
+        title: 'Mobile Money Integration',
+        description: 'Connect deposits and withdrawals to mobile money for instant, cashless funding.',
+      },
+      {
+        icon: UserCircleIcon,
+        title: 'Identity Verification (NIDA)',
+        description: 'Confirm customer identity in real time against the national ID system during onboarding.',
+      },
+      {
+        icon: Notification01Icon,
+        title: 'Notifications & Alerts',
+        description: 'Keep customers and staff informed with automated SMS and email on key events.',
+      },
+      {
+        icon: SecurityCheckIcon,
+        title: 'Audit Trail & Security',
+        description: 'Every action is logged and traceable, with encryption and tenant isolation throughout.',
       },
     ],
   },

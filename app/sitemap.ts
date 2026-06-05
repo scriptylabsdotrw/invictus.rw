@@ -3,7 +3,7 @@ import type { MetadataRoute } from 'next'
 const SITE_URL = 'https://invictus.rw'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const routes = ['', '/product', '/features', '/how-it-works', '/pricing', '/faq', '/contact']
+  const routes = ['', '/features', '/how-it-works', '/pricing', '/faq', '/contact', '/privacy', '/terms']
   return routes.map((route) => ({
     url: `${SITE_URL}${route}`,
     changeFrequency: 'monthly',

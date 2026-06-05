@@ -100,7 +100,7 @@ export default function ProblemSection() {
           className="mt-12 flex justify-center"
         >
           <Link
-            href="/product"
+            href="/features"
             className="group inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-white px-5 py-2.5 text-sm font-semibold text-emerald-800 transition-colors hover:border-emerald-300 hover:bg-emerald-50"
           >
             Invictus replaces all of it

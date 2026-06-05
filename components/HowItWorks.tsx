@@ -1,153 +1,227 @@
 'use client'
 
-import { useEffect, useState } from 'react'
-import { motion } from 'framer-motion'
+import { useRef, useState } from 'react'
+import Link from 'next/link'
+import {
+  AnimatePresence,
+  motion,
+  useScroll,
+  useMotionValueEvent,
+  useTransform,
+} from 'framer-motion'
 import Icon from './ui/Icon'
 import {
   Building03Icon,
   Configuration01Icon,
   Globe02Icon,
   ChartUpIcon,
-  Tick02Icon,
+  ArrowRight01Icon,
 } from '@/lib/icons'
 
 const steps = [
   {
+    tag: 'Onboard',
     icon: Building03Icon,
-    title: 'Create Institution Account',
-    text: 'A bank, SACCO, or microfinance institution is onboarded into Invictus.',
+    title: 'Create your institution account',
+    text: 'A bank, SACCO, or microfinance institution is onboarded into Invictus in minutes.',
   },
   {
+    tag: 'Configure',
     icon: Configuration01Icon,
-    title: 'Configure Banking',
+    title: 'Configure your banking',
     text: 'Set up account products, interest and fees, staff users, branches, and your chart of accounts.',
   },
   {
+    tag: 'Launch',
     icon: Globe02Icon,
-    title: 'Launch Branded Portal',
-    text: 'The institution receives a branded portal such as yourbank.invictus.rw.',
+    title: 'Launch a branded portal',
+    text: 'The institution receives its own branded portal, such as yourbank.invictus.rw.',
   },
   {
+    tag: 'Operate',
     icon: ChartUpIcon,
-    title: 'Run Banking Operations',
+    title: 'Run banking operations',
     text: 'Serve customers across accounts, deposits, transactions, loans, branches, and reports.',
   },
 ]
 
 const EASE = [0.22, 1, 0.36, 1] as const
-const STEP_MS = 3600
+const pad = (n: number) => String(n).padStart(2, '0')
 
 export default function HowItWorks({ showHeader = true }: { showHeader?: boolean }) {
+  const containerRef = useRef<HTMLDivElement>(null)
   const [active, setActive] = useState(0)
-  const [paused, setPaused] = useState(false)
 
-  useEffect(() => {
-    if (paused) return
-    const id = setInterval(() => setActive((v) => (v + 1) % steps.length), STEP_MS)
-    return () => clearInterval(id)
-  }, [paused])
+  // Scroll through the tall container drives the active step while the inner
+  // editorial spread stays pinned (sticky). Releases after the final step.
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ['start start', 'end end'],
+  })
+  const progressWidth = useTransform(scrollYProgress, [0, 1], ['0%', '100%'])
 
-  // Fraction of the connector line that should be filled (0 → 1).
-  const fill = steps.length > 1 ? active / (steps.length - 1) : 0
+  useMotionValueEvent(scrollYProgress, 'change', (v) => {
+    const idx = Math.min(steps.length - 1, Math.max(0, Math.floor(v * steps.length)))
+    setActive(idx)
+  })
+
+  const step = steps[active]
+  const isLast = active === steps.length - 1
 
   return (
-    <section className="section bg-white">
-      <div className="container-px">
-        {showHeader && (
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-80px' }}
-            transition={{ duration: 0.7, ease: EASE }}
-            className="mx-auto max-w-2xl text-center"
-          >
-            <span className="eyebrow">How it works</span>
-            <h2 className="display mt-5 text-4xl sm:text-5xl lg:text-6xl">
-              Live in four clear steps
-            </h2>
-          </motion.div>
-        )}
+    <section
+      ref={containerRef}
+      className="relative bg-white"
+      style={{ height: `${steps.length * 90}vh` }}
+    >
+      {/* Pinned editorial spread */}
+      <div className="sticky top-0 flex min-h-screen items-center overflow-hidden py-14 sm:py-24">
+        <div className="container-px w-full">
+          {/* ---- Masthead ---- */}
+          <div className="flex items-end justify-between gap-4">
+            <div>
+              <span className="text-xs font-bold uppercase tracking-[0.22em] text-emerald-700">
+                How it works
+              </span>
+              {showHeader && (
+                <h2 className="display mt-2 text-3xl text-ink sm:text-4xl lg:text-5xl">
+                  Live in four clear steps
+                </h2>
+              )}
+            </div>
+            <span className="hidden font-display text-sm font-bold tracking-[0.2em] text-muted sm:block">
+              {pad(active + 1)} <span className="text-line">/</span> {pad(steps.length)}
+            </span>
+          </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-80px' }}
-          transition={{ duration: 0.7, ease: EASE }}
-          onMouseEnter={() => setPaused(true)}
-          onMouseLeave={() => setPaused(false)}
-          className={`relative ${showHeader ? 'mt-20' : 'mt-8'}`}
-        >
-          {/* Connector line that fills up to the active step */}
-          <div className="absolute left-[12.5%] right-[12.5%] top-8 hidden h-0.5 bg-line lg:block">
+          {/* Scroll-driven progress rule */}
+          <div className="relative mt-5 h-px w-full bg-line">
             <motion.div
-              className="h-full origin-left rounded-full bg-gradient-to-r from-emerald-600 to-emerald-400"
-              animate={{ scaleX: fill }}
-              transition={{ duration: 0.6, ease: EASE }}
-              style={{ width: '100%', transformOrigin: 'left' }}
+              style={{ width: progressWidth }}
+              className="absolute inset-y-0 left-0 bg-gradient-to-r from-emerald-600 to-gold"
             />
           </div>
 
-          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-            {steps.map((s, i) => {
-              const isActive = i === active
-              const isDone = i < active
-
-              return (
-                <button
-                  key={s.title}
-                  type="button"
-                  onClick={() => setActive(i)}
-                  className="group flex flex-col items-center text-center focus:outline-none"
+          {/* ---- Main spread: giant number + content ---- */}
+          <div className="mt-8 grid items-center gap-4 lg:mt-14 lg:min-h-[360px] lg:grid-cols-12 lg:gap-10">
+            {/* Oversized step number */}
+            <div className="relative lg:col-span-5">
+              <AnimatePresence mode="wait">
+                <motion.span
+                  key={active}
+                  initial={{ opacity: 0, y: 40, rotateX: -20 }}
+                  animate={{ opacity: 1, y: 0, rotateX: 0 }}
+                  exit={{ opacity: 0, y: -40, rotateX: 20 }}
+                  transition={{ duration: 0.5, ease: EASE }}
+                  className="block bg-gradient-to-br from-emerald-900 via-emerald-600 to-emerald-400 bg-clip-text font-display text-[5.5rem] font-bold leading-[0.8] tracking-tighter text-transparent sm:text-[12rem] lg:text-[17rem]"
                 >
-                  {/* Numbered / completed node */}
-                  <motion.div
-                    animate={{ scale: isActive ? 1.12 : 1 }}
-                    transition={{ type: 'spring', stiffness: 300, damping: 18 }}
-                    className={`relative z-10 flex h-16 w-16 items-center justify-center rounded-full font-display text-xl font-bold ring-4 ring-white transition-colors duration-300 ${
-                      isActive || isDone
-                        ? 'bg-gradient-to-br from-emerald-600 to-emerald-800 text-white'
-                        : 'bg-emerald-50 text-emerald-700'
-                    }`}
-                  >
-                    {isDone ? <Icon icon={Tick02Icon} size={26} /> : i + 1}
-                  </motion.div>
+                  {pad(active + 1)}
+                </motion.span>
+              </AnimatePresence>
+            </div>
 
-                  {/* Step card */}
-                  <motion.div
-                    animate={{ y: isActive ? -4 : 0 }}
-                    transition={{ type: 'spring', stiffness: 300, damping: 24 }}
-                    className={`mt-6 h-full w-full overflow-hidden rounded-3xl border p-6 transition-colors duration-300 ${
-                      isActive ? 'border-emerald-300 bg-emerald-50/60' : 'border-line bg-white'
-                    }`}
-                  >
+            {/* Content */}
+            <div className="lg:col-span-7 lg:pl-6">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={active}
+                  initial={{ opacity: 0, x: 30 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -30 }}
+                  transition={{ duration: 0.45, ease: EASE }}
+                >
+                  <span className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.22em] text-emerald-700">
+                    <Icon icon={step.icon} size={15} />
+                    {step.tag}
+                  </span>
+
+                  <h3 className="display mt-4 text-balance text-3xl text-ink sm:text-5xl lg:text-6xl">
+                    {step.title}
+                  </h3>
+
+                  <div className="mt-5 h-0.5 w-16 bg-gold" />
+
+                  <p className="mt-5 max-w-md text-base leading-relaxed text-muted sm:text-lg">
+                    {step.text}
+                  </p>
+
+                  {/* Next teaser / final CTA */}
+                  <div className="mt-7">
+                    {isLast ? (
+                      <div className="flex flex-wrap items-center gap-4">
+                        <span className="inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-4 py-1.5 text-sm font-semibold text-emerald-700">
+                          <span className="relative flex h-2 w-2">
+                            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-500 opacity-75" />
+                            <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
+                          </span>
+                          You&apos;re live
+                        </span>
+                        <Link
+                          href="/contact"
+                          className="group inline-flex items-center gap-2 rounded-full bg-emerald-800 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-emerald-900"
+                        >
+                          Request a demo
+                          <span className="transition-transform group-hover:translate-x-1">
+                            <Icon icon={ArrowRight01Icon} size={16} />
+                          </span>
+                        </Link>
+                      </div>
+                    ) : (
+                      <div className="flex items-center gap-3 text-sm">
+                        <span className="text-xs font-bold uppercase tracking-[0.18em] text-muted/60">
+                          Next
+                        </span>
+                        <span className="font-display font-bold text-emerald-700">
+                          {pad(active + 2)}
+                        </span>
+                        <span className="font-semibold text-ink/70">{steps[active + 1].title}</span>
+                        <span className="text-gold">
+                          <Icon icon={ArrowRight01Icon} size={16} />
+                        </span>
+                      </div>
+                    )}
+                  </div>
+                </motion.div>
+              </AnimatePresence>
+            </div>
+          </div>
+
+          {/* ---- Step index ---- */}
+          <div className="mt-8 grid grid-cols-2 border-t border-line sm:grid-cols-4 lg:mt-12">
+            {steps.map((s, i) => {
+              const isCurrent = i === active
+              const isDone = i < active
+              return (
+                <div
+                  key={s.title}
+                  className={`relative border-line px-1 py-4 transition-opacity duration-300 sm:border-l sm:px-5 sm:py-5 sm:first:border-l-0 ${
+                    isCurrent ? 'opacity-100' : 'opacity-45'
+                  }`}
+                >
+                  <div className="flex items-baseline gap-2">
                     <span
-                      className={`mx-auto flex h-12 w-12 items-center justify-center rounded-2xl transition-colors duration-300 ${
-                        isActive ? 'bg-emerald-800 text-white' : 'bg-emerald-50 text-emerald-700'
+                      className={`font-display text-sm font-bold ${
+                        isCurrent || isDone ? 'text-emerald-700' : 'text-muted'
                       }`}
                     >
-                      <Icon icon={s.icon} size={22} />
+                      {pad(i + 1)}
                     </span>
-                    <h3 className="mt-4 text-lg font-bold text-ink">{s.title}</h3>
-                    <p className="mt-2 text-sm leading-relaxed text-muted">{s.text}</p>
-
-                    {/* Auto-advance progress bar on the active card */}
-                    <div className="mt-4 h-1 w-full overflow-hidden rounded-full bg-emerald-100">
-                      {isActive && (
-                        <motion.div
-                          key={`${active}-${paused}`}
-                          className="h-full rounded-full bg-emerald-600"
-                          initial={{ width: paused ? '40%' : '0%' }}
-                          animate={{ width: paused ? '40%' : '100%' }}
-                          transition={{ duration: paused ? 0.3 : STEP_MS / 1000, ease: 'linear' }}
-                        />
-                      )}
-                    </div>
-                  </motion.div>
-                </button>
+                    <span className="text-xs font-bold uppercase tracking-[0.16em] text-muted">
+                      {s.tag}
+                    </span>
+                  </div>
+                  <p className="mt-1.5 text-sm font-semibold text-ink">{s.title}</p>
+                  {isCurrent && (
+                    <motion.span
+                      layoutId="hiw-marker"
+                      className="absolute -top-px left-0 right-0 h-0.5 bg-gold sm:left-5 sm:right-5"
+                    />
+                  )}
+                </div>
               )
             })}
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   )

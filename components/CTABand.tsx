@@ -17,7 +17,7 @@ export default function CTABand({
     <section className="section bg-white">
       <div className="container-px">
         <Reveal>
-          <div className="relative overflow-hidden rounded-[2rem] bg-emerald-950 px-6 py-14 text-center shadow-glow sm:px-12 sm:py-20">
+          <div className="relative overflow-hidden rounded-[2rem] bg-emerald-950 px-6 py-14 text-center sm:px-12 sm:py-20">
             <div className="pointer-events-none absolute inset-0 -z-0 opacity-60">
               <div className="absolute -left-10 top-0 h-60 w-60 rounded-full bg-emerald-700/40 blur-3xl" />
               <div className="absolute -right-10 bottom-0 h-60 w-60 rounded-full bg-emerald-600/30 blur-3xl" />

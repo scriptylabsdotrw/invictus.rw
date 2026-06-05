@@ -3,7 +3,13 @@ export interface Testimonial {
   name: string
   role: string
   initials: string
+  /** Square portrait (Unsplash, face-cropped). Falls back to initials if it fails. */
+  image: string
 }
+
+// Face-cropped square portraits from Unsplash (free to use, no attribution required).
+const unsplash = (id: string) =>
+  `https://images.unsplash.com/photo-${id}?w=480&h=480&fit=crop&crop=faces&auto=format&q=80`
 
 export const testimonials: Testimonial[] = [
   {
@@ -12,6 +18,7 @@ export const testimonials: Testimonial[] = [
     name: 'A. Mukamana',
     role: 'Microfinance CEO',
     initials: 'AM',
+    image: unsplash('1573497019418-b400bb3ab074'),
   },
   {
     quote:
@@ -19,6 +26,7 @@ export const testimonials: Testimonial[] = [
     name: 'J. Habimana',
     role: 'Head of Operations',
     initials: 'JH',
+    image: unsplash('1495603889488-42d1d66e5523'),
   },
   {
     quote:
@@ -26,6 +34,7 @@ export const testimonials: Testimonial[] = [
     name: 'C. Uwase',
     role: 'Branch Manager',
     initials: 'CU',
+    image: unsplash('1611432579402-7037e3e2c1e4'),
   },
   {
     quote:
@@ -33,5 +42,6 @@ export const testimonials: Testimonial[] = [
     name: 'D. Niyonzima',
     role: 'Finance Director',
     initials: 'DN',
+    image: unsplash('1605602517387-ec78b947335e'),
   },
 ]

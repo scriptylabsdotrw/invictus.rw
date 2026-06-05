@@ -136,10 +136,10 @@ function Card({ card }: { card: PartnerCard }) {
 
 export default function Partners() {
   return (
-    <section className="section bg-white">
+    <section className="section bg-neutralbg">
       <div className="container-px">
         <Reveal>
-          <div className="border border-line">
+          <div className="border border-line bg-white">
             {/* Heading row */}
             <div className="p-8 lg:p-10">
               <div className="max-w-2xl">

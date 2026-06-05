@@ -4,12 +4,14 @@ import { useState, type FormEvent } from 'react'
 import { motion } from 'framer-motion'
 import Reveal from './ui/Reveal'
 import Icon from './ui/Icon'
+import Select from './ui/Select'
 import {
   Mail01Icon,
   SmartPhone01Icon,
   Location01Icon,
   CheckmarkCircle02Icon,
   SentIcon,
+  Tick02Icon,
 } from '@/lib/icons'
 
 const businessTypes = [
@@ -25,37 +27,54 @@ const inputClass =
   'mt-1.5 w-full rounded-2xl border border-line bg-white px-4 py-3 text-sm text-ink transition-colors placeholder:text-muted/70 focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-100'
 
 const contactItems = [
-  { icon: Mail01Icon, label: 'Email', value: 'hello@invictus.rw' },
-  { icon: SmartPhone01Icon, label: 'Phone', value: '+250 XXX XXX XXX' },
+  { icon: Mail01Icon, label: 'Email', value: 'demo@invictus.rw' },
+  { icon: SmartPhone01Icon, label: 'Phone', value: '+250 780 226 666' },
   { icon: Location01Icon, label: 'Location', value: 'Kigali, Rwanda' },
+]
+
+const assurances = [
+  'A private demo tailored to your institution',
+  'Response within 1 business day',
+  'No commitment, no pressure',
 ]
 
 export default function Contact() {
   const [submitted, setSubmitted] = useState(false)
+  const [businessType, setBusinessType] = useState('')
+  const [bizError, setBizError] = useState(false)
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    // Native required fields are validated by the browser first; the custom
+    // Business Type select is validated here.
+    if (!businessType) {
+      setBizError(true)
+      return
+    }
     // Frontend-only: no backend submission.
     setSubmitted(true)
   }
 
+  const resetForm = () => {
+    setSubmitted(false)
+    setBusinessType('')
+    setBizError(false)
+  }
+
   return (
-    <section className="section bg-white pt-36 sm:pt-44">
+    <section className="section bg-white">
       <div className="container-px">
         <div className="grid gap-12 lg:grid-cols-[1fr_1.15fr] lg:gap-16">
-          {/* Copy + contact details */}
+          {/* Contact details + assurances */}
           <Reveal>
             <div>
-              <span className="eyebrow">Request a demo</span>
-              <h2 className="display mt-5 text-4xl sm:text-5xl lg:text-6xl">
-                Request a private demo of Invictus
-              </h2>
-              <p className="lead mt-6">
-                Tell us about your institution and we will show you how Invictus can run your
-                accounts, deposits, transactions, lending, branches, and branded portal.
+              <h2 className="display text-3xl text-ink sm:text-4xl">Talk to our team</h2>
+              <p className="mt-4 text-lg leading-relaxed text-muted">
+                Send us a few details and we&apos;ll arrange a private walkthrough for your
+                institution.
               </p>
 
-              <div className="mt-10 space-y-3">
+              <div className="mt-8 space-y-3">
                 {contactItems.map((c) => (
                   <div
                     key={c.label}
@@ -65,12 +84,25 @@ export default function Contact() {
                       <Icon icon={c.icon} size={20} />
                     </span>
                     <div>
-                      <p className="text-xs font-medium uppercase tracking-wide text-muted">{c.label}</p>
+                      <p className="text-xs font-medium uppercase tracking-wide text-muted">
+                        {c.label}
+                      </p>
                       <p className="text-sm font-semibold text-ink">{c.value}</p>
                     </div>
                   </div>
                 ))}
               </div>
+
+              <ul className="mt-8 space-y-3 border-t border-line pt-8">
+                {assurances.map((a) => (
+                  <li key={a} className="flex items-start gap-3 text-sm font-medium text-ink/80">
+                    <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-emerald-100 text-emerald-700">
+                      <Icon icon={Tick02Icon} size={14} />
+                    </span>
+                    {a}
+                  </li>
+                ))}
+              </ul>
             </div>
           </Reveal>
 
@@ -90,11 +122,7 @@ export default function Contact() {
                   <p className="mt-3 max-w-sm text-sm leading-relaxed text-muted">
                     Your demo request has been received. The Invictus team will contact you shortly.
                   </p>
-                  <button
-                    type="button"
-                    onClick={() => setSubmitted(false)}
-                    className="btn-secondary mt-8"
-                  >
+                  <button type="button" onClick={resetForm} className="btn-secondary mt-8">
                     Submit another request
                   </button>
                 </motion.div>
@@ -135,16 +163,23 @@ export default function Contact() {
                       <label htmlFor="businessType" className="text-sm font-semibold text-ink">
                         Business Type
                       </label>
-                      <select id="businessType" name="businessType" required defaultValue="" className={inputClass}>
-                        <option value="" disabled>
-                          Select business type
-                        </option>
-                        {businessTypes.map((b) => (
-                          <option key={b} value={b}>
-                            {b}
-                          </option>
-                        ))}
-                      </select>
+                      <Select
+                        id="businessType"
+                        name="businessType"
+                        options={businessTypes}
+                        value={businessType}
+                        onChange={(v) => {
+                          setBusinessType(v)
+                          setBizError(false)
+                        }}
+                        placeholder="Select business type"
+                        error={bizError}
+                      />
+                      {bizError && (
+                        <p className="mt-1.5 text-xs font-medium text-rose-500">
+                          Please select a business type.
+                        </p>
+                      )}
                     </div>
                     <div>
                       <label htmlFor="staff" className="text-sm font-semibold text-ink">

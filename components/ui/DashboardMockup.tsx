@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image'
 import {
   Area,
   AreaChart,
@@ -76,8 +77,14 @@ export default function DashboardMockup() {
       <div className="flex">
         {/* Sidebar */}
         <aside className="hidden w-16 flex-col items-center gap-1 border-r border-line bg-emerald-950 py-5 sm:flex">
-          <div className="mb-3 flex h-9 w-9 items-center justify-center rounded-xl bg-gold/90 text-sm font-bold text-emerald-950">
-            G
+          <div className="mb-3 h-9 w-9 overflow-hidden rounded-xl ring-1 ring-white/10">
+            <Image
+              src="/logos/icons/Invictus_Icon_WhiteOrange_on_Emerald.png"
+              alt="Invictus"
+              width={48}
+              height={48}
+              className="h-full w-full object-cover"
+            />
           </div>
           {nav.map(({ icon, active }, i) => (
             <div
@@ -99,7 +106,7 @@ export default function DashboardMockup() {
               <p className="text-[11px] font-medium uppercase tracking-wide text-muted">
                 Banking Overview
               </p>
-              <h3 className="text-sm font-bold text-ink">Giant Eagle Bank</h3>
+              <h3 className="font-display text-sm font-bold text-ink">Giant Eagle Bank</h3>
             </div>
             <div className="flex items-center gap-2">
               <div className="hidden items-center gap-2 rounded-full bg-white px-3 py-1.5 text-[11px] text-muted ring-1 ring-line sm:flex">
@@ -109,8 +116,14 @@ export default function DashboardMockup() {
               <div className="flex h-8 w-8 items-center justify-center rounded-full bg-white text-emerald-700 ring-1 ring-line">
                 <Icon icon={Notification01Icon} size={16} />
               </div>
-              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-emerald-800 text-[11px] font-bold text-white">
-                GE
+              <div className="h-8 w-8 overflow-hidden rounded-full ring-1 ring-line">
+                <Image
+                  src="https://images.unsplash.com/photo-1495603889488-42d1d66e5523?w=80&h=80&fit=crop&crop=faces&auto=format&q=80"
+                  alt="Institution administrator"
+                  width={32}
+                  height={32}
+                  className="h-full w-full object-cover"
+                />
               </div>
             </div>
           </div>
