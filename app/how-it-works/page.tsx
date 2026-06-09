@@ -1,9 +1,9 @@
 import type { Metadata } from 'next'
-import PageHeader from '@/components/PageHeader'
+import PageHero from '@/components/PageHero'
+import Highlight from '@/components/ui/Highlight'
 import HowItWorks from '@/components/HowItWorks'
 import DemoTeaser from '@/components/DemoTeaser'
 import CTABand from '@/components/CTABand'
-import { Rocket01Icon } from '@/lib/icons'
 
 export const metadata: Metadata = {
   title: 'How It Works — From Setup to Live Banking',
@@ -15,11 +15,9 @@ export const metadata: Metadata = {
 export default function HowItWorksPage() {
   return (
     <>
-      <PageHeader
-        title="From setup to live banking in four steps"
-        subtitle="Onboarding is simple. Your institution can be live on its own branded portal in no time."
-        icon={Rocket01Icon}
-        chips={['Onboard', 'Configure', 'Launch', 'Operate']}
+      <PageHero
+        title={<>From setup to live <Highlight>banking</Highlight> in four steps</>}
+        subtitle="Your institution can be live on its own branded portal in no time — and run full banking operations from day one."
       />
       <HowItWorks showHeader={false} />
       <DemoTeaser />

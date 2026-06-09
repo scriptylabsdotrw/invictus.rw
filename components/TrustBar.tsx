@@ -2,19 +2,19 @@ import Reveal from './ui/Reveal'
 import Icon from './ui/Icon'
 import {
   BankIcon,
-  Layers01Icon,
-  Globe02Icon,
-  ArrowDataTransferHorizontalIcon,
-  SecurityCheckIcon,
+  ServerStack01Icon,
+  BrowserIcon,
+  MoneyExchange01Icon,
+  Audit01Icon,
   Location01Icon,
 } from '@/lib/icons'
 
 const items = [
   { icon: BankIcon, label: 'Full Core Banking' },
-  { icon: Layers01Icon, label: 'Multi-Tenant Platform' },
-  { icon: Globe02Icon, label: 'Branded Portals' },
-  { icon: ArrowDataTransferHorizontalIcon, label: 'Real-Time Transactions' },
-  { icon: SecurityCheckIcon, label: 'Secure & Audit-Ready' },
+  { icon: ServerStack01Icon, label: 'Multi-Tenant Platform' },
+  { icon: BrowserIcon, label: 'Branded Portals' },
+  { icon: MoneyExchange01Icon, label: 'Real-Time Transactions' },
+  { icon: Audit01Icon, label: 'Secure & Audit-Ready' },
   { icon: Location01Icon, label: 'Rwanda & East Africa' },
 ]
 

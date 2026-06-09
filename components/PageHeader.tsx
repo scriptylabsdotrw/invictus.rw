@@ -1,8 +1,9 @@
+import type { ReactNode } from 'react'
 import Icon, { type IconSvgElement } from './ui/Icon'
 import { SparklesIcon } from '@/lib/icons'
 
 interface PageHeaderProps {
-  title: string
+  title: ReactNode
   subtitle?: string
   /** Small glassy chips under the title. */
   chips?: string[]
@@ -19,9 +20,8 @@ export default function PageHeader({
 }: PageHeaderProps) {
   return (
     <section className="relative isolate overflow-hidden bg-emerald-950 text-white">
-      {/* Layered background — static */}
-      <div className="absolute inset-0 -z-30 bg-gradient-to-b from-emerald-950 via-emerald-900/95 to-emerald-950" />
-      <div className="absolute inset-0 -z-30 bg-[radial-gradient(55%_55%_at_50%_-10%,rgba(16,185,129,0.28),transparent_70%)]" />
+      {/* Solid dark overlay */}
+      <div className="absolute inset-0 -z-30 bg-black/25" />
       <div className="pointer-events-none absolute inset-0 -z-20 bg-[linear-gradient(to_right,rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:56px_56px] [mask-image:radial-gradient(ellipse_70%_70%_at_50%_10%,black_30%,transparent_80%)]" />
 
       <div className="container-px pb-20 pt-36 sm:pb-28 sm:pt-44">

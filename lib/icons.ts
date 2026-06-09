@@ -32,6 +32,11 @@ import {
   Analytics01Icon,
   Globe02Icon,
   Layers01Icon,
+  // trust bar
+  ServerStack01Icon,
+  BrowserIcon,
+  MoneyExchange01Icon,
+  Audit01Icon,
   // how it works / value
   Configuration01Icon,
   Rocket01Icon,
@@ -93,6 +98,10 @@ export {
   Analytics01Icon,
   Globe02Icon,
   Layers01Icon,
+  ServerStack01Icon,
+  BrowserIcon,
+  MoneyExchange01Icon,
+  Audit01Icon,
   Configuration01Icon,
   Rocket01Icon,
   ChartUpIcon,

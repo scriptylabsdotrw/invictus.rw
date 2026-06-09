@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import PageHero from '@/components/PageHero'
+import Highlight from '@/components/ui/Highlight'
 import Pricing from '@/components/Pricing'
 import PlanComparison from '@/components/PlanComparison'
 import FAQ from '@/components/FAQ'
@@ -16,9 +17,8 @@ export default function PricingPage() {
   return (
     <>
       <PageHero
-        title="Flexible plans for growing institutions"
-        subtitle="Start where you are and scale as you grow. Every plan is tailored to your institution — talk to us for a quote that fits."
-        chips={['No setup fees', 'Scale as you grow', 'Tailored quotes', 'Cancel anytime']}
+        title={<>Plans built for institutions like <Highlight>yours</Highlight></>}
+        subtitle="Start where you are and scale as you grow. Talk to us for a quote that fits."
       />
       <Pricing showHeader={false} />
       <PlanComparison />

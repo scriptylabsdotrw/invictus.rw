@@ -1,13 +1,9 @@
 'use client'
 
 import Image from 'next/image'
-import {
-  Area,
-  AreaChart,
-  ResponsiveContainer,
-  Tooltip,
-  XAxis,
-} from 'recharts'
+import { motion, animate, useMotionValue, useTransform } from 'framer-motion'
+import { useEffect } from 'react'
+import { Area, AreaChart, ResponsiveContainer, Tooltip, XAxis } from 'recharts'
 import Icon from './Icon'
 import {
   DashboardSquare01Icon,
@@ -17,7 +13,6 @@ import {
   Building03Icon,
   Analytics01Icon,
   Settings01Icon,
-  Search01Icon,
   Notification01Icon,
   Globe02Icon,
   ChartIncreaseIcon,
@@ -33,20 +28,6 @@ const volume = [
   { m: 'Jul', v: 68 },
 ]
 
-const statusCards = [
-  { label: 'Deposits', value: '312', tone: 'bg-emerald-50 text-emerald-700 border-emerald-100' },
-  { label: 'Withdrawals', value: '148', tone: 'bg-sky-50 text-sky-700 border-sky-100' },
-  { label: 'Transfers', value: '96', tone: 'bg-violet-50 text-violet-700 border-violet-100' },
-  { label: 'New Accounts', value: '27', tone: 'bg-amber-50 text-amber-700 border-amber-100' },
-]
-
-const transactions = [
-  { name: 'Aline K.', amount: '+ RWF 240,000', type: 'Deposit', tone: 'bg-emerald-100 text-emerald-700' },
-  { name: 'Eric M.', amount: '− RWF 85,000', type: 'Withdrawal', tone: 'bg-sky-100 text-sky-700' },
-  { name: 'Grace U.', amount: '→ RWF 410,000', type: 'Transfer', tone: 'bg-violet-100 text-violet-700' },
-  { name: 'Patrick N.', amount: '+ RWF 120,000', type: 'Loan Repay', tone: 'bg-emerald-100 text-emerald-700' },
-]
-
 const nav = [
   { icon: DashboardSquare01Icon, active: true },
   { icon: UserMultipleIcon },
@@ -57,200 +38,342 @@ const nav = [
   { icon: Settings01Icon },
 ]
 
-/** Custom, frontend-only core banking dashboard preview — no stock images. */
+const transactions = [
+  { initials: 'AK', name: 'Aline K.', amount: '+ RWF 240,000', type: 'Deposit', dot: 'bg-emerald-500' },
+  { initials: 'EM', name: 'Eric M.', amount: '− RWF 85,000', type: 'Withdrawal', dot: 'bg-amber-500' },
+  { initials: 'GU', name: 'Grace U.', amount: '→ RWF 410,000', type: 'Transfer', dot: 'bg-sky-500' },
+  { initials: 'PN', name: 'Patrick N.', amount: '+ RWF 120,000', type: 'Repayment', dot: 'bg-emerald-500' },
+]
+
+const todayActivity = [
+  { label: 'Deposits received', value: 'RWF 4.2M', color: 'bg-emerald-500' },
+  { label: 'Withdrawals', value: 'RWF 1.8M', color: 'bg-amber-500' },
+  { label: 'Loans disbursed', value: 'RWF 620K', color: 'bg-sky-500' },
+  { label: 'Pending transfers', value: '23 items', color: 'bg-violet-500' },
+]
+
+const EASE = [0.22, 1, 0.36, 1] as const
+
+const rowsContainer = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.07, delayChildren: 1.1 } },
+}
+const rowVariant = {
+  hidden: { opacity: 0, x: -8 },
+  show: { opacity: 1, x: 0, transition: { duration: 0.38, ease: EASE } },
+}
+
+function AnimatedNumber({ to, format }: { to: number; format: (n: number) => string }) {
+  const val = useMotionValue(0)
+  const display = useTransform(val, (v) => format(v))
+  useEffect(() => {
+    const ctrl = animate(val, to, { duration: 1.7, ease: 'easeOut', delay: 1.0 })
+    return () => ctrl.stop()
+  }, [to])
+  return <motion.span>{display}</motion.span>
+}
+
+function Sparkline({ points, stroke }: { points: string; stroke: string }) {
+  return (
+    <svg viewBox="0 0 60 22" preserveAspectRatio="none" className="h-5 w-14">
+      <polyline
+        points={points}
+        fill="none"
+        stroke={stroke}
+        strokeWidth="1.8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  )
+}
+
 export default function DashboardMockup() {
   return (
     <div className="overflow-hidden rounded-3xl border border-line bg-white">
-      {/* Window chrome */}
-      <div className="flex items-center gap-2 border-b border-line bg-neutralbg px-4 py-3">
-        <span className="h-3 w-3 rounded-full bg-rose-300" />
-        <span className="h-3 w-3 rounded-full bg-amber-300" />
-        <span className="h-3 w-3 rounded-full bg-emerald-300" />
-        <div className="ml-3 flex items-center gap-2 rounded-md bg-white px-3 py-1 text-[11px] text-muted ring-1 ring-line">
+      {/* Browser chrome */}
+      <div className="flex items-center gap-2 border-b border-line bg-[#F9FAFB] px-4 py-2.5">
+        <span className="h-2.5 w-2.5 rounded-full bg-[#FF5F57]" />
+        <span className="h-2.5 w-2.5 rounded-full bg-[#FEBC2E]" />
+        <span className="h-2.5 w-2.5 rounded-full bg-[#28C840]" />
+        <div className="ml-3 flex flex-1 items-center gap-1.5 rounded-lg bg-white px-3 py-1.5 text-[11px] ring-1 ring-line">
           <span className="text-emerald-600">
-            <Icon icon={Globe02Icon} size={12} />
+            <Icon icon={Globe02Icon} size={11} />
           </span>
-          gianteaglebank.invictus.rw
+          <span className="font-medium text-muted/70">
+            <span className="text-emerald-700">yourbank</span>
+            <span className="text-muted/50">.invictus.rw</span>
+          </span>
+          <span className="ml-auto flex items-center gap-1 text-[10px] font-semibold text-emerald-600">
+            <motion.span
+              className="h-1.5 w-1.5 rounded-full bg-emerald-500"
+              animate={{ opacity: [1, 0.25, 1] }}
+              transition={{ duration: 2.2, repeat: Infinity, ease: 'easeInOut' }}
+            />
+            Live
+          </span>
         </div>
       </div>
 
       <div className="flex">
         {/* Sidebar */}
-        <aside className="hidden w-16 flex-col items-center gap-1 border-r border-line bg-emerald-950 py-5 sm:flex">
-          <div className="mb-3 h-9 w-9 overflow-hidden rounded-xl ring-1 ring-white/10">
+        <aside className="hidden w-[52px] flex-shrink-0 flex-col items-center bg-emerald-950 py-4 sm:flex">
+          <div className="mb-5 h-8 w-8 overflow-hidden rounded-xl">
             <Image
               src="/logos/icons/Invictus_Icon_WhiteOrange_on_Emerald.png"
               alt="Invictus"
-              width={48}
-              height={48}
+              width={40}
+              height={40}
               className="h-full w-full object-cover"
             />
           </div>
-          {nav.map(({ icon, active }, i) => (
-            <div
-              key={i}
-              className={`flex h-10 w-10 items-center justify-center rounded-xl transition-colors ${
-                active ? 'bg-white/15 text-white' : 'text-emerald-200/60'
-              }`}
-            >
-              <Icon icon={icon} size={18} />
-            </div>
-          ))}
-        </aside>
 
-        {/* Main */}
-        <div className="min-w-0 flex-1 bg-neutralbg p-4 sm:p-5">
-          {/* Top bar */}
-          <div className="mb-4 flex items-center justify-between gap-3">
-            <div>
-              <p className="text-[11px] font-medium uppercase tracking-wide text-muted">
-                Banking Overview
-              </p>
-              <h3 className="font-display text-sm font-bold text-ink">Giant Eagle Bank</h3>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="hidden items-center gap-2 rounded-full bg-white px-3 py-1.5 text-[11px] text-muted ring-1 ring-line sm:flex">
-                <Icon icon={Search01Icon} size={14} />
-                Search customers, accounts…
-              </div>
-              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-white text-emerald-700 ring-1 ring-line">
-                <Icon icon={Notification01Icon} size={16} />
-              </div>
-              <div className="h-8 w-8 overflow-hidden rounded-full ring-1 ring-line">
-                <Image
-                  src="https://images.unsplash.com/photo-1495603889488-42d1d66e5523?w=80&h=80&fit=crop&crop=faces&auto=format&q=80"
-                  alt="Institution administrator"
-                  width={32}
-                  height={32}
-                  className="h-full w-full object-cover"
-                />
-              </div>
-            </div>
-          </div>
-
-          {/* Top metrics */}
-          <div className="grid grid-cols-3 gap-3">
-            <div className="rounded-2xl bg-emerald-800 p-3 text-white">
-              <p className="text-[10px] uppercase tracking-wide text-emerald-100/80">Total Deposits</p>
-              <p className="mt-1 text-base font-bold sm:text-lg">RWF 1.84B</p>
-              <p className="mt-0.5 flex items-center gap-1 text-[10px] text-emerald-100">
-                <Icon icon={ChartIncreaseIcon} size={12} /> +6.4% this month
-              </p>
-            </div>
-            <div className="rounded-2xl bg-white p-3 ring-1 ring-line">
-              <p className="text-[10px] uppercase tracking-wide text-muted">Active Accounts</p>
-              <p className="mt-1 text-base font-bold text-ink sm:text-lg">12,840</p>
-              <p className="mt-0.5 text-[10px] text-emerald-600">+312 new</p>
-            </div>
-            <div className="rounded-2xl bg-white p-3 ring-1 ring-line">
-              <p className="text-[10px] uppercase tracking-wide text-muted">Loan Portfolio</p>
-              <p className="mt-1 text-base font-bold text-ink sm:text-lg">RWF 248.6M</p>
-              <p className="mt-0.5 text-[10px] text-muted">932 active loans</p>
-            </div>
-          </div>
-
-          {/* Status pills */}
-          <div className="mt-3 grid grid-cols-4 gap-2">
-            {statusCards.map((s) => (
-              <div key={s.label} className={`rounded-xl border p-2 text-center ${s.tone}`}>
-                <p className="text-sm font-bold leading-none sm:text-base">{s.value}</p>
-                <p className="mt-1 text-[9px] font-semibold uppercase tracking-wide">{s.label}</p>
+          <div className="flex flex-col items-center gap-0.5">
+            {nav.map(({ icon, active }, i) => (
+              <div
+                key={i}
+                className={`relative flex h-9 w-9 items-center justify-center rounded-xl ${
+                  active ? 'bg-white/15 text-white' : 'text-white/25'
+                }`}
+              >
+                {active && (
+                  <div className="absolute -left-[1px] top-1/2 h-4 w-[3px] -translate-y-1/2 rounded-r-full bg-emerald-400" />
+                )}
+                <Icon icon={icon} size={16} />
               </div>
             ))}
           </div>
 
-          <div className="mt-3 grid grid-cols-5 gap-3">
-            {/* Transaction volume chart */}
-            <div className="col-span-3 rounded-2xl bg-white p-3 ring-1 ring-line">
-              <div className="mb-1 flex items-center justify-between">
-                <p className="text-[11px] font-semibold text-ink">Transaction Volume</p>
-                <span className="pill bg-emerald-50 text-emerald-700">+18.4%</span>
+          <div className="mt-auto">
+            <div className="h-7 w-7 overflow-hidden rounded-full ring-2 ring-white/15">
+              <Image
+                src="https://images.unsplash.com/photo-1495603889488-42d1d66e5523?w=80&h=80&fit=crop&crop=faces&auto=format&q=80"
+                alt="Admin"
+                width={32}
+                height={32}
+                className="h-full w-full object-cover"
+              />
+            </div>
+          </div>
+        </aside>
+
+        {/* Main */}
+        <div className="min-w-0 flex-1 bg-[#F4F7FA] p-3 sm:p-4">
+          {/* Header */}
+          <div className="mb-3 flex items-center justify-between">
+            <div>
+              <p className="text-[10px] font-semibold uppercase tracking-widest text-muted/60">
+                Overview
+              </p>
+              <h3 className="font-display text-[13px] font-bold text-ink">Giant Eagle Bank</h3>
+            </div>
+            <div className="flex items-center gap-1.5">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.85 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.65, duration: 0.4, ease: EASE }}
+                className="hidden items-center gap-1.5 rounded-full bg-emerald-50 px-2.5 py-1 text-[10px] font-semibold text-emerald-700 ring-1 ring-emerald-100 sm:flex"
+              >
+                <motion.span
+                  className="h-1.5 w-1.5 rounded-full bg-emerald-500"
+                  animate={{ scale: [1, 1.6, 1], opacity: [1, 0.5, 1] }}
+                  transition={{ duration: 2.8, repeat: Infinity }}
+                />
+                All systems normal
+              </motion.div>
+              <div className="flex h-7 w-7 items-center justify-center rounded-full bg-white text-muted ring-1 ring-line">
+                <Icon icon={Notification01Icon} size={13} />
               </div>
-              <div className="h-24">
+            </div>
+          </div>
+
+          {/* Metric cards */}
+          <div className="grid grid-cols-3 gap-2">
+            {/* Primary */}
+            <motion.div
+              initial={{ opacity: 0, y: 14 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5, duration: 0.55, ease: EASE }}
+              className="rounded-2xl bg-gradient-to-br from-emerald-800 to-emerald-950 p-3 text-white"
+            >
+              <p className="text-[9px] font-semibold uppercase tracking-widest text-emerald-300/60">
+                Total Deposits
+              </p>
+              <div className="mt-1.5 flex items-end justify-between">
+                <p className="font-display text-[15px] font-bold sm:text-base">
+                  <span className="text-[9px] font-normal text-emerald-300/50">RWF </span>
+                  <AnimatedNumber to={1.84} format={(n) => n.toFixed(2) + 'B'} />
+                </p>
+                <Sparkline points="0,18 10,15 20,17 30,12 40,9 50,6 60,3" stroke="rgba(110,231,183,0.7)" />
+              </div>
+              <div className="mt-2 flex items-center gap-1 text-[9px] font-medium text-emerald-300/80">
+                <Icon icon={ChartIncreaseIcon} size={10} />
+                +6.4% this month
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 14 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.6, duration: 0.55, ease: EASE }}
+              className="rounded-2xl bg-white p-3 ring-1 ring-line"
+            >
+              <p className="text-[9px] font-semibold uppercase tracking-widest text-muted/60">
+                Active Accounts
+              </p>
+              <div className="mt-1.5 flex items-end justify-between">
+                <p className="font-display text-[15px] font-bold text-ink sm:text-base">
+                  <AnimatedNumber to={12840} format={(n) => Math.round(n).toLocaleString()} />
+                </p>
+                <Sparkline points="0,16 10,14 20,17 30,11 40,9 50,7 60,4" stroke="#059669" />
+              </div>
+              <p className="mt-2 text-[9px] font-medium text-emerald-600">+312 new this week</p>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 14 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.7, duration: 0.55, ease: EASE }}
+              className="rounded-2xl bg-white p-3 ring-1 ring-line"
+            >
+              <p className="text-[9px] font-semibold uppercase tracking-widest text-muted/60">
+                Loan Portfolio
+              </p>
+              <div className="mt-1.5 flex items-end justify-between">
+                <p className="font-display text-[15px] font-bold text-ink sm:text-base">
+                  <span className="text-[9px] font-normal text-muted/50">RWF </span>
+                  <AnimatedNumber to={248.6} format={(n) => n.toFixed(1) + 'M'} />
+                </p>
+                <Sparkline points="0,14 10,16 20,12 30,14 40,11 50,10 60,7" stroke="#0284c7" />
+              </div>
+              <p className="mt-2 text-[9px] text-muted">932 active loans</p>
+            </motion.div>
+          </div>
+
+          {/* Charts row */}
+          <div className="mt-2 grid grid-cols-5 gap-2">
+            {/* Area chart */}
+            <motion.div
+              initial={{ opacity: 0, y: 14 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.78, duration: 0.55, ease: EASE }}
+              className="col-span-3 rounded-2xl bg-white p-3 ring-1 ring-line"
+            >
+              <div className="mb-1.5 flex items-center justify-between">
+                <p className="text-[11px] font-semibold text-ink">Transaction Volume</p>
+                <span className="rounded-full bg-emerald-50 px-2 py-0.5 text-[9px] font-bold text-emerald-700 ring-1 ring-emerald-100">
+                  +18.4%
+                </span>
+              </div>
+              <div className="h-[72px] sm:h-[84px]">
                 <ResponsiveContainer width="100%" height="100%">
-                  <AreaChart data={volume} margin={{ top: 6, right: 4, left: 4, bottom: 0 }}>
+                  <AreaChart data={volume} margin={{ top: 4, right: 2, left: 2, bottom: 0 }}>
                     <defs>
-                      <linearGradient id="rev" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="0%" stopColor="#10B981" stopOpacity={0.45} />
-                        <stop offset="100%" stopColor="#10B981" stopOpacity={0} />
+                      <linearGradient id="vol" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stopColor="#059669" stopOpacity={0.28} />
+                        <stop offset="100%" stopColor="#059669" stopOpacity={0} />
                       </linearGradient>
                     </defs>
                     <XAxis
                       dataKey="m"
                       axisLine={false}
                       tickLine={false}
-                      tick={{ fontSize: 9, fill: '#94a3b8' }}
+                      tick={{ fontSize: 8, fill: '#94a3b8' }}
                     />
                     <Tooltip
-                      cursor={{ stroke: '#10B981', strokeWidth: 1 }}
+                      cursor={{ stroke: '#10B981', strokeWidth: 1, strokeDasharray: '4 2' }}
                       contentStyle={{
-                        borderRadius: 12,
+                        borderRadius: 10,
                         border: '1px solid #E2E8F0',
-                        fontSize: 11,
+                        fontSize: 10,
+                        padding: '4px 8px',
                       }}
                     />
                     <Area
                       type="monotone"
                       dataKey="v"
-                      stroke="#047857"
-                      strokeWidth={2.5}
-                      fill="url(#rev)"
+                      stroke="#059669"
+                      strokeWidth={2}
+                      fill="url(#vol)"
+                      dot={false}
+                      isAnimationActive
+                      animationBegin={900}
+                      animationDuration={1400}
                     />
                   </AreaChart>
                 </ResponsiveContainer>
               </div>
-            </div>
+            </motion.div>
 
-            {/* Branch performance */}
-            <div className="col-span-2 rounded-2xl bg-white p-3 ring-1 ring-line">
-              <p className="mb-2 text-[11px] font-semibold text-ink">Branch Performance</p>
-              {[
-                { b: 'Kigali HQ', p: 82 },
-                { b: 'Musanze', p: 64 },
-                { b: 'Huye', p: 51 },
-              ].map((row) => (
-                <div key={row.b} className="mb-2">
-                  <div className="mb-1 flex justify-between text-[10px] text-muted">
-                    <span>{row.b}</span>
-                    <span className="font-semibold text-ink">{row.p}%</span>
-                  </div>
-                  <div className="h-1.5 w-full overflow-hidden rounded-full bg-emerald-50">
-                    <div
-                      className="h-full rounded-full bg-emerald-600"
-                      style={{ width: `${row.p}%` }}
-                    />
-                  </div>
-                </div>
-              ))}
-            </div>
+            {/* Today's activity */}
+            <motion.div
+              initial={{ opacity: 0, y: 14 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.88, duration: 0.55, ease: EASE }}
+              className="col-span-2 rounded-2xl bg-white p-3 ring-1 ring-line"
+            >
+              <p className="mb-2.5 text-[11px] font-semibold text-ink">Today's Activity</p>
+              <div className="space-y-2">
+                {todayActivity.map((a, i) => (
+                  <motion.div
+                    key={a.label}
+                    initial={{ opacity: 0, x: 8 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 1.0 + i * 0.1, duration: 0.35, ease: EASE }}
+                    className="flex items-center gap-2"
+                  >
+                    <span className={`h-1.5 w-1.5 flex-shrink-0 rounded-full ${a.color}`} />
+                    <div className="flex flex-1 items-center justify-between">
+                      <span className="text-[9px] text-muted">{a.label}</span>
+                      <span className="text-[9px] font-bold text-ink">{a.value}</span>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
           </div>
 
-          {/* Recent transactions */}
-          <div className="mt-3 rounded-2xl bg-white p-3 ring-1 ring-line">
-            <p className="mb-2 text-[11px] font-semibold text-ink">Recent Transactions</p>
-            <div className="space-y-1.5">
-              {transactions.map((r) => (
-                <div
-                  key={r.name}
-                  className="flex items-center justify-between rounded-lg bg-neutralbg px-2.5 py-1.5"
+          {/* Transactions */}
+          <motion.div
+            initial={{ opacity: 0, y: 14 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.95, duration: 0.55, ease: EASE }}
+            className="mt-2 rounded-2xl bg-white p-3 ring-1 ring-line"
+          >
+            <div className="mb-2 flex items-center justify-between">
+              <p className="text-[11px] font-semibold text-ink">Recent Transactions</p>
+              <span className="text-[9px] font-medium text-emerald-600">View all →</span>
+            </div>
+            <motion.div
+              className="space-y-1"
+              variants={rowsContainer}
+              initial="hidden"
+              animate="show"
+            >
+              {transactions.map((t) => (
+                <motion.div
+                  key={t.name}
+                  variants={rowVariant}
+                  className="flex items-center justify-between rounded-xl bg-[#F8FAFC] px-2.5 py-1.5"
                 >
                   <div className="flex items-center gap-2">
-                    <span className="flex h-6 w-6 items-center justify-center rounded-full bg-emerald-100 text-[9px] font-bold text-emerald-700">
-                      {r.name
-                        .split(' ')
-                        .map((p) => p[0])
-                        .join('')}
+                    <span
+                      className={`flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full text-[9px] font-bold text-white ${t.dot}`}
+                    >
+                      {t.initials}
                     </span>
-                    <span className="text-[11px] font-medium text-ink">{r.name}</span>
+                    <span className="text-[11px] font-medium text-ink">{t.name}</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <span className="text-[11px] font-semibold text-ink">{r.amount}</span>
-                    <span className={`pill ${r.tone} text-[9px]`}>{r.type}</span>
+                    <span className="text-[10px] font-semibold text-ink">{t.amount}</span>
+                    <span className="rounded-full bg-emerald-50 px-1.5 py-0.5 text-[9px] font-semibold text-emerald-700">
+                      {t.type}
+                    </span>
                   </div>
-                </div>
+                </motion.div>
               ))}
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         </div>
       </div>
     </div>

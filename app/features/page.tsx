@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import PageHero from '@/components/PageHero'
+import Highlight from '@/components/ui/Highlight'
 import FeaturesShowcase from '@/components/FeaturesShowcase'
 import DemoTeaser from '@/components/DemoTeaser'
 import CTABand from '@/components/CTABand'
@@ -15,9 +16,8 @@ export default function FeaturesPage() {
   return (
     <>
       <PageHero
-        title="Everything your institution needs"
-        subtitle="A complete, secure core banking toolkit — organized into the core pillars that run a modern financial institution."
-        chips={['Accounts', 'Deposits', 'Lending', 'Transactions', 'Ledger', 'Branches', 'Portals', 'Mobile']}
+        title={<>Everything your institution <Highlight>needs</Highlight></>}
+        subtitle="23+ capabilities across core banking, operations, insights, and channels — all in one platform."
       />
       <FeaturesShowcase />
       <DemoTeaser />

@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import LegalPage, { type LegalSection } from '@/components/LegalPage'
+import Highlight from '@/components/ui/Highlight'
 import { JusticeScaleIcon } from '@/lib/icons'
 
 export const metadata: Metadata = {
@@ -194,7 +195,7 @@ const sections: LegalSection[] = [
 export default function TermsPage() {
   return (
     <LegalPage
-      title="Terms & Conditions"
+      title={<>Terms & <Highlight>Conditions</Highlight></>}
       subtitle="The terms that govern your use of the Invictus website."
       icon={JusticeScaleIcon}
       lastUpdated="5 June 2026"

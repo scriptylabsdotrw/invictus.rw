@@ -5,12 +5,9 @@ import Link from 'next/link'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import DashboardMockup from './ui/DashboardMockup'
 import Icon from './ui/Icon'
-import {
-  ArrowRight01Icon,
-  ArrowDataTransferHorizontalIcon,
-  CheckmarkCircle02Icon,
-} from '@/lib/icons'
+import { ArrowRight01Icon } from '@/lib/icons'
 import { staggerContainer, staggerItem } from './ui/Reveal'
+import Highlight from './ui/Highlight'
 
 const MotionLink = motion.create(Link)
 
@@ -33,21 +30,15 @@ export default function Hero() {
       id="top"
       className="relative isolate overflow-hidden bg-emerald-950 text-white"
     >
-      {/* ---- Layered background ---- */}
-      {/* Base vertical gradient */}
-      <div className="absolute inset-0 -z-30 bg-gradient-to-b from-emerald-950 via-emerald-900/95 to-emerald-950" />
-      {/* Top radial glow */}
-      <div className="absolute inset-0 -z-30 bg-[radial-gradient(60%_50%_at_50%_-10%,rgba(16,185,129,0.28),transparent_70%)]" />
-      {/* Existing hero texture, parallaxing */}
+      {/* ---- Solid dark background ---- */}
+      <div className="absolute inset-0 -z-30 bg-black/25" />
+      {/* Hero texture, parallaxing */}
       <motion.div
         style={{ y: bgY }}
-        className="hero-bg pointer-events-none absolute inset-0 -z-30 bg-cover bg-center opacity-40"
+        className="hero-bg pointer-events-none absolute inset-0 -z-30 bg-cover bg-center opacity-30"
       />
-      {/* Fine grid, masked to fade at the edges */}
+      {/* Fine grid */}
       <div className="pointer-events-none absolute inset-0 -z-20 bg-[linear-gradient(to_right,rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:56px_56px] [mask-image:radial-gradient(ellipse_70%_60%_at_50%_0%,black_30%,transparent_80%)]" />
-      {/* Floating colour orbs */}
-      <div className="pointer-events-none absolute -left-24 top-24 -z-20 h-72 w-72 animate-float rounded-full bg-emerald-500/20 blur-3xl" />
-      <div className="pointer-events-none absolute -right-20 top-40 -z-20 h-80 w-80 animate-float rounded-full bg-gold/15 blur-3xl [animation-delay:2s]" />
 
       <div className="container-px pt-32 sm:pt-40">
         <motion.div
@@ -61,10 +52,8 @@ export default function Hero() {
             variants={staggerItem}
             className="display text-balance text-5xl text-white sm:text-7xl lg:text-[5.75rem]"
           >
-            The core banking system for{' '}
-            <span className="bg-gradient-to-r from-emerald-300 via-emerald-200 to-gold-soft bg-clip-text text-transparent">
-              modern institutions
-            </span>
+            The core banking system for modern{' '}
+            <Highlight>institutions</Highlight>
           </motion.h1>
 
           <motion.p
@@ -101,59 +90,30 @@ export default function Hero() {
         </motion.div>
 
         {/* ---- Dashboard preview ---- */}
-        <motion.div style={{ y: previewY }} className="relative mx-auto mt-14 max-w-5xl">
-          {/* Glow behind the preview */}
-          <div className="pointer-events-none absolute -inset-x-16 -top-10 bottom-0 -z-10 bg-[radial-gradient(50%_50%_at_50%_35%,rgba(16,185,129,0.4),transparent_70%)] blur-2xl" />
+        <motion.div style={{ y: previewY }} className="relative mx-auto mt-16 max-w-5xl">
+          {/* Ambient glow behind the window */}
+          <div className="pointer-events-none absolute inset-x-0 top-8 -z-10 flex justify-center">
+            <div className="h-48 w-3/4 rounded-full bg-emerald-500/25 blur-3xl" />
+          </div>
+          <div className="pointer-events-none absolute -right-16 top-24 -z-10 h-64 w-64 rounded-full bg-emerald-400/10 blur-3xl" />
 
-          {/* Gradient hairline border (no shadows in this system) */}
+          {/* Window frame */}
           <motion.div
-            initial={{ opacity: 0, y: 60 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
+            initial={{ opacity: 0, y: 72, scale: 0.96 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ duration: 1.2, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
             style={{ scale: previewScale }}
-            className="relative max-h-[340px] origin-top overflow-hidden rounded-t-3xl bg-gradient-to-b from-white/25 via-white/10 to-transparent p-[1.5px] sm:max-h-[440px]"
+            className="relative max-h-[360px] origin-top overflow-hidden rounded-t-3xl border border-white/20 sm:max-h-[480px]"
           >
+            {/* Top edge shine */}
+            <div className="pointer-events-none absolute inset-x-0 top-0 z-10 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent" />
+
             <div className="overflow-hidden rounded-t-3xl">
               <DashboardMockup />
             </div>
-            {/* fade the cut-off edge into the dark hero */}
-            <div className="pointer-events-none absolute inset-x-0 bottom-0 h-36 bg-gradient-to-b from-transparent to-emerald-950" />
-          </motion.div>
 
-          {/* Floating card — left */}
-          <motion.div
-            initial={{ opacity: 0, x: -30, y: 20 }}
-            animate={{ opacity: 1, x: 0, y: 0 }}
-            transition={{ duration: 0.9, delay: 1 }}
-            className="absolute -left-4 top-24 hidden animate-float rounded-2xl border border-line bg-white/95 p-3 backdrop-blur-xl md:block"
-          >
-            <div className="flex items-center gap-2">
-              <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-emerald-100 text-emerald-700">
-                <Icon icon={ArrowDataTransferHorizontalIcon} size={20} />
-              </span>
-              <div>
-                <p className="text-xs font-bold text-ink">Transfer posted</p>
-                <p className="text-[11px] text-muted">RWF 1.2M · Kigali HQ</p>
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Floating card — right */}
-          <motion.div
-            initial={{ opacity: 0, x: 30, y: 20 }}
-            animate={{ opacity: 1, x: 0, y: 0 }}
-            transition={{ duration: 0.9, delay: 1.2 }}
-            className="absolute -right-4 top-40 hidden animate-float rounded-2xl border border-line bg-white/95 p-3 backdrop-blur-xl md:block [animation-delay:1.5s]"
-          >
-            <div className="flex items-center gap-2">
-              <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-emerald-600 text-white">
-                <Icon icon={CheckmarkCircle02Icon} size={20} />
-              </span>
-              <div>
-                <p className="text-xs font-bold text-ink">Identity verified</p>
-                <p className="text-[11px] text-muted">NIDA · 0.4s</p>
-              </div>
-            </div>
+            {/* Bottom fade into hero */}
+            <div className="pointer-events-none absolute inset-x-0 bottom-0 h-44 bg-gradient-to-b from-transparent to-emerald-950" />
           </motion.div>
         </motion.div>
       </div>

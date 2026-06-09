@@ -9,7 +9,7 @@ export interface LegalSection {
 }
 
 interface LegalPageProps {
-  title: string
+  title: ReactNode
   subtitle: string
   icon: IconSvgElement
   lastUpdated: string

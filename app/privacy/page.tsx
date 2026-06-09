@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import LegalPage, { type LegalSection } from '@/components/LegalPage'
+import Highlight from '@/components/ui/Highlight'
 import { SecurityCheckIcon } from '@/lib/icons'
 
 export const metadata: Metadata = {
@@ -281,7 +282,7 @@ const sections: LegalSection[] = [
 export default function PrivacyPage() {
   return (
     <LegalPage
-      title="Privacy Policy"
+      title={<><Highlight>Privacy</Highlight> Policy</>}
       subtitle="How we collect, use, and protect your personal data — in line with Rwanda’s data protection law."
       icon={SecurityCheckIcon}
       lastUpdated="5 June 2026"
