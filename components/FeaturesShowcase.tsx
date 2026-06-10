@@ -203,7 +203,7 @@ function CapabilityCard({ item, delay }: { item: Capability; delay: number }) {
         transition={{ type: 'spring', stiffness: 300, damping: 22 }}
         className="group h-full rounded-2xl border border-line bg-white p-6 transition-colors hover:border-emerald-200"
       >
-        <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-emerald-50 text-emerald-700 transition-colors group-hover:bg-emerald-800 group-hover:text-white">
+        <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-gold/10 text-gold transition-all group-hover:bg-gold group-hover:text-emerald-950">
           <Icon icon={item.icon} size={20} />
         </span>
         <h3 className="mt-5 text-base font-bold text-ink">{item.title}</h3>

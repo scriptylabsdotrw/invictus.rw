@@ -2,25 +2,14 @@ import Image from 'next/image'
 import type { Client, ClientAccent } from '../data/clients'
 import { clientsRowOne, clientsRowTwo } from '../data/clients'
 import Reveal from './ui/Reveal'
-import Icon from './ui/Icon'
 
-// Monogram placeholder colours, used until a real logo is supplied.
-const monogram: Record<ClientAccent, string> = {
-  orange: 'bg-orange-50 text-orange-600',
-  gold: 'bg-amber-50 text-amber-600',
-  sky: 'bg-sky-50 text-sky-700',
-  emerald: 'bg-emerald-50 text-emerald-700',
-}
-
-// The little pixel/gradient block in each card's top-right corner.
 const pixel: Record<ClientAccent, string> = {
   orange: 'bg-orange-400',
-  gold: 'bg-amber-300',
-  sky: 'bg-sky-300',
-  emerald: 'bg-emerald-400',
+  gold:   'bg-amber-300',
+  sky:    'bg-sky-300',
+  emerald:'bg-emerald-400',
 }
 
-// Descending staircase pattern → the faded pixel look. '' = empty cell.
 const cells: string[] = [
   '', '', 'opacity-90', 'opacity-100',
   '', 'opacity-70', 'opacity-100', 'opacity-50',
@@ -29,11 +18,11 @@ const cells: string[] = [
 
 function CornerBlock({ accent }: { accent: ClientAccent }) {
   return (
-    <div aria-hidden className="absolute right-5 top-5 grid grid-cols-4 gap-[3px]">
+    <div aria-hidden className="absolute right-6 top-6 grid grid-cols-4 gap-[3px]">
       {cells.map((o, i) => (
         <span
           key={i}
-          className={`h-2 w-2 rounded-[2px] ${o ? `${pixel[accent]} ${o}` : 'bg-transparent'}`}
+          className={`h-2.5 w-2.5 rounded-[2px] ${o ? `${pixel[accent]} ${o}` : 'bg-transparent'}`}
         />
       ))}
     </div>
@@ -41,41 +30,49 @@ function CornerBlock({ accent }: { accent: ClientAccent }) {
 }
 
 function ClientCard({ client }: { client: Client }) {
-  const { name, icon, logo, badge, accent } = client
-  return (
-    <div className="relative flex h-full w-72 shrink-0 flex-col overflow-hidden rounded-2xl border border-line bg-white p-6 transition-colors duration-300 hover:border-emerald-200">
+  const { name, logo, badge, accent, website } = client
+
+  const inner = (
+    <div className="group relative w-80 shrink-0 overflow-hidden rounded-2xl border border-line bg-white p-8 transition-colors duration-300 hover:border-emerald-200">
       <CornerBlock accent={accent} />
 
-      {/* Logo (real) or monogram placeholder */}
-      <div className="relative flex h-10 items-center">
-        {logo ? (
-          <div className="relative h-10 w-36">
-            <Image
-              src={logo}
-              alt={`${name} logo`}
-              fill
-              sizes="150px"
-              className="object-contain object-left"
-            />
-          </div>
-        ) : (
-          <span
-            className={`inline-flex h-10 w-10 items-center justify-center rounded-xl ${monogram[accent]}`}
-          >
-            <Icon icon={icon} size={20} />
-          </span>
-        )}
+      {/* Logo */}
+      <div className="relative flex h-12 items-center">
+        <Image
+          src={logo}
+          alt={`${name} logo`}
+          width={180}
+          height={48}
+          className="h-12 w-auto object-contain object-left"
+        />
       </div>
 
       {/* Name + badge */}
-      <div className="mt-6 flex items-center justify-between gap-2">
-        <h3 className="truncate text-sm font-bold text-ink">{name}</h3>
-        <span className="shrink-0 rounded bg-emerald-50 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-emerald-700">
+      <div className="mt-7 flex items-start justify-between gap-3">
+        <h3 className="text-base font-bold leading-snug text-ink">{name}</h3>
+        <span className="mt-0.5 shrink-0 rounded bg-emerald-50 px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider text-emerald-700">
           {badge}
         </span>
       </div>
+
+      {/* Website domain */}
+      {website && (
+        <p className="mt-3 text-sm text-muted/60">
+          {new URL(website).hostname.replace('www.', '')}
+        </p>
+      )}
     </div>
   )
+
+  if (website) {
+    return (
+      <a href={website} target="_blank" rel="noopener noreferrer" aria-label={name}>
+        {inner}
+      </a>
+    )
+  }
+
+  return inner
 }
 
 function MarqueeRow({
@@ -87,7 +84,6 @@ function MarqueeRow({
   direction: 'left' | 'right'
   duration: number
 }) {
-  // Duplicate the set so the -50% translate loops seamlessly.
   const doubled = [...items, ...items]
   const animation = direction === 'right' ? 'animate-marquee-reverse' : 'animate-marquee'
 
@@ -123,10 +119,9 @@ export default function ClientsMarquee() {
         </Reveal>
       </div>
 
-      {/* Full-bleed rows for an edge-to-edge marquee */}
       <div className="space-y-5">
-        <MarqueeRow items={clientsRowOne} direction="right" duration={42} />
-        <MarqueeRow items={clientsRowTwo} direction="left" duration={50} />
+        <MarqueeRow items={clientsRowOne} direction="right" duration={44} />
+        <MarqueeRow items={clientsRowTwo} direction="left" duration={52} />
       </div>
     </section>
   )

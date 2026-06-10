@@ -54,14 +54,14 @@ export default function Navbar() {
           <Link href="/" aria-label="Invictus home" className="relative shrink-0">
             {/* Green logo (default) — sizes the container */}
             <Logo
-              className={`h-14 transition-opacity duration-300 lg:h-[88px] ${
+              className={`h-16 transition-opacity duration-300 lg:h-[104px] ${
                 showWhiteLogo ? 'opacity-0' : 'opacity-100'
               }`}
             />
             {/* White logo — fades in over the dark hero */}
             <Logo
               light
-              className={`absolute left-0 top-0 h-14 transition-opacity duration-300 lg:h-[88px] ${
+              className={`absolute left-0 top-0 h-16 transition-opacity duration-300 lg:h-[104px] ${
                 showWhiteLogo ? 'opacity-100' : 'opacity-0'
               }`}
             />

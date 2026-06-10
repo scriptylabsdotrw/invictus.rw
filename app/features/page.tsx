@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import PageHero from '@/components/PageHero'
 import Highlight from '@/components/ui/Highlight'
 import FeaturesShowcase from '@/components/FeaturesShowcase'
+import Partners from '@/components/Partners'
 import DemoTeaser from '@/components/DemoTeaser'
 import CTABand from '@/components/CTABand'
 
@@ -21,6 +22,7 @@ export default function FeaturesPage() {
       />
       <FeaturesShowcase />
       <DemoTeaser />
+      <Partners />
       <CTABand />
     </>
   )

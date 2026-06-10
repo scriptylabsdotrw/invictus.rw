@@ -21,8 +21,8 @@ export default function HomePage() {
       />
       <HowItWorks />
       <Testimonials />
-      <ClientsMarquee />
       <Partners />
+      <ClientsMarquee />
       <CTABand />
     </>
   )

@@ -104,7 +104,7 @@ export default function Features({
               {/* gold top accent on hover */}
               <span className="absolute inset-x-0 top-0 h-0.5 bg-gold/70 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
 
-              <span className="relative flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-emerald-700 to-emerald-900 text-white transition-transform duration-300 group-hover:scale-110">
+              <span className="relative flex h-12 w-12 items-center justify-center rounded-2xl bg-gold/10 text-gold transition-all duration-300 group-hover:bg-gold group-hover:text-emerald-950">
                 <Icon icon={f.icon} size={22} />
               </span>
               <h3 className="relative mt-6 text-xl font-bold text-ink">{f.title}</h3>

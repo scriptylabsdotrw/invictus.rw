@@ -68,14 +68,11 @@ export default function LoginForm() {
     <div className="grid min-h-screen lg:grid-cols-2">
       {/* ---- Brand panel ---- */}
       <div className="relative hidden flex-col justify-between overflow-hidden bg-emerald-950 p-10 text-white lg:flex xl:p-14">
-        <div className="absolute inset-0 -z-30 bg-gradient-to-b from-emerald-950 via-emerald-900/95 to-emerald-950" />
-        <div className="absolute inset-0 -z-30 bg-[radial-gradient(55%_55%_at_30%_-10%,rgba(16,185,129,0.3),transparent_70%)]" />
+        <div className="absolute inset-0 -z-30 bg-black/25" />
         <div className="pointer-events-none absolute inset-0 -z-20 bg-[linear-gradient(to_right,rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:52px_52px] [mask-image:radial-gradient(ellipse_70%_60%_at_30%_10%,black_30%,transparent_80%)]" />
-        <div className="pointer-events-none absolute -left-16 top-1/3 -z-20 h-60 w-60 animate-float rounded-full bg-emerald-500/15 blur-3xl" />
-        <div className="pointer-events-none absolute -right-12 bottom-0 -z-20 h-56 w-56 animate-float rounded-full bg-gold/10 blur-3xl [animation-delay:2s]" />
 
         <Link href="/" aria-label="Invictus home" className="relative w-fit">
-          <Logo light className="h-16" />
+          <Logo light className="h-20" />
         </Link>
 
         <div className="relative">
@@ -107,7 +104,7 @@ export default function LoginForm() {
       <div className="flex items-center justify-center bg-white px-5 py-12 sm:px-8">
         <div className="w-full max-w-sm">
           <Link href="/" aria-label="Invictus home" className="mb-8 inline-block lg:hidden">
-            <Logo className="h-12" />
+            <Logo className="h-16" />
           </Link>
 
           <h1 className="display text-3xl text-ink sm:text-4xl">Sign in</h1>

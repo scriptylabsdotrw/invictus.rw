@@ -74,7 +74,7 @@ export default function Footer() {
         {/* Top: brand + link columns */}
         <div className="grid gap-12 lg:grid-cols-[1.4fr_repeat(4,1fr)]">
           <div className="max-w-xs">
-            <Logo light className="h-20" />
+            <Logo light className="h-24" />
             <p className="mt-5 text-sm leading-relaxed text-emerald-100/70">
               The multi-tenant core banking platform for microfinance institutions, SACCOs, banks,
               and lenders.

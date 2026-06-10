@@ -194,7 +194,7 @@ export default function DashboardMockup() {
               initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5, duration: 0.55, ease: EASE }}
-              className="rounded-2xl bg-gradient-to-br from-emerald-800 to-emerald-950 p-3 text-white"
+              className="rounded-2xl bg-emerald-900 p-3 text-white"
             >
               <p className="text-[9px] font-semibold uppercase tracking-widest text-emerald-300/60">
                 Total Deposits

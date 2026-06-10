@@ -58,7 +58,7 @@ export default function Testimonials() {
                   className="absolute inset-0"
                 >
                   {failed.has(active) ? (
-                    <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-emerald-700 to-emerald-900 font-display text-5xl font-bold text-white">
+                    <div className="flex h-full w-full items-center justify-center bg-emerald-800 font-display text-5xl font-bold text-white">
                       {t.initials}
                     </div>
                   ) : (
