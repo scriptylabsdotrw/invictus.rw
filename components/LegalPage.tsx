@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react'
 import PageHeader from './PageHeader'
+import LegalToc from './ui/LegalToc'
 import type { IconSvgElement } from './ui/Icon'
 
 export interface LegalSection {
@@ -38,26 +39,9 @@ export default function LegalPage({
 
       <section className="section bg-white">
         <div className="container-px">
-          <div className="grid gap-12 lg:grid-cols-[250px_1fr] lg:gap-16">
-            {/* Table of contents */}
-            <aside className="hidden lg:block">
-              <div className="lg:sticky lg:top-32">
-                <p className="text-xs font-bold uppercase tracking-[0.15em] text-muted">
-                  On this page
-                </p>
-                <nav className="mt-4 border-l border-line">
-                  {sections.map((s) => (
-                    <a
-                      key={s.id}
-                      href={`#${s.id}`}
-                      className="-ml-px block border-l-2 border-transparent py-1.5 pl-4 text-sm text-muted transition-colors hover:border-emerald-500 hover:text-emerald-700"
-                    >
-                      {s.heading}
-                    </a>
-                  ))}
-                </nav>
-              </div>
-            </aside>
+          <div className="grid gap-10 lg:grid-cols-[250px_1fr] lg:gap-16">
+            {/* Table of contents — scroll-spy + reading progress (client). */}
+            <LegalToc items={sections.map(({ id, heading }) => ({ id, heading }))} />
 
             {/* Content */}
             <div className="max-w-3xl">

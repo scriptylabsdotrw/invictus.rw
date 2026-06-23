@@ -67,6 +67,10 @@ import {
   ComputerRemoveIcon,
   GitBranchIcon,
   PieChart01Icon,
+  // legal pages
+  CookieIcon,
+  LegalDocument01Icon,
+  Agreement01Icon,
 } from '@hugeicons/core-free-icons'
 
 export {
@@ -128,4 +132,7 @@ export {
   ComputerRemoveIcon,
   GitBranchIcon,
   PieChart01Icon,
+  CookieIcon,
+  LegalDocument01Icon,
+  Agreement01Icon,
 }

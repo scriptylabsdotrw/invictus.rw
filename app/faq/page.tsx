@@ -14,7 +14,6 @@ export default function FAQPage() {
   return (
     <>
       <PageHeader
-        eyebrow="FAQ"
         title="Frequently asked questions"
         subtitle="Everything financial institutions ask before getting started with Invictus."
       />

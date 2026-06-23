@@ -141,6 +141,12 @@ export default function Footer() {
             <Link href="/terms" className="transition-colors hover:text-white">
               Terms &amp; Conditions
             </Link>
+            <Link href="/cookies" className="transition-colors hover:text-white">
+              Cookie Policy
+            </Link>
+            <Link href="/acceptable-use" className="transition-colors hover:text-white">
+              Acceptable Use
+            </Link>
           </div>
 
           <span className="inline-flex items-center gap-2 rounded-full border border-emerald-400/30 bg-emerald-500/10 px-4 py-1.5 text-sm font-semibold text-emerald-300">

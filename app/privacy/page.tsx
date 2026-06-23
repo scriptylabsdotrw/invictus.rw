@@ -228,7 +228,8 @@ const sections: LegalSection[] = [
     body: (
       <p>
         This website uses only essential cookies necessary for its operation and security. We do not
-        use cookies for advertising. You can control cookies through your browser settings.
+        use cookies for advertising. You can control cookies through your browser settings. For full
+        details, see our <a href="/cookies">Cookie Policy</a>.
       </p>
     ),
   },
@@ -285,7 +286,7 @@ export default function PrivacyPage() {
       title={<><Highlight>Privacy</Highlight> Policy</>}
       subtitle="How we collect, use, and protect your personal data — in line with Rwanda’s data protection law."
       icon={SecurityCheckIcon}
-      lastUpdated="5 June 2026"
+      lastUpdated="23 June 2026"
       chips={['Aligned with Law N° 058/2021']}
       sections={sections}
     />

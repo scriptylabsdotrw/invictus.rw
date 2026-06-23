@@ -90,6 +90,10 @@ const sections: LegalSection[] = [
           <li>Introduce malicious code or otherwise interfere with the Website’s operation; or</li>
           <li>Use the Website to transmit unlawful, harmful, or misleading content.</li>
         </ul>
+        <p>
+          Full details of permitted and prohibited activity are set out in our{' '}
+          <a href="/acceptable-use">Acceptable Use Policy</a>, which forms part of these Terms.
+        </p>
       </>
     ),
   },
@@ -198,7 +202,7 @@ export default function TermsPage() {
       title={<>Terms & <Highlight>Conditions</Highlight></>}
       subtitle="The terms that govern your use of the Invictus website."
       icon={JusticeScaleIcon}
-      lastUpdated="5 June 2026"
+      lastUpdated="23 June 2026"
       chips={['Governed by Rwandan law']}
       sections={sections}
     />
