@@ -88,12 +88,12 @@ export default function Navbar() {
           </div>
 
           <div className="hidden items-center gap-2 lg:flex">
-            <Link
-              href="/login"
+            <a
+              href="https://invictus.rw/en/auth/login"
               className={heroMode ? 'btn text-white hover:bg-white/10' : 'btn-ghost'}
             >
               Login
-            </Link>
+            </a>
             <Link
               href="/contact"
               className={
@@ -142,9 +142,9 @@ export default function Navbar() {
                 </Link>
               ))}
               <div className="mt-2 grid grid-cols-2 gap-2 p-1">
-                <Link href="/login" className="btn-secondary">
+                <a href="https://invictus.rw/en/auth/login" className="btn-secondary">
                   Login
-                </Link>
+                </a>
                 <Link href="/contact" className="btn-primary">
                   Request Demo
                 </Link>

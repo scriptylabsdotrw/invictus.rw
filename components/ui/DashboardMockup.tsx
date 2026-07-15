@@ -3,7 +3,7 @@
 import Image from 'next/image'
 import { motion, animate, useMotionValue, useTransform } from 'framer-motion'
 import { useEffect } from 'react'
-import { Area, AreaChart, ResponsiveContainer, Tooltip, XAxis } from 'recharts'
+import { Area, AreaChart, Cell, Pie, PieChart, ResponsiveContainer, Tooltip, XAxis } from 'recharts'
 import Icon from './Icon'
 import {
   DashboardSquare01Icon,
@@ -45,11 +45,11 @@ const transactions = [
   { initials: 'PN', name: 'Patrick N.', amount: '+ RWF 120,000', type: 'Repayment', dot: 'bg-emerald-500' },
 ]
 
-const todayActivity = [
-  { label: 'Deposits received', value: 'RWF 4.2M', color: 'bg-emerald-500' },
-  { label: 'Withdrawals', value: 'RWF 1.8M', color: 'bg-amber-500' },
-  { label: 'Loans disbursed', value: 'RWF 620K', color: 'bg-sky-500' },
-  { label: 'Pending transfers', value: '23 items', color: 'bg-violet-500' },
+const loanMix = [
+  { name: 'Business',      value: 38, color: '#059669' },
+  { name: 'Agriculture',   value: 24, color: '#0284c7' },
+  { name: 'Consumer',      value: 22, color: '#d97706' },
+  { name: 'SACCO Group',   value: 16, color: '#7c3aed' },
 ]
 
 const EASE = [0.22, 1, 0.36, 1] as const
@@ -165,7 +165,7 @@ export default function DashboardMockup() {
               <p className="text-[10px] font-semibold uppercase tracking-widest text-muted/60">
                 Overview
               </p>
-              <h3 className="font-display text-[13px] font-bold text-ink">Giant Eagle Bank</h3>
+              <h3 className="font-display text-[13px] font-bold text-ink">INGABO Finance</h3>
             </div>
             <div className="flex items-center gap-1.5">
               <motion.div
@@ -188,7 +188,7 @@ export default function DashboardMockup() {
           </div>
 
           {/* Metric cards */}
-          <div className="grid grid-cols-3 gap-2">
+          <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
             {/* Primary */}
             <motion.div
               initial={{ opacity: 0, y: 14 }}
@@ -200,7 +200,7 @@ export default function DashboardMockup() {
                 Total Deposits
               </p>
               <div className="mt-1.5 flex items-end justify-between">
-                <p className="font-display text-[15px] font-bold sm:text-base">
+                <p className="font-display text-[13px] font-bold sm:text-[15px]">
                   <span className="text-[9px] font-normal text-emerald-300/50">RWF </span>
                   <AnimatedNumber to={1.84} format={(n) => n.toFixed(2) + 'B'} />
                 </p>
@@ -215,14 +215,33 @@ export default function DashboardMockup() {
             <motion.div
               initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6, duration: 0.55, ease: EASE }}
+              transition={{ delay: 0.58, duration: 0.55, ease: EASE }}
               className="rounded-2xl bg-white p-3 ring-1 ring-line"
             >
               <p className="text-[9px] font-semibold uppercase tracking-widest text-muted/60">
-                Active Accounts
+                Loans Disbursed
               </p>
               <div className="mt-1.5 flex items-end justify-between">
-                <p className="font-display text-[15px] font-bold text-ink sm:text-base">
+                <p className="font-display text-[13px] font-bold text-ink sm:text-[15px]">
+                  <span className="text-[9px] font-normal text-muted/50">RWF </span>
+                  <AnimatedNumber to={892} format={(n) => Math.round(n) + 'M'} />
+                </p>
+                <Sparkline points="0,17 10,15 20,16 30,10 40,8 50,9 60,4" stroke="#d97706" />
+              </div>
+              <p className="mt-2 text-[9px] font-medium text-amber-600">128 loans this month</p>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 14 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.66, duration: 0.55, ease: EASE }}
+              className="rounded-2xl bg-white p-3 ring-1 ring-line"
+            >
+              <p className="text-[9px] font-semibold uppercase tracking-widest text-muted/60">
+                Total Clients
+              </p>
+              <div className="mt-1.5 flex items-end justify-between">
+                <p className="font-display text-[13px] font-bold text-ink sm:text-[15px]">
                   <AnimatedNumber to={12840} format={(n) => Math.round(n).toLocaleString()} />
                 </p>
                 <Sparkline points="0,16 10,14 20,17 30,11 40,9 50,7 60,4" stroke="#059669" />
@@ -233,14 +252,14 @@ export default function DashboardMockup() {
             <motion.div
               initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.7, duration: 0.55, ease: EASE }}
+              transition={{ delay: 0.74, duration: 0.55, ease: EASE }}
               className="rounded-2xl bg-white p-3 ring-1 ring-line"
             >
               <p className="text-[9px] font-semibold uppercase tracking-widest text-muted/60">
                 Loan Portfolio
               </p>
               <div className="mt-1.5 flex items-end justify-between">
-                <p className="font-display text-[15px] font-bold text-ink sm:text-base">
+                <p className="font-display text-[13px] font-bold text-ink sm:text-[15px]">
                   <span className="text-[9px] font-normal text-muted/50">RWF </span>
                   <AnimatedNumber to={248.6} format={(n) => n.toFixed(1) + 'M'} />
                 </p>
@@ -305,30 +324,52 @@ export default function DashboardMockup() {
               </div>
             </motion.div>
 
-            {/* Today's activity */}
+            {/* Loan portfolio mix (donut) */}
             <motion.div
               initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.88, duration: 0.55, ease: EASE }}
               className="col-span-2 rounded-2xl bg-white p-3 ring-1 ring-line"
             >
-              <p className="mb-2.5 text-[11px] font-semibold text-ink">Today's Activity</p>
-              <div className="space-y-2">
-                {todayActivity.map((a, i) => (
-                  <motion.div
-                    key={a.label}
-                    initial={{ opacity: 0, x: 8 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 1.0 + i * 0.1, duration: 0.35, ease: EASE }}
-                    className="flex items-center gap-2"
-                  >
-                    <span className={`h-1.5 w-1.5 flex-shrink-0 rounded-full ${a.color}`} />
-                    <div className="flex flex-1 items-center justify-between">
-                      <span className="text-[9px] text-muted">{a.label}</span>
-                      <span className="text-[9px] font-bold text-ink">{a.value}</span>
-                    </div>
-                  </motion.div>
-                ))}
+              <p className="mb-2.5 text-[11px] font-semibold text-ink">Loan Portfolio Mix</p>
+              <div className="flex items-center gap-3">
+                <div className="h-[68px] w-[68px] flex-shrink-0">
+                  <ResponsiveContainer width="100%" height="100%">
+                    <PieChart>
+                      <Pie
+                        data={loanMix}
+                        dataKey="value"
+                        nameKey="name"
+                        innerRadius={20}
+                        outerRadius={32}
+                        paddingAngle={2}
+                        stroke="none"
+                        isAnimationActive
+                        animationBegin={900}
+                        animationDuration={1200}
+                      >
+                        {loanMix.map((entry) => (
+                          <Cell key={entry.name} fill={entry.color} />
+                        ))}
+                      </Pie>
+                    </PieChart>
+                  </ResponsiveContainer>
+                </div>
+                <div className="flex-1 space-y-1.5">
+                  {loanMix.map((s, i) => (
+                    <motion.div
+                      key={s.name}
+                      initial={{ opacity: 0, x: 8 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 1.0 + i * 0.1, duration: 0.35, ease: EASE }}
+                      className="flex items-center gap-1.5"
+                    >
+                      <span className="h-1.5 w-1.5 flex-shrink-0 rounded-full" style={{ background: s.color }} />
+                      <span className="flex-1 truncate text-[9px] text-muted">{s.name}</span>
+                      <span className="text-[9px] font-bold text-ink">{s.value}%</span>
+                    </motion.div>
+                  ))}
+                </div>
               </div>
             </motion.div>
           </div>
