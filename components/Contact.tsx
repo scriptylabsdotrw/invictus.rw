@@ -1,12 +1,17 @@
 'use client'
 
-import { useState, useCallback, type FormEvent } from 'react'
+import { useState, type FormEvent } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Icon from './ui/Icon'
-import Select from './ui/Select'
-import DatePicker from './ui/DatePicker'
+import DemoDatePicker from './DemoDatePicker'
 import TimePicker from './ui/TimePicker'
-import Toast from './ui/Toast'
+import { toast } from 'sonner'
+import { Button } from './ui/button'
+import { Card, CardContent } from './ui/card'
+import { Input } from './ui/input'
+import { Label } from './ui/label'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/Select'
+import { Textarea } from './ui/textarea'
 import {
   Mail01Icon,
   SmartPhone01Icon,
@@ -49,9 +54,7 @@ function todayISO() {
   return new Date().toISOString().split('T')[0]
 }
 
-const inputClass =
-  'mt-1.5 w-full rounded-2xl border border-line bg-white px-4 py-3 text-sm text-ink transition-colors ' +
-  'placeholder:text-muted/70 focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-100'
+const inputClass = 'mt-1.5 h-12 w-full rounded-2xl border-line bg-white px-4 text-ink placeholder:text-muted/70 focus-visible:border-emerald-500 focus-visible:ring-emerald-100'
 
 const contactItems = [
   { icon: Mail01Icon,       label: 'Email',    value: 'demo@invictus.rw'  },
@@ -75,9 +78,6 @@ export default function Contact() {
   const [demoTime,    setDemoTime]    = useState('')
   const [timeError,   setTimeError]   = useState(false)
   const [loading,  setLoading]  = useState(false)
-  const [toast,    setToast]    = useState<{ type: 'success' | 'error'; message: string } | null>(null)
-
-  const closeToast = useCallback(() => setToast(null), [])
   const isBusiness = accountType === 'business'
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -88,7 +88,6 @@ export default function Contact() {
     if (!demoTime) { setTimeError(true); valid = false }
     if (!valid) return
 
-    setToast(null)
     setLoading(true)
 
     const fd = new FormData(e.currentTarget)
@@ -114,9 +113,9 @@ export default function Contact() {
       const data = await res.json().catch(() => null)
       if (!res.ok) throw new Error(data?.error ?? 'Something went wrong.')
       setSubmitted(true)
-      setToast({ type: 'success', message: "We'll confirm your demo slot within 1 business day. Check your inbox for a confirmation email." })
+      toast.success('Demo request sent!', { description: "We'll confirm your demo slot within 1 business day. Check your inbox for a confirmation email." })
     } catch (err) {
-      setToast({ type: 'error', message: err instanceof Error ? err.message : 'Unable to send. Please try again.' })
+      toast.error('Failed to send request', { description: err instanceof Error ? err.message : 'Unable to send. Please try again.' })
     } finally {
       setLoading(false)
     }
@@ -131,7 +130,6 @@ export default function Contact() {
     setDateError(false)
     setDemoTime('')
     setTimeError(false)
-    setToast(null)
   }
 
   return (
@@ -151,7 +149,8 @@ export default function Contact() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
           >
-            <div className="rounded-3xl border border-line bg-neutralbg p-6 sm:p-8">
+            <Card className="rounded-3xl border border-line bg-neutralbg py-0 shadow-none ring-0">
+              <CardContent className="p-6 sm:p-8">
               {submitted ? (
                 <motion.div
                   initial={{ opacity: 0, scale: 0.96 }}
@@ -166,9 +165,9 @@ export default function Contact() {
                     The Invictus team will reach out within 1 business day to confirm your demo.
                     Check your inbox for a confirmation email.
                   </p>
-                  <button type="button" onClick={resetForm} className="btn-secondary mt-8">
+                  <Button type="button" variant="outline" onClick={resetForm} className="mt-8">
                     Submit another request
-                  </button>
+                  </Button>
                 </motion.div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-5">
@@ -176,19 +175,15 @@ export default function Contact() {
                   {/* Account type toggle */}
                   <div>
                     <p className="mb-2 text-sm font-semibold text-ink">I am a</p>
-                    <div className="flex rounded-2xl border border-line bg-white p-1">
+                    <div className="flex w-full rounded-2xl border border-line bg-white p-1">
                       {([
                         { value: 'business',   label: 'Business / Organisation', icon: Building03Icon },
                         { value: 'individual', label: 'Individual',              icon: UserCircleIcon },
                       ] as const).map((opt) => (
-                        <button
+                        <Button
                           key={opt.value}
                           type="button"
-                          onClick={() => {
-                            setAccountType(opt.value)
-                            setCategory('')
-                            setCatError(false)
-                          }}
+                          onClick={() => { setAccountType(opt.value); setCategory(''); setCatError(false) }}
                           className={`flex flex-1 items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold transition-all duration-200 ${
                             accountType === opt.value
                               ? 'bg-emerald-800 text-white'
@@ -197,7 +192,7 @@ export default function Contact() {
                         >
                           <Icon icon={opt.icon} size={16} />
                           {opt.label}
-                        </button>
+                        </Button>
                       ))}
                     </div>
                   </div>
@@ -205,8 +200,8 @@ export default function Contact() {
                   {/* Name + Org */}
                   <div className={`grid gap-4 ${isBusiness ? 'sm:grid-cols-2' : ''}`}>
                     <div>
-                      <label htmlFor="fullName" className="text-sm font-semibold text-ink">Full Name</label>
-                      <input id="fullName" name="fullName" type="text" required autoComplete="name" placeholder="Your full name" className={inputClass} />
+                      <Label htmlFor="fullName" className="text-ink">Full Name</Label>
+                      <Input id="fullName" name="fullName" type="text" required autoComplete="name" placeholder="Your full name" className={inputClass} />
                     </div>
                     <AnimatePresence>
                       {isBusiness && (
@@ -216,8 +211,8 @@ export default function Contact() {
                           exit={{ opacity: 0, x: 10 }}
                           transition={{ duration: 0.2 }}
                         >
-                          <label htmlFor="orgName" className="text-sm font-semibold text-ink">Organisation Name</label>
-                          <input id="orgName" name="orgName" type="text" required={isBusiness} autoComplete="organization" placeholder="Your institution or company" className={inputClass} />
+                          <Label htmlFor="orgName" className="text-ink">Organisation Name</Label>
+                          <Input id="orgName" name="orgName" type="text" required={isBusiness} autoComplete="organization" placeholder="Your institution or company" className={inputClass} />
                         </motion.div>
                       )}
                     </AnimatePresence>
@@ -226,29 +221,26 @@ export default function Contact() {
                   {/* Email + Phone */}
                   <div className="grid gap-4 sm:grid-cols-2">
                     <div>
-                      <label htmlFor="email" className="text-sm font-semibold text-ink">Email Address</label>
-                      <input id="email" name="email" type="email" required autoComplete="email" placeholder="you@example.com" className={inputClass} />
+                      <Label htmlFor="email" className="text-ink">Email Address</Label>
+                      <Input id="email" name="email" type="email" required autoComplete="email" placeholder="you@example.com" className={inputClass} />
                     </div>
                     <div>
-                      <label htmlFor="phone" className="text-sm font-semibold text-ink">Phone Number</label>
-                      <input id="phone" name="phone" type="tel" autoComplete="tel" placeholder="+250 ..." className={inputClass} />
+                      <Label htmlFor="phone" className="text-ink">Phone Number</Label>
+                      <Input id="phone" name="phone" type="tel" autoComplete="tel" placeholder="+250 ..." className={inputClass} />
                     </div>
                   </div>
 
                   {/* Category + Staff */}
                   <div className="grid gap-4 sm:grid-cols-2">
                     <div>
-                      <label className="text-sm font-semibold text-ink">
+                      <Label htmlFor="category" className="text-ink">
                         {isBusiness ? 'Business Type' : 'Your Role'}
-                      </label>
-                      <Select
-                        id="category" name="category"
-                        options={isBusiness ? businessTypes : individualRoles}
-                        value={category}
-                        onChange={(v) => { setCategory(v); setCatError(false) }}
-                        placeholder={isBusiness ? 'Select business type' : 'Select your role'}
-                        error={catError}
-                      />
+                      </Label>
+                      <Select value={category || null} onValueChange={(v) => { setCategory(v ?? ''); setCatError(false) }}>
+                        <SelectTrigger id="category" aria-invalid={catError} className="mt-1.5 h-12 w-full rounded-2xl border-line bg-white px-4"><SelectValue placeholder={isBusiness ? 'Select business type' : 'Select your role'} /></SelectTrigger>
+                        <SelectContent>{(isBusiness ? businessTypes : individualRoles).map((option) => <SelectItem key={option} value={option}>{option}</SelectItem>)}</SelectContent>
+                      </Select>
+                      <input type="hidden" name="category" value={category} />
                       {catError && <p className="mt-1.5 text-xs font-medium text-rose-500">Please make a selection.</p>}
                     </div>
                     <AnimatePresence>
@@ -259,8 +251,8 @@ export default function Contact() {
                           exit={{ opacity: 0 }}
                           transition={{ duration: 0.2 }}
                         >
-                          <label htmlFor="staff" className="text-sm font-semibold text-ink">Number of Staff</label>
-                          <input id="staff" name="staff" type="number" min={1} placeholder="e.g. 12" className={inputClass} />
+                          <Label htmlFor="staff" className="text-ink">Number of Staff</Label>
+                          <Input id="staff" name="staff" type="number" min={1} placeholder="e.g. 12" className={inputClass} />
                         </motion.div>
                       )}
                     </AnimatePresence>
@@ -269,9 +261,9 @@ export default function Contact() {
                   {/* Date + Time */}
                   <div className="grid gap-5 sm:grid-cols-2">
                     <div>
-                      <label className="text-sm font-semibold text-ink">Preferred Demo Date</label>
+                      <Label className="text-ink">Preferred Demo Date</Label>
                       {dateError && <p className="mt-1 text-xs font-medium text-rose-500">Please select a date.</p>}
-                      <DatePicker
+                      <DemoDatePicker
                         value={demoDate}
                         onChange={(d) => { setDemoDate(d); setDateError(false) }}
                         minDate={todayISO()}
@@ -279,7 +271,7 @@ export default function Contact() {
                       />
                     </div>
                     <div>
-                      <label className="text-sm font-semibold text-ink">Preferred Time</label>
+                      <Label className="text-ink">Preferred Time</Label>
                       {timeError && <p className="mt-1 text-xs font-medium text-rose-500">Please select a time slot.</p>}
                       <TimePicker
                         slots={TIME_SLOTS}
@@ -292,10 +284,10 @@ export default function Contact() {
 
                   {/* Message */}
                   <div>
-                    <label htmlFor="message" className="text-sm font-semibold text-ink">
+                    <Label htmlFor="message" className="text-ink">
                       Message <span className="font-normal text-muted">(optional)</span>
-                    </label>
-                    <textarea
+                    </Label>
+                    <Textarea
                       id="message" name="message" rows={3}
                       placeholder={isBusiness
                         ? "Tell us about your institution — size, current challenges, what you'd like to see…"
@@ -305,22 +297,21 @@ export default function Contact() {
                   </div>
 
                   {/* Submit */}
-                  <motion.button
+                  <Button
                     type="submit"
                     disabled={loading}
-                    whileHover={{ scale: loading ? 1 : 1.01 }}
-                    whileTap={{ scale: loading ? 1 : 0.99 }}
-                    className="btn-primary w-full disabled:opacity-70"
+                    className="w-full disabled:opacity-70"
                   >
                     {loading ? 'Sending…' : <> Book My Demo <Icon icon={SentIcon} size={18} /></>}
-                  </motion.button>
+                  </Button>
 
                   <p className="text-center text-xs text-muted">
                     We respect your privacy. Your details are only used to arrange your demo.
                   </p>
                 </form>
               )}
-            </div>
+              </CardContent>
+            </Card>
           </motion.div>
 
           {/* ─── SIDEBAR (second / right) ────────────────────────────── */}
@@ -355,7 +346,6 @@ export default function Contact() {
                   </div>
                 ))}
               </div>
-
               <ul className="space-y-3 border-t border-line pt-6">
                 {assurances.map((a) => (
                   <li key={a} className="flex items-center gap-3 text-sm font-medium text-ink/80">
@@ -373,16 +363,6 @@ export default function Contact() {
       </div>
     </section>
 
-    <AnimatePresence>
-      {toast && (
-        <Toast
-          key={toast.type}
-          type={toast.type}
-          message={toast.message}
-          onClose={closeToast}
-        />
-      )}
-    </AnimatePresence>
     </>
   )
 }

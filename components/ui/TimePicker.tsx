@@ -1,5 +1,7 @@
 'use client'
 
+import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group'
+
 interface TimePickerProps {
   slots: string[]
   value: string
@@ -18,12 +20,12 @@ export default function TimePicker({ slots, value, onChange, error }: TimePicker
 
       {/* Scrollable slot grid */}
       <div className="max-h-[260px] overflow-y-auto p-3">
-        <div className="grid grid-cols-3 gap-1.5">
+        <ToggleGroup value={value ? [value] : []} onValueChange={(next) => { if (next[0]) onChange(next[0]) }} className="grid w-full grid-cols-3 gap-1.5" spacing={0} multiple={false}>
           {slots.map((slot) => {
             const isActive = value === slot
             const [time, period] = slot.split(' ')
             return (
-              <button
+              <ToggleGroupItem
                 key={slot}
                 type="button"
                 onClick={() => onChange(slot)}
@@ -49,10 +51,10 @@ export default function TimePicker({ slots, value, onChange, error }: TimePicker
                     </svg>
                   </span>
                 )}
-              </button>
+              </ToggleGroupItem>
             )
           })}
-        </div>
+        </ToggleGroup>
       </div>
 
       <div className="border-t border-line px-4 py-2">

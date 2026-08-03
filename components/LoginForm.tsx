@@ -2,9 +2,13 @@
 
 import { useState, type FormEvent } from 'react'
 import Link from 'next/link'
-import { motion } from 'framer-motion'
 import Logo from './ui/Logo'
 import Icon from './ui/Icon'
+import { Alert, AlertDescription } from './ui/alert'
+import { Button } from './ui/button'
+import { Checkbox } from './ui/checkbox'
+import { InputGroup, InputGroupAddon, InputGroupButton, InputGroupInput } from './ui/input-group'
+import { Label } from './ui/label'
 import {
   Mail01Icon,
   SecurityCheckIcon,
@@ -23,10 +27,6 @@ const highlights = [
   { icon: Globe02Icon, text: 'Your branded portal on the Invictus platform' },
   { icon: SecurityCheckIcon, text: 'Role-based access with full audit trails' },
 ]
-
-const fieldBase =
-  'w-full rounded-2xl border border-line bg-white py-3 pl-11 text-sm text-ink transition-colors ' +
-  'placeholder:text-muted/70 focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-100'
 
 export default function LoginForm() {
   const [email, setEmail] = useState('')
@@ -113,24 +113,19 @@ export default function LoginForm() {
           </p>
 
           {error && (
-            <div
-              role="alert"
-              className="mt-6 rounded-2xl border border-rose-200 bg-rose-50 px-4 py-3 text-sm font-medium text-rose-600"
-            >
-              {error}
-            </div>
+            <Alert variant="destructive" className="mt-6 rounded-2xl border-rose-200 bg-rose-50"><AlertDescription>{error}</AlertDescription></Alert>
           )}
 
           <form onSubmit={handleSubmit} className="mt-7 space-y-4">
             <div>
-              <label htmlFor="email" className="text-sm font-semibold text-ink">
+              <Label htmlFor="email" className="text-ink">
                 Email address
-              </label>
-              <div className="relative mt-1.5">
-                <span className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-muted">
+              </Label>
+              <InputGroup className="mt-1.5 h-12 rounded-2xl border-line bg-white">
+                <InputGroupAddon className="text-muted">
                   <Icon icon={Mail01Icon} size={18} />
-                </span>
-                <input
+                </InputGroupAddon>
+                <InputGroupInput
                   id="email"
                   name="email"
                   type="email"
@@ -139,16 +134,16 @@ export default function LoginForm() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="you@institution.rw"
-                  className={`${fieldBase} pr-4`}
+                  className="h-full pr-4 text-ink placeholder:text-muted/70"
                 />
-              </div>
+              </InputGroup>
             </div>
 
             <div>
               <div className="flex items-center justify-between">
-                <label htmlFor="password" className="text-sm font-semibold text-ink">
+                <Label htmlFor="password" className="text-ink">
                   Password
-                </label>
+                </Label>
                 <Link
                   href="/contact"
                   className="text-xs font-semibold text-emerald-700 hover:underline"
@@ -156,11 +151,11 @@ export default function LoginForm() {
                   Forgot password?
                 </Link>
               </div>
-              <div className="relative mt-1.5">
-                <span className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-muted">
+              <InputGroup className="mt-1.5 h-12 rounded-2xl border-line bg-white">
+                <InputGroupAddon className="text-muted">
                   <Icon icon={SecurityCheckIcon} size={18} />
-                </span>
-                <input
+                </InputGroupAddon>
+                <InputGroupInput
                   id="password"
                   name="password"
                   type={showPw ? 'text' : 'password'}
@@ -169,37 +164,32 @@ export default function LoginForm() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="••••••••"
-                  className={`${fieldBase} pr-11`}
+                  className="h-full pr-11 text-ink placeholder:text-muted/70"
                 />
-                <button
-                  type="button"
+                <InputGroupButton
                   onClick={() => setShowPw((v) => !v)}
                   aria-label={showPw ? 'Hide password' : 'Show password'}
-                  className={`absolute right-3 top-1/2 flex h-7 w-7 -translate-y-1/2 items-center justify-center rounded-lg transition-colors ${
+                  className={`absolute right-2 top-1/2 -translate-y-1/2 transition-colors ${
                     showPw ? 'text-emerald-700' : 'text-muted hover:text-emerald-700'
                   }`}
                 >
                   <Icon icon={ViewIcon} size={18} />
-                </button>
-              </div>
+                </InputGroupButton>
+              </InputGroup>
             </div>
 
             <label className="flex w-fit cursor-pointer items-center gap-2 text-sm text-muted">
-              <input
-                type="checkbox"
+              <Checkbox
                 checked={remember}
-                onChange={(e) => setRemember(e.target.checked)}
-                className="h-4 w-4 rounded border-line text-emerald-600 focus:ring-emerald-500"
+                onCheckedChange={setRemember}
               />
               Keep me signed in
             </label>
 
-            <motion.button
+            <Button
               type="submit"
               disabled={loading}
-              whileHover={{ scale: loading ? 1 : 1.01 }}
-              whileTap={{ scale: loading ? 1 : 0.99 }}
-              className="btn-primary w-full disabled:opacity-70"
+              className="w-full disabled:opacity-70"
             >
               {loading ? (
                 'Signing in…'
@@ -208,7 +198,7 @@ export default function LoginForm() {
                   Sign in <Icon icon={ArrowRight01Icon} size={18} />
                 </>
               )}
-            </motion.button>
+            </Button>
           </form>
 
           <p className="mt-8 text-center text-sm text-muted">

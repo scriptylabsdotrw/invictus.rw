@@ -1,6 +1,6 @@
 import Image from 'next/image'
-import type { Client } from '../data/clients'
-import { clientsRowOne, clientsRowTwo } from '../data/clients'
+import type { Client } from '@/lib/constants'
+import { clientsRowOne, clientsRowTwo } from '@/lib/constants'
 import Reveal from './ui/Reveal'
 import Icon from './ui/Icon'
 import { ArrowRight01Icon } from '@/lib/icons'

@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { motion } from 'framer-motion'
-import { plans } from '../data/pricing'
+import { plans } from '@/lib/constants'
 import Reveal from './ui/Reveal'
 import Icon from './ui/Icon'
 import { Tick02Icon, StarIcon, ArrowRight01Icon } from '@/lib/icons'

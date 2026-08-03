@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { motion } from 'framer-motion'
-import { features } from '../data/features'
+import { features } from '@/lib/constants'
 import Icon from './ui/Icon'
 import { ArrowRight01Icon } from '@/lib/icons'
 

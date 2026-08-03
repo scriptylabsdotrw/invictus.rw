@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import { AnimatePresence, motion } from 'framer-motion'
-import { testimonials } from '../data/testimonials'
+import { testimonials } from '@/lib/constants'
 import Icon from './ui/Icon'
 import { QuoteUpIcon, StarIcon } from '@/lib/icons'
 

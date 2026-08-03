@@ -4,6 +4,7 @@ import './globals.css'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import WhatsAppButton from '@/components/WhatsAppButton'
+import { Toaster } from '@/components/ui/sonner'
 
 // Body copy — highly readable.
 const inter = Inter({
@@ -114,6 +115,7 @@ export default function RootLayout({
         <main>{children}</main>
         <Footer />
         <WhatsAppButton />
+        <Toaster theme="light" position="bottom-right" richColors />
       </body>
     </html>
   )
