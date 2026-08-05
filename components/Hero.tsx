@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Icon from "./ui/Icon";
-import { ArrowRight01Icon } from "@/lib/icons";
+import { ArrowRight01Icon } from "@hugeicons/core-free-icons";
 import { staggerContainer, staggerItem } from "./ui/Reveal";
 import Highlight from "./ui/Highlight";
 
@@ -46,7 +46,7 @@ export default function Hero() {
         >
           <motion.h1
             variants={staggerItem}
-            className="display text-balance text-5xl text-white sm:text-7xl lg:text-[5.75rem]"
+            className="display text-balance text-5xl text-white sm:text-5xl lg:text-[5.75rem]"
           >
             The core banking system for modern{" "}
             <Highlight>institutions</Highlight>

@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { plans, comparison } from '@/lib/constants'
 import Reveal from './ui/Reveal'
 import Icon from './ui/Icon'
-import { Tick02Icon, StarIcon, ArrowRight01Icon } from '@/lib/icons'
+import { Tick02Icon, StarIcon, ArrowRight01Icon } from '@hugeicons/core-free-icons'
 
 const popularIndex = plans.findIndex((p) => p.popular)
 

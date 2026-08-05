@@ -10,7 +10,7 @@ import {
   useTransform,
 } from "framer-motion";
 import Icon from "./ui/Icon";
-import { ArrowRight01Icon } from "@/lib/icons";
+import { ArrowRight01Icon } from "@hugeicons/core-free-icons";
 
 const steps = [
   {
@@ -30,11 +30,7 @@ const steps = [
 const EASE = [0.22, 1, 0.36, 1] as const;
 const pad = (n: number) => String(n).padStart(2, "0");
 
-export default function HowItWorks({
-  showHeader = true,
-}: {
-  showHeader?: boolean;
-}) {
+export default function HowItWorks() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(0);
 
@@ -68,11 +64,9 @@ export default function HowItWorks({
               <span className="text-xs font-bold uppercase tracking-[0.22em] text-emerald-700">
                 How it works
               </span>
-              {showHeader && (
-                <h2 className="display mt-2 text-3xl text-ink sm:text-4xl lg:text-5xl">
-                  Ready to get started?
-                </h2>
-              )}
+              <h2 className="display mt-2 text-3xl text-ink sm:text-4xl lg:text-5xl">
+                Ready to get started?
+              </h2>
             </div>
             <span className="hidden font-display text-sm font-bold tracking-[0.2em] text-muted sm:block">
               {pad(active + 1)} <span className="text-line">/</span>{" "}

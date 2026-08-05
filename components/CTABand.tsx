@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Reveal from "./ui/Reveal";
 import Icon from "./ui/Icon";
-import { ArrowRight01Icon } from "@/lib/icons";
+import { ArrowRight01Icon } from "@hugeicons/core-free-icons";
 
 interface CTABandProps {
   title?: string;

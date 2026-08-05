@@ -1,17 +1,7 @@
 'use client'
 
-import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { features } from '@/lib/constants'
-import Icon from './ui/Icon'
-import { ArrowRight01Icon } from '@/lib/icons'
-
-interface FeaturesProps {
-  limit?: number
-  showViewAll?: boolean
-  heading?: string
-  subheading?: string
-}
 
 const EASE = [0.22, 1, 0.36, 1] as const
 
@@ -24,13 +14,8 @@ const item = {
   show: { opacity: 1, y: 0, transition: { duration: 0.55, ease: EASE } },
 }
 
-export default function Features({
-  limit,
-  showViewAll = false,
-  heading = 'What we offer',
-  subheading: _subheading = 'Everything your institution needs to run modern banking operations.',
-}: FeaturesProps) {
-  const items = limit ? features.slice(0, limit) : features
+export default function Features() {
+  const items = features.slice(0, 6)
 
   return (
     <section className="relative overflow-hidden bg-neutralbg">
@@ -51,25 +36,6 @@ export default function Features({
               What we <em className="font-serif font-normal lowercase">offer</em>
             </h2>
           </motion.div>
-
-          {showViewAll && (
-            <motion.div
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-80px' }}
-              transition={{ duration: 0.7, delay: 0.1, ease: EASE }}
-            >
-              <Link
-                href="/features"
-                className="group mt-5 inline-flex items-center gap-2 text-sm font-semibold text-emerald-700"
-              >
-                View all capabilities
-                <span className="transition-transform group-hover:translate-x-1">
-                  <Icon icon={ArrowRight01Icon} size={18} />
-                </span>
-              </Link>
-            </motion.div>
-          )}
         </div>
 
         <motion.div

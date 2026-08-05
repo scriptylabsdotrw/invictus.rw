@@ -5,7 +5,7 @@ import { motion } from 'framer-motion'
 import { plans } from '@/lib/constants'
 import Reveal from './ui/Reveal'
 import Icon from './ui/Icon'
-import { Tick02Icon, StarIcon, ArrowRight01Icon } from '@/lib/icons'
+import { Tick02Icon, StarIcon, ArrowRight01Icon } from '@hugeicons/core-free-icons'
 
 export default function Pricing({ showHeader = true }: { showHeader?: boolean }) {
   return (
