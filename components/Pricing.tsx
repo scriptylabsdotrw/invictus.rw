@@ -50,7 +50,7 @@ export default function Pricing({ showHeader = true }: { showHeader?: boolean })
                   )}
                   {/* Gold top accent on hover for standard plans */}
                   {!popular && (
-                    <span className="absolute inset-x-0 top-0 h-0.5 bg-gold/70 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                    <span className="absolute inset-x-0 top-0 h-0.5 bg-brand-orange/70 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
                   )}
 
                   {/* Header: icon mark + popular badge */}
@@ -65,7 +65,7 @@ export default function Pricing({ showHeader = true }: { showHeader?: boolean })
                       <Icon icon={plan.icon} size={22} />
                     </span>
                     {popular && (
-                      <span className="inline-flex items-center gap-1 rounded-full bg-gold px-3 py-1 text-xs font-extrabold text-emerald-950">
+                      <span className="inline-flex items-center gap-1 rounded-full bg-brand-orange px-3 py-1 text-xs font-extrabold text-white">
                         <Icon icon={StarIcon} size={13} /> Most Popular
                       </span>
                     )}
@@ -148,7 +148,7 @@ export default function Pricing({ showHeader = true }: { showHeader?: boolean })
                     href="/contact"
                     className={`group/cta relative mt-8 inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition-all ${
                       popular
-                        ? 'bg-gold text-emerald-950 hover:brightness-105'
+                        ? 'bg-brand-orange text-white hover:bg-brand-orange-soft'
                         : 'bg-emerald-800 text-white hover:bg-emerald-900'
                     }`}
                   >

@@ -203,7 +203,7 @@ function CapabilityCard({ item, delay }: { item: Capability; delay: number }) {
         transition={{ type: 'spring', stiffness: 300, damping: 22 }}
         className="group h-full rounded-2xl border border-line bg-white p-6 transition-colors hover:border-emerald-200"
       >
-        <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-gold/10 text-gold transition-all group-hover:bg-gold group-hover:text-emerald-950">
+        <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-brand-orange/10 text-brand-orange transition-all group-hover:bg-brand-orange group-hover:text-white">
           <Icon icon={item.icon} size={20} />
         </span>
         <h3 className="mt-5 text-base font-bold text-ink">{item.title}</h3>
@@ -259,7 +259,7 @@ export function LedgerSpotlight() {
           <Reveal>
             <div>
               <span className="inline-flex items-center gap-2 text-sm font-semibold text-emerald-300">
-                <span className="text-gold">
+                <span className="text-brand-orange">
                   <Icon icon={BookOpen01Icon} size={16} />
                 </span>
                 Built on a real ledger

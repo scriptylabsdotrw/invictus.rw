@@ -1,28 +1,38 @@
 import type { Metadata } from 'next'
-import PageHero from '@/components/PageHero'
-import Highlight from '@/components/ui/Highlight'
 import Contact from '@/components/Contact'
-import CTABand from '@/components/CTABand'
+
+function getCalLink() {
+  const eventUrl = process.env.CAL_COM_EVENT_URL
+
+  if (!eventUrl) {
+    throw new Error('CAL_COM_EVENT_URL is required to build the contact page.')
+  }
+
+  try {
+    const url = new URL(eventUrl)
+    if (!['cal.com', 'www.cal.com', 'app.cal.com'].includes(url.hostname)) {
+      throw new Error('Unsupported Cal.com host')
+    }
+
+    const calLink = `${url.pathname}${url.search}`.replace(/^\/+/, '')
+    if (!calLink) throw new Error('Missing event path')
+    return calLink
+  } catch {
+    throw new Error('CAL_COM_EVENT_URL must be a valid Cal.com event URL.')
+  }
+}
 
 export const metadata: Metadata = {
-  title: 'Contact — Request a Private Demo of Invictus',
+  title: 'Contact — Book a Private Demo of Invictus',
   description:
-    'Request a private demo of Invictus. Tell us about your institution and we will show you how to run accounts, deposits, transactions, lending, branches, and branded portals from one core banking platform.',
+    'Book a private demo of Invictus and see how to run accounts, deposits, transactions, lending, branches, and branded portals from one core banking platform.',
   alternates: { canonical: '/contact' },
 }
 
 export default function ContactPage() {
+  const calLink = getCalLink()
+
   return (
-    <>
-      <PageHero
-        title={<>Talk to our <Highlight>team</Highlight></>}
-        subtitle="Send us a few details and we'll arrange a private walkthrough tailored to your institution."
-      />
-      <Contact />
-      <CTABand
-        title="Prefer to explore first?"
-        subtitle="Browse the features and pricing, then come back to request your private demo whenever you're ready."
-      />
-    </>
+    <Contact calLink={calLink} />
   )
 }

@@ -16,7 +16,7 @@ import {
   ChartUpIcon,
 } from "@/lib/icons";
 
-export type ClientAccent = "orange" | "gold" | "sky" | "emerald";
+export type ClientAccent = "orange" | "sky" | "emerald";
 
 export interface Client {
   name: string;
@@ -44,7 +44,7 @@ export const clientsRowOne: Client[] = [
   {
     name: "Giant Eagle Finance",
     badge: "Microfinance",
-    accent: "gold",
+    accent: "orange",
     logo: "/clients/GEF_LOG.jpg-removebg-preview.png",
     website: "https://www.gianteaglefinance.rw/",
   },
@@ -60,7 +60,7 @@ export const clientsRowTwo: Client[] = [
   {
     name: "Giant Eagle Finance",
     badge: "Microfinance",
-    accent: "gold",
+    accent: "orange",
     logo: "/clients/GEF_LOG.jpg-removebg-preview.png",
     website: "https://www.gianteaglefinance.rw/",
   },

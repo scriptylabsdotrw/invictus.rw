@@ -1,72 +1,59 @@
-'use client'
+"use client";
 
-import { useRef, useState } from 'react'
-import Link from 'next/link'
+import { useRef, useState } from "react";
+import Link from "next/link";
 import {
   AnimatePresence,
   motion,
   useScroll,
   useMotionValueEvent,
   useTransform,
-} from 'framer-motion'
-import Icon from './ui/Icon'
-import {
-  Building03Icon,
-  Configuration01Icon,
-  Globe02Icon,
-  ChartUpIcon,
-  ArrowRight01Icon,
-} from '@/lib/icons'
+} from "framer-motion";
+import Icon from "./ui/Icon";
+import { ArrowRight01Icon } from "@/lib/icons";
 
 const steps = [
   {
-    tag: 'Onboard',
-    icon: Building03Icon,
-    title: 'Create your institution account',
-    text: 'A bank, SACCO, or microfinance institution is onboarded into Invictus in minutes.',
+    title: "Onboard your organisation",
+    text: "Collaborate with our team to onboard your organisation and bring your team members onto Invictus.",
   },
   {
-    tag: 'Configure',
-    icon: Configuration01Icon,
-    title: 'Configure your banking',
-    text: 'Set up account products, interest and fees, staff users, branches, and your chart of accounts.',
+    title: "Set up your operations",
+    text: "Set up charges, interest rates, staff members, and the accounts your institution needs.",
   },
   {
-    tag: 'Launch',
-    icon: Globe02Icon,
-    title: 'Launch a branded portal',
-    text: 'The institution receives its own branded portal, such as yourbank.invictus.rw.',
+    title: "Go live",
+    text: "Start operations and serve your customers with Invictus.",
   },
-  {
-    tag: 'Operate',
-    icon: ChartUpIcon,
-    title: 'Run banking operations',
-    text: 'Serve customers across accounts, deposits, transactions, loans, branches, and reports.',
-  },
-]
+];
 
-const EASE = [0.22, 1, 0.36, 1] as const
-const pad = (n: number) => String(n).padStart(2, '0')
+const EASE = [0.22, 1, 0.36, 1] as const;
+const pad = (n: number) => String(n).padStart(2, "0");
 
-export default function HowItWorks({ showHeader = true }: { showHeader?: boolean }) {
-  const containerRef = useRef<HTMLDivElement>(null)
-  const [active, setActive] = useState(0)
+export default function HowItWorks({
+  showHeader = true,
+}: {
+  showHeader?: boolean;
+}) {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [active, setActive] = useState(0);
 
-  // Scroll through the tall container drives the active step while the inner
-  // editorial spread stays pinned (sticky). Releases after the final step.
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ['start start', 'end end'],
-  })
-  const progressWidth = useTransform(scrollYProgress, [0, 1], ['0%', '100%'])
+    offset: ["start start", "end end"],
+  });
+  const progressWidth = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
 
-  useMotionValueEvent(scrollYProgress, 'change', (v) => {
-    const idx = Math.min(steps.length - 1, Math.max(0, Math.floor(v * steps.length)))
-    setActive(idx)
-  })
+  useMotionValueEvent(scrollYProgress, "change", (v) => {
+    const idx = Math.min(
+      steps.length - 1,
+      Math.max(0, Math.floor(v * steps.length)),
+    );
+    setActive(idx);
+  });
 
-  const step = steps[active]
-  const isLast = active === steps.length - 1
+  const step = steps[active];
+  const isLast = active === steps.length - 1;
 
   return (
     <section
@@ -74,10 +61,8 @@ export default function HowItWorks({ showHeader = true }: { showHeader?: boolean
       className="relative bg-white"
       style={{ height: `${steps.length * 90}vh` }}
     >
-      {/* Pinned editorial spread */}
       <div className="sticky top-0 flex min-h-screen items-center overflow-hidden py-14 sm:py-24">
         <div className="container-px w-full">
-          {/* ---- Masthead ---- */}
           <div className="flex items-end justify-between gap-4">
             <div>
               <span className="text-xs font-bold uppercase tracking-[0.22em] text-emerald-700">
@@ -85,26 +70,22 @@ export default function HowItWorks({ showHeader = true }: { showHeader?: boolean
               </span>
               {showHeader && (
                 <h2 className="display mt-2 text-3xl text-ink sm:text-4xl lg:text-5xl">
-                  Live in four clear steps
+                  Ready to get started?
                 </h2>
               )}
             </div>
             <span className="hidden font-display text-sm font-bold tracking-[0.2em] text-muted sm:block">
-              {pad(active + 1)} <span className="text-line">/</span> {pad(steps.length)}
+              {pad(active + 1)} <span className="text-line">/</span>{" "}
+              {pad(steps.length)}
             </span>
           </div>
-
-          {/* Scroll-driven progress rule */}
           <div className="relative mt-5 h-px w-full bg-line">
             <motion.div
               style={{ width: progressWidth }}
-              className="absolute inset-y-0 left-0 bg-gradient-to-r from-emerald-600 to-gold"
+              className="absolute inset-y-0 left-0 bg-gradient-to-r from-emerald-600 to-brand-orange"
             />
           </div>
-
-          {/* ---- Main spread: giant number + content ---- */}
           <div className="mt-8 grid items-center gap-4 lg:mt-14 lg:min-h-[360px] lg:grid-cols-12 lg:gap-10">
-            {/* Oversized step number */}
             <div className="relative lg:col-span-5">
               <AnimatePresence mode="wait">
                 <motion.span
@@ -120,7 +101,6 @@ export default function HowItWorks({ showHeader = true }: { showHeader?: boolean
               </AnimatePresence>
             </div>
 
-            {/* Content */}
             <div className="lg:col-span-7 lg:pl-6">
               <AnimatePresence mode="wait">
                 <motion.div
@@ -130,99 +110,65 @@ export default function HowItWorks({ showHeader = true }: { showHeader?: boolean
                   exit={{ opacity: 0, x: -30 }}
                   transition={{ duration: 0.45, ease: EASE }}
                 >
-                  <span className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.22em] text-emerald-700">
-                    <Icon icon={step.icon} size={15} />
-                    {step.tag}
-                  </span>
-
                   <h3 className="display mt-4 text-balance text-3xl text-ink sm:text-5xl lg:text-6xl">
                     {step.title}
                   </h3>
-
-                  <div className="mt-5 h-0.5 w-16 bg-gold" />
-
                   <p className="mt-5 max-w-md text-base leading-relaxed text-muted sm:text-lg">
                     {step.text}
                   </p>
-
-                  {/* Next teaser / final CTA */}
                   <div className="mt-7">
-                    {isLast ? (
-                      <div className="flex flex-wrap items-center gap-4">
-                        <span className="inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-4 py-1.5 text-sm font-semibold text-emerald-700">
-                          <span className="relative flex h-2 w-2">
-                            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-500 opacity-75" />
-                            <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
-                          </span>
-                          You&apos;re live
-                        </span>
-                        <Link
-                          href="/contact"
-                          className="group inline-flex items-center gap-2 rounded-full bg-emerald-800 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-emerald-900"
-                        >
-                          Request a demo
-                          <span className="transition-transform group-hover:translate-x-1">
-                            <Icon icon={ArrowRight01Icon} size={16} />
-                          </span>
-                        </Link>
-                      </div>
-                    ) : (
-                      <div className="flex items-center gap-3 text-sm">
-                        <span className="text-xs font-bold uppercase tracking-[0.18em] text-muted/60">
-                          Next
-                        </span>
-                        <span className="font-display font-bold text-emerald-700">
-                          {pad(active + 2)}
-                        </span>
-                        <span className="font-semibold text-ink/70">{steps[active + 1].title}</span>
-                        <span className="text-gold">
+                    <div className="flex flex-wrap items-center gap-4">
+                      <Link
+                        href="/contact"
+                        className="group inline-flex items-center gap-2 rounded-md bg-emerald-800 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-emerald-900"
+                      >
+                        Request a demo
+                        <span className="transition-transform group-hover:translate-x-1">
                           <Icon icon={ArrowRight01Icon} size={16} />
                         </span>
-                      </div>
-                    )}
+                      </Link>
+                    </div>
                   </div>
                 </motion.div>
               </AnimatePresence>
             </div>
           </div>
 
-          {/* ---- Step index ---- */}
-          <div className="mt-8 grid grid-cols-2 border-t border-line sm:grid-cols-4 lg:mt-12">
+          <div className="mt-8 grid grid-cols-1 border-t border-line sm:grid-cols-3 lg:mt-12">
             {steps.map((s, i) => {
-              const isCurrent = i === active
-              const isDone = i < active
+              const isCurrent = i === active;
+              const isDone = i < active;
               return (
                 <div
                   key={s.title}
                   className={`relative border-line px-1 py-4 transition-opacity duration-300 sm:border-l sm:px-5 sm:py-5 sm:first:border-l-0 ${
-                    isCurrent ? 'opacity-100' : 'opacity-45'
+                    isCurrent ? "opacity-100" : "opacity-45"
                   }`}
                 >
                   <div className="flex items-baseline gap-2">
                     <span
                       className={`font-display text-sm font-bold ${
-                        isCurrent || isDone ? 'text-emerald-700' : 'text-muted'
+                        isCurrent || isDone ? "text-emerald-700" : "text-muted"
                       }`}
                     >
                       {pad(i + 1)}
                     </span>
-                    <span className="text-xs font-bold uppercase tracking-[0.16em] text-muted">
-                      {s.tag}
-                    </span>
                   </div>
-                  <p className="mt-1.5 text-sm font-semibold text-ink">{s.title}</p>
+                  <p className="mt-1.5 text-sm font-semibold text-ink">
+                    {s.title}
+                  </p>
                   {isCurrent && (
                     <motion.span
                       layoutId="hiw-marker"
-                      className="absolute -top-px left-0 right-0 h-0.5 bg-gold sm:left-5 sm:right-5"
+                      className="absolute -top-px left-0 right-0 h-0.5 bg-brand-orange sm:left-5 sm:right-5"
                     />
                   )}
                 </div>
-              )
+              );
             })}
           </div>
         </div>
       </div>
     </section>
-  )
+  );
 }

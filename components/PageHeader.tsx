@@ -34,7 +34,7 @@ export default function PageHeader({
             {title}
           </h1>
 
-          <div className="mx-auto mt-6 h-0.5 w-16 bg-gold" />
+          <div className="mx-auto mt-6 h-0.5 w-16 bg-brand-orange" />
 
           {subtitle && (
             <p className="mx-auto mt-6 max-w-2xl text-balance text-lg leading-relaxed text-emerald-100/80 sm:text-xl">

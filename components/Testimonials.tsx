@@ -75,7 +75,7 @@ export default function Testimonials() {
                   <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-emerald-950/35 via-transparent to-transparent" />
                 </motion.div>
               </AnimatePresence>
-              <span className="absolute left-5 top-5 z-10 text-gold drop-shadow">
+              <span className="absolute left-5 top-5 z-10 text-brand-orange drop-shadow">
                 <Icon icon={QuoteUpIcon} size={30} />
               </span>
             </div>
@@ -83,7 +83,7 @@ export default function Testimonials() {
             {/* ---- Quote ---- */}
             <div className="relative flex flex-col justify-center bg-white p-8 sm:p-12">
               {/* Rating */}
-              <div className="flex gap-1 text-gold">
+              <div className="flex gap-1 text-brand-orange">
                 {Array.from({ length: 5 }).map((_, i) => (
                   <Icon key={i} icon={StarIcon} size={16} />
                 ))}

@@ -95,7 +95,7 @@ export default function LegalToc({ items }: LegalTocProps) {
       {/* Reading-progress bar pinned to the very top edge of the viewport. */}
       <div className="fixed inset-x-0 top-0 z-[60] h-[3px] bg-transparent" aria-hidden="true">
         <div
-          className="h-full bg-gradient-to-r from-emerald-600 via-emerald-500 to-gold transition-[width] duration-150 ease-out"
+          className="h-full bg-gradient-to-r from-emerald-600 via-emerald-500 to-brand-orange transition-[width] duration-150 ease-out"
           style={{ width: `${progress * 100}%` }}
         />
       </div>

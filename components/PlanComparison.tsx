@@ -21,7 +21,7 @@ function PlanDots({ values }: { values: (boolean | string)[] }) {
             {value === true ? (
               <span
                 className={`flex h-8 w-8 items-center justify-center rounded-full ${
-                  popular ? 'bg-gold/20 text-gold' : 'bg-emerald-100 text-emerald-700'
+                  popular ? 'bg-brand-orange/15 text-brand-orange' : 'bg-emerald-100 text-emerald-700'
                 }`}
               >
                 <Icon icon={Tick02Icon} size={15} />
@@ -34,7 +34,7 @@ function PlanDots({ values }: { values: (boolean | string)[] }) {
               <span
                 className={`rounded-full px-2.5 py-1 text-[10px] font-bold leading-none ${
                   popular
-                    ? 'bg-gold/20 text-amber-700'
+                    ? 'bg-brand-orange/15 text-brand-orange'
                     : 'bg-emerald-50 text-emerald-700'
                 }`}
               >
@@ -82,11 +82,11 @@ export default function PlanComparison() {
                   }`}
                 >
                   {popular && (
-                    <div className="absolute inset-x-0 top-0 h-0.5 bg-gold" />
+                    <div className="absolute inset-x-0 top-0 h-0.5 bg-brand-orange" />
                   )}
 
                   {popular ? (
-                    <span className="mb-2 inline-flex items-center gap-1 rounded-full bg-gold px-2.5 py-0.5 text-[9px] font-extrabold uppercase tracking-wide text-emerald-950">
+                    <span className="mb-2 inline-flex items-center gap-1 rounded-full bg-brand-orange px-2.5 py-0.5 text-[9px] font-extrabold uppercase tracking-wide text-white">
                       <Icon icon={StarIcon} size={9} /> Popular
                     </span>
                   ) : (
@@ -104,7 +104,7 @@ export default function PlanComparison() {
                     href="/contact"
                     className={`mt-4 inline-flex w-full items-center justify-center gap-1 rounded-full px-3 py-2 text-[11px] font-bold transition-all ${
                       popular
-                        ? 'bg-gold text-emerald-950 hover:brightness-105'
+                        ? 'bg-brand-orange text-white hover:bg-brand-orange-soft'
                         : 'border border-line bg-white text-ink hover:border-emerald-300'
                     }`}
                   >

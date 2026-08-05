@@ -73,7 +73,7 @@ export async function renderOgImage() {
             marginTop: 30,
             fontSize: 36,
             fontWeight: 600,
-            color: '#D4AF37',
+            color: '#C2410C',
             letterSpacing: -0.5,
             zIndex: 1,
           }}
@@ -103,7 +103,7 @@ export async function renderOgImage() {
             right: 0,
             height: 6,
             display: 'flex',
-            background: 'linear-gradient(90deg, #D4AF37, #E5C76B, #D4AF37)',
+            background: 'linear-gradient(90deg, #C2410C, #EA580C, #C2410C)',
           }}
         />
       </div>

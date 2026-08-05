@@ -9,18 +9,12 @@ const config: Config = {
     extend: {
       fontFamily: {
         sans: [
-          '-apple-system',
-          'BlinkMacSystemFont',
-          '"SF Pro Text"',
-          'var(--font-inter)',
+          'var(--font-geist)',
           '"Segoe UI"',
           'sans-serif',
         ],
         display: [
-          'var(--font-space-grotesk)',
-          '-apple-system',
-          'BlinkMacSystemFont',
-          '"SF Pro Display"',
+          'var(--font-geist)',
           'sans-serif',
         ],
       },
@@ -58,9 +52,9 @@ const config: Config = {
         muted: '#64748B',
         line: '#E2E8F0',
         neutralbg: '#F8FAFC',
-        gold: {
-          DEFAULT: '#D4AF37',
-          soft: '#E5C76B',
+        brand: {
+          orange: '#C2410C',
+          'orange-soft': '#EA580C',
         },
       },
       // Apple-style flat design: no shadows anywhere. Every shadow-* utility
