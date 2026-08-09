@@ -10,7 +10,6 @@ interface RevealProps {
   className?: string
 }
 
-/** Calm, premium reveal-on-scroll wrapper used across the site. */
 export default function Reveal({ children, delay = 0, y = 24, className }: RevealProps) {
   return (
     <motion.div

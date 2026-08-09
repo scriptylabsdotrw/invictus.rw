@@ -7,7 +7,7 @@ export interface Logo {
   website?: string
 }
 
-function LogoMark({ item }: { item: Logo }) {
+function Logo({ item }: { item: Logo }) {
   const content = (
     <div className="group flex w-56 shrink-0 flex-col items-center gap-3 px-4 py-2 text-center sm:w-64">
       <Image
@@ -60,7 +60,7 @@ export  function Marquee({
           style={{ animationDuration: duration + 's' }}
         >
           {doubled.map((item, index) => (
-            <LogoMark key={item.name + '-' + index} item={item} />
+            <Logo key={item.name + '-' + index} item={item} />
           ))}
         </div>
       </div>

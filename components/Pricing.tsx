@@ -86,7 +86,6 @@ export default function Pricing({ showHeader = true }: { showHeader?: boolean })
                     {plan.bestFor}
                   </p>
 
-                  {/* Price block */}
                   <div
                     className={`relative mt-6 border-t pt-6 ${
                       popular ? 'border-white/10' : 'border-line'
@@ -109,8 +108,6 @@ export default function Pricing({ showHeader = true }: { showHeader?: boolean })
                       </p>
                     )}
                   </div>
-
-                  {/* Feature list */}
                   <div
                     className={`relative mt-6 flex-1 border-t pt-6 ${
                       popular ? 'border-white/10' : 'border-line'
@@ -143,7 +140,6 @@ export default function Pricing({ showHeader = true }: { showHeader?: boolean })
                     </ul>
                   </div>
 
-                  {/* CTA */}
                   <Link
                     href="/contact"
                     className={`group/cta relative mt-8 inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition-all ${

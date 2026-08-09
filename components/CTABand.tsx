@@ -3,15 +3,7 @@ import Reveal from "./ui/Reveal";
 import Icon from "./ui/Icon";
 import { ArrowRight01Icon } from "@hugeicons/core-free-icons";
 
-interface CTABandProps {
-  title?: string;
-  subtitle?: string;
-}
-
-export default function CTABand({
-  title = "Whats Next?",
-  subtitle = "Request a private demo and see how Invictus runs accounts,transactions, loans, branches.",
-}: CTABandProps) {
+export default function CTABand() {
   return (
     <section className="section bg-white">
       <div className="container-px">
@@ -24,10 +16,11 @@ export default function CTABand({
             <div className="relative z-10 mx-auto max-w-2xl">
               <div className="accent-line mx-auto mb-6" />
               <h2 className="display text-3xl text-white sm:text-4xl lg:text-5xl">
-                {title}
+                Whats Next?
               </h2>
               <p className="mt-5 text-lg leading-relaxed text-emerald-100/80">
-                {subtitle}
+                Request a private demo and see how Invictus runs
+                accounts,transactions, loans, branches.
               </p>
               <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
                 <Link

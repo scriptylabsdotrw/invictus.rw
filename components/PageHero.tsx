@@ -1,19 +1,16 @@
-import type { ReactNode } from 'react'
+import type { ReactNode } from "react";
 
 interface PageHeroProps {
-  title: ReactNode
-  subtitle?: string
-  chips?: string[]
+  title: ReactNode;
+  subtitle?: string;
+  chips?: string[];
 }
 
-/** Static, premium dark hero band for inner pages (Features, Pricing). */
 export default function PageHero({ title, subtitle, chips }: PageHeroProps) {
   return (
     <section className="relative isolate overflow-hidden bg-emerald-950 text-white">
-      {/* Solid dark overlay */}
       <div className="absolute inset-0 -z-30 bg-black/25" />
       <div className="pointer-events-none absolute inset-0 -z-20 bg-[linear-gradient(to_right,rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:56px_56px] [mask-image:radial-gradient(ellipse_70%_70%_at_50%_10%,black_30%,transparent_80%)]" />
-
       <div className="container-px pb-20 pt-40 sm:pb-24 sm:pt-48">
         <div className="mx-auto max-w-3xl text-center">
           <h1 className="display text-balance text-5xl text-white sm:text-6xl lg:text-7xl">
@@ -25,7 +22,6 @@ export default function PageHero({ title, subtitle, chips }: PageHeroProps) {
               {subtitle}
             </p>
           )}
-
           {chips && chips.length > 0 && (
             <div className="mt-9 flex flex-wrap justify-center gap-2.5">
               {chips.map((c) => (
@@ -41,5 +37,5 @@ export default function PageHero({ title, subtitle, chips }: PageHeroProps) {
         </div>
       </div>
     </section>
-  )
+  );
 }

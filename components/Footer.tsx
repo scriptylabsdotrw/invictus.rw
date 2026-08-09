@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import Logo from "./ui/Logo";
 
 const socials: { label: string; href: string; path: string }[] = [
@@ -26,28 +25,18 @@ const columns = [
   {
     title: "Product",
     links: [
-      { label: "Features", href: "/features" },
-      { label: "How It Works", href: "/how-it-works" },
-      { label: "Pricing", href: "/pricing" },
+      { label: "Features", href: "#" },
+      { label: "How It Works", href: "#" },
       { label: "Request Demo", href: "/contact" },
     ],
   },
   {
     title: "Features",
     links: [
-      { label: "Customers & Accounts", href: "/features" },
-      { label: "Deposits & Transactions", href: "/features" },
-      { label: "Branded Portals", href: "/features" },
-      { label: "Reports & Ledger", href: "/features" },
-    ],
-  },
-  {
-    title: "Resources",
-    links: [
-      { label: "FAQ", href: "/faq" },
-      { label: "Core Banking", href: "/features" },
-      { label: "For SACCOs", href: "/features" },
-      { label: "For Microfinance", href: "/features" },
+      { label: "Loans & Credit", href: "#" },
+      { label: "Payment Reminders & Notifications", href: "#" },
+      { label: "Branded Portals", href: "#" },
+      { label: "General Ledger & Accounting", href: "#" },
     ],
   },
   {
@@ -61,9 +50,6 @@ const columns = [
 ];
 
 export default function Footer() {
-  const pathname = usePathname();
-  if (pathname === "/login") return null;
-
   return (
     <footer className="relative overflow-hidden bg-emerald-950 text-white">
       <div className="h-px w-full bg-brand-orange/50" />
@@ -73,8 +59,8 @@ export default function Footer() {
           <div className="max-w-xs">
             <Logo light className="h-24" />
             <p className="mt-5 text-sm leading-relaxed text-emerald-100/70">
-              The multi-tenant core banking platform for microfinance
-              institutions, SACCOs, banks, and lenders.
+              The core banking platform for microfinance institutions, banks,
+              and lenders.
             </p>
             <div className="mt-6 flex gap-3">
               {socials.map((s) => (
@@ -140,10 +126,9 @@ export default function Footer() {
           </svg>
         </div>
 
-        {/* Bottom bar */}
         <div className="relative z-10 -mt-6 flex flex-col items-center justify-between gap-4 border-t border-white/10 py-8 text-center sm:flex-row sm:text-left">
           <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-sm text-emerald-100/70 sm:justify-start">
-            <span>© 2026 Invictus. All rights reserved.</span>
+            <span>© {new Date().getFullYear()} Invictus. All rights reserved.</span>
             <Link
               href="/privacy"
               className="transition-colors hover:text-white"

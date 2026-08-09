@@ -26,7 +26,6 @@ export interface Client {
   website?: string;
 }
 
-
 export interface Faq {
   question: string;
   answer: string;
@@ -59,11 +58,6 @@ export const faqs: Faq[] = [
       "Absolutely. Invictus is a multi-tenant platform. It can serve many institutions from one scalable system while keeping each tenant’s data cleanly separated.",
   },
   {
-    question: "Does it handle deposits and transactions, not just loans?",
-    answer:
-      "Yes. Deposits, savings, withdrawals, transfers, and payments are all first-class — posted in real time to the general ledger alongside lending.",
-  },
-  {
     question: "Can staff roles and branches be managed?",
     answer:
       "You can control exactly what administrators, managers, tellers, and officers can do, and operate multiple branches with performance visibility across the network.",
@@ -72,11 +66,6 @@ export const faqs: Faq[] = [
     question: "How are reports and the ledger handled?",
     answer:
       "Every transaction posts to a double-entry general ledger, so your books stay balanced and audit-ready. Portfolio, deposit, transaction, and income reports are available on demand.",
-  },
-  {
-    question: "Is there a backend in this project?",
-    answer:
-      "This website is a frontend showcase. It uses polished mock content and frontend-only interactions to demonstrate the Invictus experience, without a live backend, database, or real API.",
   },
   {
     question: "How can an institution request a demo?",
@@ -94,39 +83,26 @@ export interface Feature {
 export const features: Feature[] = [
   {
     icon: UserMultipleIcon,
-    title: "Customers & Accounts",
+    title: "Customers",
     description:
-      "Onboard customers with KYC, open multiple account types, and keep every profile, document, and balance in one place.",
-  },
-  {
-    icon: PiggyBankIcon,
-    title: "Deposits & Savings",
-    description:
-      "Run savings, current, and fixed-deposit products with automated interest accrual and clear balances.",
+      "Onboard customers,KYC Verification and National ID Verification.",
   },
   {
     icon: BankIcon,
     title: "Loans & Credit",
     description:
-      "Originate, approve, disburse, and track loans — with repayments, arrears, and penalties handled end to end.",
+      "Create, approve, disburse, and track loans — with payment, and penalties handled end to end.",
   },
   {
     icon: ArrowDataTransferHorizontalIcon,
     title: "Transactions & Payments",
     description:
-      "Process deposits, withdrawals, transfers, and payments in real time, posted straight to the ledger.",
-  },
-  {
-    icon: Wallet01Icon,
-    title: "Teller & Cashiering",
-    description:
-      "Give branch tellers fast, controlled cash operations with day-open, day-close, and cash position tracking.",
+      "Process transactions, transfers, and payments in real time, posted straight to the ledger.",
   },
   {
     icon: PercentCircleIcon,
     title: "Interest, Fees & Charges",
-    description:
-      "Configure interest, fees, and penalties per product so income and customer charges are always accurate.",
+    description: "Configure interest, fees, and penalties and charges",
   },
   {
     icon: BookOpen01Icon,
@@ -135,34 +111,10 @@ export const features: Feature[] = [
       "A real double-entry general ledger keeps every transaction balanced and your books audit-ready.",
   },
   {
-    icon: SecurityCheckIcon,
-    title: "Staff & Role Management",
-    description:
-      "Control exactly what administrators, managers, tellers, and officers can access with granular roles.",
-  },
-  {
-    icon: Building03Icon,
-    title: "Branch Management",
-    description:
-      "Operate multiple branches, assign teams, and monitor performance across your whole network.",
-  },
-  {
-    icon: Analytics01Icon,
-    title: "Reports & Analytics",
-    description:
-      "Portfolio, deposits, transactions, income, and regulatory-style reports — ready whenever you need them.",
-  },
-  {
-    icon: Globe02Icon,
-    title: "Branded Customer Portals",
-    description:
-      "Give every institution its own professional portal on a subdomain such as yourbank.invictus.rw.",
-  },
-  {
     icon: Layers01Icon,
-    title: "Multi-Tenant Architecture",
+    title: "Payment Reminders & Notifications",
     description:
-      "Serve many institutions from one scalable platform while keeping each tenant’s data fully separate.",
+      "Customers Receive automated payment reminders and notifications via SMS and email.",
   },
 ];
 export interface Plan {
