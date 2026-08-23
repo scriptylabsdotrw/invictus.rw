@@ -25,18 +25,20 @@ const columns = [
   {
     title: "Product",
     links: [
-      { label: "Features", href: "#" },
-      { label: "How It Works", href: "#" },
+      { label: "Features", href: "/#features" },
+      { label: "How It Works", href: "/#how-it-works" },
       { label: "Request Demo", href: "/contact" },
     ],
   },
   {
     title: "Features",
     links: [
-      { label: "Loans & Credit", href: "#" },
-      { label: "Payment Reminders & Notifications", href: "#" },
-      { label: "Branded Portals", href: "#" },
-      { label: "General Ledger & Accounting", href: "#" },
+      { label: "Customer Management", href: "/#features" },
+      { label: "Loan Management", href: "/#features" },
+      { label: "Repayments & Penalties", href: "/#features" },
+      { label: "Payment Reminders & Notifications", href: "/#features" },
+      { label: "Branded Portals", href: "/#features" },
+      { label: "General Ledger & Accounting", href: "/#features" },
     ],
   },
   {
@@ -59,7 +61,7 @@ export default function Footer() {
           <div className="max-w-xs">
             <Logo light className="h-24" />
             <p className="mt-5 text-sm leading-relaxed text-emerald-100/70">
-              The core banking platform for microfinance institutions, banks,
+              Modern loan management for microfinance institutions, SACCOs,
               and lenders.
             </p>
             <div className="mt-6 flex gap-3">

@@ -13,7 +13,7 @@ export default function PageHero({ title, subtitle, chips }: PageHeroProps) {
       <div className="pointer-events-none absolute inset-0 -z-20 bg-[linear-gradient(to_right,rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:56px_56px] [mask-image:radial-gradient(ellipse_70%_70%_at_50%_10%,black_30%,transparent_80%)]" />
       <div className="container-px pb-20 pt-40 sm:pb-24 sm:pt-48">
         <div className="mx-auto max-w-3xl text-center">
-          <h1 className="display text-balance text-5xl text-white sm:text-6xl lg:text-7xl">
+          <h1 className="display text-balance text-5xl text-white">
             {title}
           </h1>
 

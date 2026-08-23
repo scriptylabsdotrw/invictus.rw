@@ -15,15 +15,15 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
     default:
-      "Invictus — Core Banking System for Microfinance, SACCOs & Banks in Rwanda",
-    template: "%s — Invictus",
+      "Invictus | Loan Management System for Microfinance & SACCOs in Rwanda",
+    template: "%s | Invictus",
   },
   description:
-    "Invictus is a multi-tenant core banking system for microfinance institutions, SACCOs, banks, and lenders in Rwanda and East Africa. Run customers, accounts, deposits, transactions, lending, the general ledger, staff, branches, reports, and branded portals from one secure platform.",
+    "Invictus is a modern loan management system for microfinance institutions, SACCOs, and lenders in Rwanda and East Africa. Manage customers, loan applications, approvals, disbursements, repayments, penalties, accounting, and portfolio reporting from one secure platform.",
   keywords: [
-    "core banking software",
-    "customer portal for banks",
     "loan management software",
+    "microfinance software",
+    "SACCO loan management",
   ],
   authors: [{ name: "Invictus" }],
   alternates: { canonical: "/" },
@@ -52,17 +52,17 @@ export const metadata: Metadata = {
     type: "website",
     siteName: "Invictus",
     title:
-      "Invictus — The Core Banking System for Modern Financial Institutions",
+      "Invictus — Loan Management for Modern Financial Institutions",
     description:
-      "Run your entire institution — accounts, deposits, payments, lending, and branches — on one secure, multi-tenant core banking platform across Rwanda and East Africa.",
+      "Manage customers, loan applications, approvals, disbursements, repayments, accounting, and portfolio performance on one secure platform.",
     url: SITE_URL,
     locale: "en_RW",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Invictus — Core Banking System for Financial Institutions",
+    title: "Invictus — Loan Management System for Financial Institutions",
     description:
-      "Multi-tenant core banking platform with branded portals for banks, microfinance, and SACCOs in Rwanda and East Africa.",
+      "Modern loan management for microfinance institutions, SACCOs, and lenders in Rwanda and East Africa.",
   },
   robots: { index: true, follow: true },
 };
@@ -78,7 +78,7 @@ const jsonLd = {
   applicationCategory: "FinanceApplication",
   operatingSystem: "Web",
   description:
-    "Multi-tenant core banking system for microfinance institutions, SACCOs, banks, and lenders in Rwanda and East Africa.",
+    "Modern loan management system for microfinance institutions, SACCOs, and lenders in Rwanda and East Africa.",
   url: SITE_URL,
   offers: {
     "@type": "Offer",

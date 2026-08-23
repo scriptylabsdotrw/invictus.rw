@@ -35,7 +35,7 @@ export const faqs: Faq[] = [
   {
     question: "What is Invictus?",
     answer:
-      "Invictus is a cloud core banking system for financial institutions. It brings customers, accounts, deposits, transactions, lending, the general ledger, staff, branches, reports, and branded customer portals together in one secure platform.",
+      "Invictus is a modern loan management system for financial institutions. It brings customer onboarding, loan applications, approvals, disbursements, repayments, penalties, accounting, reporting, and branded customer portals together in one secure platform.",
   },
   {
     question: "Who is Invictus built for?",
@@ -43,14 +43,14 @@ export const faqs: Faq[] = [
       "Invictus is designed for microfinance institutions, SACCOs and cooperatives, community banks, money lenders, SME lenders, and other financial service providers across Rwanda and East Africa.",
   },
   {
-    question: "Is Invictus a full core banking system?",
+    question: "What parts of the loan lifecycle does Invictus cover?",
     answer:
-      "Yes. Invictus covers core banking end to end — customer and account management, deposits and savings, loans and credit, transactions and payments, teller operations, and a real double-entry general ledger.",
+      "Invictus helps institutions manage loans from customer onboarding and application through approval, disbursement, repayment tracking, penalties, and portfolio reporting.",
   },
   {
     question: "Can each institution get its own portal?",
     answer:
-      "Yes. Every institution can operate under its own branded subdomain — for example yourbank.invictus.rw — while still being powered by the central Invictus platform.",
+      "Yes. Every institution can operate under its own branded subdomain or custom domain for example yourbank.invictus.rw or yourbank.co.rw while still being powered by the central Invictus platform.",
   },
   {
     question: "Does Invictus support multiple institutions?",
@@ -60,12 +60,12 @@ export const faqs: Faq[] = [
   {
     question: "Can staff roles and branches be managed?",
     answer:
-      "You can control exactly what administrators, managers, tellers, and officers can do, and operate multiple branches with performance visibility across the network.",
+      "You can control exactly what administrators, managers, and loan officers can do, and operate multiple branches with performance visibility across the network.",
   },
   {
-    question: "How are reports and the ledger handled?",
+    question: "How are accounting and reports handled?",
     answer:
-      "Every transaction posts to a double-entry general ledger, so your books stay balanced and audit-ready. Portfolio, deposit, transaction, and income reports are available on demand.",
+      "Every loan transaction posts to a double-entry general ledger, while reports and dashboards help teams monitor their loan portfolio, repayments, and lending performance.",
   },
   {
     question: "How can an institution request a demo?",
@@ -89,15 +89,15 @@ export const features: Feature[] = [
   },
   {
     icon: BankIcon,
-    title: "Loans & Credit",
+    title: "Loans",
     description:
-      "Create, approve, disburse, and track loans — with payment, and penalties handled end to end.",
+      "Create, approve, disburse, and track loans with payments, and penalties handled end to end.",
   },
   {
     icon: ArrowDataTransferHorizontalIcon,
-    title: "Transactions & Payments",
+    title: "Repayment Tracking",
     description:
-      "Process transactions, transfers, and payments in real time, posted straight to the ledger.",
+      "Track loan repayments and keep each customer's payment history in one place.",
   },
   {
     icon: PercentCircleIcon,
@@ -108,13 +108,25 @@ export const features: Feature[] = [
     icon: BookOpen01Icon,
     title: "General Ledger & Accounting",
     description:
-      "A real double-entry general ledger keeps every transaction balanced and your books audit-ready.",
+      "A double-entry general ledger keeps loan transactions balanced and your books audit-ready.",
   },
   {
     icon: Layers01Icon,
     title: "Payment Reminders & Notifications",
     description:
       "Customers Receive automated payment reminders and notifications via SMS and email.",
+  },
+  {
+    icon: Globe02Icon,
+    title: "Branded Portals",
+    description:
+      "Operate under your own branded subdomain or custom domain with your  logo, and brand colors to have a familiar experience.",
+  },
+  {
+    icon: SecurityCheckIcon,
+    title: "Audit Trail & Activity Logs",
+    description:
+      "Track who performed each action, what changed, and when it happened with detailed activity logs.",
   },
 ];
 export interface Plan {
@@ -136,15 +148,16 @@ export const plans: Plan[] = [
     name: "Starter",
     icon: Rocket01Icon,
     price: "Contact Sales",
-    priceNote: "Tailored quote — no setup fees",
-    tagline: "For small institutions digitizing their core banking operations.",
+    priceNote: "Tailored quote no setup fees",
+    tagline: "For small institutions digitizing their loan operations.",
     bestFor: "Small institutions going digital",
     features: [
       "1 institution portal",
       "Up to 2 staff users",
-      "Customers & accounts",
-      "Deposits & savings",
-      "Basic loans & repayments",
+      "Customers & loan profiles",
+      "Loan applications & approvals",
+      "Loan disbursements & repayments",     
+      "Interest, fees & penalties",
       "Standard support",
     ],
     cta: "Request Demo",
@@ -153,16 +166,15 @@ export const plans: Plan[] = [
     name: "Growth",
     icon: ChartUpIcon,
     price: "Contact Sales",
-    priceNote: "Tailored quote — scale as you grow",
+    priceNote: "Tailored quote no scale as you grow",
     tagline: "For active microfinance institutions, SACCOs, and lenders.",
     bestFor: "Active MFIs, SACCOs & lenders",
     popular: true,
     inherits: "Everything in Starter, plus",
     features: [
-      "1 branded subdomain",
+      "1 branded subdomain or custom domain",
       "Up to 10 staff users",
-      "Full deposits, loans & transactions",
-      "Teller & cashiering",
+      "Full loan management workflow",
       "General ledger & reports",
       "Branch support",
       "Priority support",
@@ -174,7 +186,7 @@ export const plans: Plan[] = [
     icon: BankIcon,
     price: "Custom Quote",
     priceNote: "Scoped to your institution",
-    tagline: "For banks, groups, and multi-branch financial institutions.",
+    tagline: "For lenders, groups, and multi-branch financial institutions.",
     bestFor: "Banks & multi-branch groups",
     inherits: "Everything in Growth, plus",
     features: [
@@ -200,11 +212,11 @@ export interface ComparisonGroup {
 }
 export const comparison: ComparisonGroup[] = [
   {
-    category: "Core banking",
+    category: "Loan management",
     rows: [
-      { label: "Customers & accounts", values: [true, true, true] },
-      { label: "Deposits & savings", values: [true, true, true] },
-      { label: "Transactions & transfers", values: [true, true, true] },
+      { label: "Customers & loan profiles", values: [true, true, true] },
+      { label: "Loan applications", values: [true, true, true] },
+      { label: "Repayment tracking", values: [true, true, true] },
       { label: "Loans & repayments", values: ["Basic", "Full", "Advanced"] },
       {
         label: "General ledger & accounting",
@@ -217,7 +229,6 @@ export const comparison: ComparisonGroup[] = [
     rows: [
       { label: "Staff users", values: ["Up to 2", "Up to 10", "Custom roles"] },
       { label: "Branded subdomain portal", values: [false, true, true] },
-      { label: "Teller & cashiering", values: [false, true, true] },
       { label: "Branch support", values: [false, "Single", "Multiple"] },
       {
         label: "Custom products & configuration",
@@ -254,7 +265,7 @@ const unsplash = (id: string) =>
 export const testimonials: Testimonial[] = [
   {
     quote:
-      "Invictus gives us a single, real-time view of every customer, account, deposit, and loan. It finally feels like a banking system built for how we actually operate.",
+      "Invictus gives us a single, real-time view of every customer and loan. It finally feels like a lending system built for how we actually operate.",
     name: "A. Mukamana",
     role: "Microfinance CEO",
     initials: "AM",
@@ -262,7 +273,7 @@ export const testimonials: Testimonial[] = [
   },
   {
     quote:
-      "We replaced a patchwork of spreadsheets and disconnected tools. Now deposits, transactions, and lending all post to one ledger — and our books balance every day.",
+      "We replaced a patchwork of spreadsheets and disconnected tools. Now applications, disbursements, and repayments are managed in one place.",
     name: "J. Habimana",
     role: "Head of Operations",
     initials: "JH",
@@ -270,7 +281,7 @@ export const testimonials: Testimonial[] = [
   },
   {
     quote:
-      "Our tellers move faster and our branch numbers reconcile instantly. Day-open and day-close that used to take hours now take minutes.",
+      "Our loan officers move faster because customer details, repayment schedules, and loan activity are easy to follow.",
     name: "C. Uwase",
     role: "Branch Manager",
     initials: "CU",
@@ -278,7 +289,7 @@ export const testimonials: Testimonial[] = [
   },
   {
     quote:
-      "The reporting and general ledger give leadership the visibility we needed to grow with confidence across multiple branches.",
+      "The reporting and general ledger give leadership the portfolio visibility we need to grow with confidence across multiple branches.",
     name: "D. Niyonzima",
     role: "Finance Director",
     initials: "DN",

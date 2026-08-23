@@ -19,8 +19,8 @@ export default function CTABand() {
                 Whats Next?
               </h2>
               <p className="mt-5 text-lg leading-relaxed text-emerald-100/80">
-                Request a private demo and see how Invictus runs
-                accounts,transactions, loans, branches.
+                Request a private demo and see how Invictus manages customers,
+                loans, repayments, accounting, and portfolio performance.
               </p>
               <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
                 <Link

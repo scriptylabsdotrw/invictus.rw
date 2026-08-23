@@ -53,6 +53,7 @@ export default function HowItWorks() {
 
   return (
     <section
+      id="how-it-works"
       ref={containerRef}
       className="relative bg-white"
       style={{ height: `${steps.length * 90}vh` }}

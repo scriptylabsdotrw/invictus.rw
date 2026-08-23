@@ -159,7 +159,7 @@ export default function Pricing({ showHeader = true }: { showHeader?: boolean })
           })}
         </div>
         <p className="mt-8 text-center text-sm text-muted">
-          All plans are quoted to your needs. No hidden fees — just a clear conversation.
+          All plans are quoted to your needs. No hidden fees just a clear conversation.
         </p>
       </div>
     </section>

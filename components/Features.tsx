@@ -15,10 +15,8 @@ const item = {
 }
 
 export default function Features() {
-  const items = features.slice(0, 6)
-
   return (
-    <section className="relative overflow-hidden bg-neutralbg">
+    <section id="features" className="relative overflow-hidden bg-neutralbg">
       <div className="container-px section relative">
         <div>
           <motion.div
@@ -45,7 +43,7 @@ export default function Features() {
           viewport={{ once: true, margin: '-60px' }}
           className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3"
         >
-          {items.map((f) => (
+          {features.map((f) => (
             <motion.article
               key={f.title}
               variants={item}

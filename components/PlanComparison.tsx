@@ -25,7 +25,7 @@ function PlanDots({ values }: { values: (boolean | string)[] }) {
               <span
                 className={`flex h-8 w-8 items-center justify-center rounded-full ${
                   popular
-                    ? "bg-brand-orange/15 text-brand-orange"
+                    ? "bg-brand-orange/70 text-white"
                     : "bg-emerald-100 text-emerald-700"
                 }`}
               >

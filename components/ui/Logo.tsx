@@ -15,7 +15,7 @@ export default function Logo({ className = '', light = false }: LogoProps) {
   return (
     <Image
       src={src}
-      alt="Invictus — core banking platform"
+      alt="Invictus — loan management platform"
       width={Math.round(renderHeight * ASPECT)}
       height={renderHeight}
       priority

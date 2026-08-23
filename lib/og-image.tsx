@@ -4,7 +4,7 @@ import { join } from 'node:path'
 
 export const size = { width: 1200, height: 630 }
 export const contentType = 'image/png'
-export const alt = 'Invictus — Core Banking System for Microfinance, SACCOs & Banks'
+export const alt = 'Invictus — Loan Management System for Microfinance & SACCOs'
 
 export async function renderOgImage() {
   const iconData = await readFile(
@@ -78,7 +78,7 @@ export async function renderOgImage() {
             zIndex: 1,
           }}
         >
-          The Core Banking System for Modern Institutions
+          Loan Management for Modern Institutions
         </div>
 
         <div
@@ -92,7 +92,7 @@ export async function renderOgImage() {
             zIndex: 1,
           }}
         >
-          Multi-tenant core banking for microfinance institutions, SACCOs & banks across Rwanda and East Africa
+          Manage the complete loan lifecycle for microfinance institutions, SACCOs & lenders across Rwanda and East Africa
         </div>
 
         <div

@@ -7,9 +7,9 @@ import FAQ from '@/components/FAQ'
 import CTABand from '@/components/CTABand'
 
 export const metadata: Metadata = {
-  title: 'Pricing — Flexible Plans for Financial Institutions',
+  title: 'Pricing | Flexible Plans for Financial Institutions',
   description:
-    'Flexible Invictus plans for growing institutions — Starter, Growth, and Enterprise. Tailored to microfinance institutions, SACCOs, banks, and lenders. Contact sales for a quote.',
+    'Flexible Invictus plans for growing institutions  Starter, Growth, and Enterprise. Tailored to microfinance institutions, SACCOs, banks, and lenders. Contact sales for a quote.',
   alternates: { canonical: '/pricing' },
 }
 

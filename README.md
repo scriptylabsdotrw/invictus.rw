@@ -1,6 +1,6 @@
-# Invictus — Core Banking Marketing Site
+# Invictus — Loan Management Marketing Site
 
-The public-facing marketing website for **Invictus**, a multi-tenant core banking platform built for financial institutions in Rwanda and East Africa. Institutions get their own branded portal at `yourbank.invictus.rw`.
+The public-facing marketing website for **Invictus**, a loan management platform built for microfinance institutions, SACCOs, and lenders in Rwanda and East Africa. Institutions get their own branded portal at `yourbank.invictus.rw`.
 
 ---
 
