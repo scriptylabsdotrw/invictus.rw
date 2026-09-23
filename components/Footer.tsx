@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import Logo from "./ui/Logo";
+import { features } from "@/lib/constants";
 
 const socials: { label: string; href: string; path: string }[] = [
   {
@@ -32,14 +33,7 @@ const columns = [
   },
   {
     title: "Features",
-    links: [
-      { label: "Customer Management", href: "/#features" },
-      { label: "Loan Management", href: "/#features" },
-      { label: "Repayments & Penalties", href: "/#features" },
-      { label: "Payment Reminders & Notifications", href: "/#features" },
-      { label: "Branded Portals", href: "/#features" },
-      { label: "General Ledger & Accounting", href: "/#features" },
-    ],
+    links: features.map((f) => ({ label: f.title, href: "/#features" })),
   },
   {
     title: "Contact",

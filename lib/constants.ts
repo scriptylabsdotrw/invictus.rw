@@ -1,19 +1,14 @@
 import type { IconSvgElement } from "@hugeicons/react";
 import {
   UserMultipleIcon,
-  PiggyBankIcon,
   BankIcon,
   ArrowDataTransferHorizontalIcon,
-  Wallet01Icon,
-  PercentCircleIcon,
-  SecurityCheckIcon,
-  Building03Icon,
-  Analytics01Icon,
-  Globe02Icon,
   Layers01Icon,
   BookOpen01Icon,
   Rocket01Icon,
   ChartUpIcon,
+  Globe02Icon,
+  SecurityCheckIcon,
 } from "@hugeicons/core-free-icons";
 
 export type ClientAccent = "orange" | "sky" | "emerald";
@@ -82,33 +77,10 @@ export interface Feature {
 
 export const features: Feature[] = [
   {
-    icon: UserMultipleIcon,
-    title: "Customers",
+    icon: Globe02Icon,
+    title: "Client Portal App",
     description:
-      "Onboard customers,KYC Verification and National ID Verification.",
-  },
-  {
-    icon: BankIcon,
-    title: "Loans",
-    description:
-      "Create, approve, disburse, and track loans with payments, and penalties handled end to end.",
-  },
-  {
-    icon: ArrowDataTransferHorizontalIcon,
-    title: "Repayment Tracking",
-    description:
-      "Track loan repayments and keep each customer's payment history in one place.",
-  },
-  {
-    icon: PercentCircleIcon,
-    title: "Interest, Fees & Charges",
-    description: "Configure interest, fees, and penalties and charges",
-  },
-  {
-    icon: BookOpen01Icon,
-    title: "General Ledger & Accounting",
-    description:
-      "A double-entry general ledger keeps loan transactions balanced and your books audit-ready.",
+      "Client Portal for your Customers to track and Pay  Their Loans",
   },
   {
     icon: Layers01Icon,
@@ -117,16 +89,30 @@ export const features: Feature[] = [
       "Customers Receive automated payment reminders and notifications via SMS and email.",
   },
   {
-    icon: Globe02Icon,
-    title: "Branded Portals",
+    icon: BankIcon,
+    title: "Loans",
     description:
-      "Operate under your own branded subdomain or custom domain with your  logo, and brand colors to have a familiar experience.",
+      "Loan applications,approvals,payments,disbursements and Payment Tracking",
   },
+
+  {
+    icon: BookOpen01Icon,
+    title: "Accounting",
+    description:
+      "Double-entry general ledger, income statement,trial balance and balance sheet.",
+  },
+  {
+    icon: ChartUpIcon,
+    title: "Reporting & Analytics",
+    description:
+      " Analytics and  performance reports, advanced/custom reporting.",
+  },
+
   {
     icon: SecurityCheckIcon,
     title: "Audit Trail & Activity Logs",
     description:
-      "Track who performed each action, what changed, and when it happened with detailed activity logs.",
+      "Track who performed each action, what changed, and when it happened with detailed included.",
   },
 ];
 export interface Plan {
@@ -145,58 +131,70 @@ export interface Plan {
 
 export const plans: Plan[] = [
   {
-    name: "Starter",
+    name: "Basic",
     icon: Rocket01Icon,
     price: "Contact Sales",
     priceNote: "Tailored quote no setup fees",
-    tagline: "For small institutions digitizing their loan operations.",
+    tagline: "Single-branch lenders, manual ops.",
     bestFor: "Small institutions going digital",
     features: [
-      "1 institution portal",
-      "Up to 2 staff users",
-      "Customers & loan profiles",
+      "1 institution portal, up to 2 staff users",
+      "Customer profiles & KYC basics",
       "Loan applications & approvals",
-      "Loan disbursements & repayments",     
+      "Disbursements & repayments",
       "Interest, fees & penalties",
       "Standard support",
     ],
-    cta: "Request Demo",
+    cta: "Get A Quote",
   },
   {
-    name: "Growth",
+    name: "Standard",
     icon: ChartUpIcon,
     price: "Contact Sales",
-    priceNote: "Tailored quote no scale as you grow",
-    tagline: "For active microfinance institutions, SACCOs, and lenders.",
+    priceNote: "Tailored quote scale as you grow",
+    tagline: "Growing lenders needing branding + finance.",
     bestFor: "Active MFIs, SACCOs & lenders",
     popular: true,
-    inherits: "Everything in Starter, plus",
+    inherits: "Everything in Basic",
     features: [
-      "1 branded subdomain or custom domain",
-      "Up to 10 staff users",
-      "Full loan management workflow",
-      "General ledger & reports",
-      "Branch support",
+      "Custom subdomain/domain",
+      "Up to 10 Staff Members",
+      "General ledger & accounting",
+      "Automated payment reminders & notifications",
+      "Analytics & Reports",
       "Priority support",
     ],
-    cta: "Request Demo",
+    cta: "Get A Quote",
+  },
+  {
+    name: "Corporate",
+    icon: Layers01Icon,
+    price: "Contact Sales",
+    priceNote: "Tailored quote for growing networks",
+    tagline: "Multi-branch institutions.",
+    bestFor: "Multi-branch MFIs & lenders",
+    inherits: "Everything in Standard",
+    features: [
+      "Multiple branches ",
+      "Advanced staff roles & permissions",
+      "Branch performance Analytics",
+      "Premium support",
+    ],
+    cta: "Get A Quote",
   },
   {
     name: "Enterprise",
     icon: BankIcon,
     price: "Custom Quote",
     priceNote: "Scoped to your institution",
-    tagline: "For lenders, groups, and multi-branch financial institutions.",
-    bestFor: "Banks & multi-branch groups",
-    inherits: "Everything in Growth, plus",
+    tagline: "Regulated/large institutions.",
+    bestFor: "Banks & large financial groups",
+    inherits: "Everything in Corporate",
     features: [
-      "Multiple branches",
-      "Advanced staff roles",
-      "Custom products & configurations",
-      "Advanced reporting & ledger",
       "Dedicated onboarding",
-      "Premium support",
-      "Custom integrations",
+      "National ID & MOMO integrations",
+      "Dedicated support team",
+      "Custom SLAs",
     ],
     cta: "Talk to Sales",
   },
@@ -250,49 +248,5 @@ export const comparison: ComparisonGroup[] = [
       { label: "Dedicated onboarding", values: [false, false, true] },
       { label: "Support", values: ["Standard", "Priority", "Premium"] },
     ],
-  },
-];
-export interface Testimonial {
-  quote: string;
-  name: string;
-  role: string;
-  initials: string;
-  image: string;
-}
-const unsplash = (id: string) =>
-  `https://images.unsplash.com/photo-${id}?w=480&h=480&fit=crop&crop=faces&auto=format&q=80`;
-
-export const testimonials: Testimonial[] = [
-  {
-    quote:
-      "Invictus gives us a single, real-time view of every customer and loan. It finally feels like a lending system built for how we actually operate.",
-    name: "A. Mukamana",
-    role: "Microfinance CEO",
-    initials: "AM",
-    image: unsplash("1573497019418-b400bb3ab074"),
-  },
-  {
-    quote:
-      "We replaced a patchwork of spreadsheets and disconnected tools. Now applications, disbursements, and repayments are managed in one place.",
-    name: "J. Habimana",
-    role: "Head of Operations",
-    initials: "JH",
-    image: unsplash("1495603889488-42d1d66e5523"),
-  },
-  {
-    quote:
-      "Our loan officers move faster because customer details, repayment schedules, and loan activity are easy to follow.",
-    name: "C. Uwase",
-    role: "Branch Manager",
-    initials: "CU",
-    image: unsplash("1611432579402-7037e3e2c1e4"),
-  },
-  {
-    quote:
-      "The reporting and general ledger give leadership the portfolio visibility we need to grow with confidence across multiple branches.",
-    name: "D. Niyonzima",
-    role: "Finance Director",
-    initials: "DN",
-    image: unsplash("1605602517387-ec78b947335e"),
   },
 ];

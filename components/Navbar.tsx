@@ -52,7 +52,7 @@ export default function Navbar() {
           </div>
 
           <div className="hidden items-center gap-2 lg:flex">
-            <a href="https://invictus.rw/en/auth/login" className="inline-flex items-center justify-center rounded-lg border border-white/30 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-white/10">
+            <a href="https://lms.rw/en/auth/login" className="inline-flex items-center justify-center rounded-lg border border-white/30 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-white/10">
               Login
             </a>
             <Link href="/contact" className="inline-flex items-center justify-center rounded-lg bg-white px-5 py-2.5 text-sm font-semibold text-emerald-900 transition-colors hover:bg-emerald-50">

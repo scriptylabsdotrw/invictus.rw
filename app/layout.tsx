@@ -7,8 +7,6 @@ import WhatsAppButton from "@/components/WhatsAppButton";
 import { Toaster } from "@/components/ui/sonner";
 import { cn } from "@/lib/utils";
 
-
-
 const SITE_URL = "https://invictus.rw";
 
 export const metadata: Metadata = {
@@ -51,8 +49,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     siteName: "Invictus",
-    title:
-      "Invictus — Loan Management for Modern Financial Institutions",
+    title: "Invictus — Loan Management for Modern Financial Institutions",
     description:
       "Manage customers, loan applications, approvals, disbursements, repayments, accounting, and portfolio performance on one secure platform.",
     url: SITE_URL,
@@ -77,8 +74,7 @@ const jsonLd = {
   name: "Invictus",
   applicationCategory: "FinanceApplication",
   operatingSystem: "Web",
-  description:
-    "Modern loan management system for microfinance institutions, SACCOs, and lenders in Rwanda and East Africa.",
+  description: "Modern loan management system for microfinance institutions.",
   url: SITE_URL,
   offers: {
     "@type": "Offer",
@@ -105,7 +101,12 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className={cn(geist.variable, "font-sans min-h-screen bg-white antialiased")}>
+      <body
+        className={cn(
+          geist.variable,
+          "font-sans min-h-screen bg-white antialiased",
+        )}
+      >
         <Navbar />
         <main>{children}</main>
         <Footer />

@@ -56,7 +56,7 @@ export default function Hero() {
             variants={staggerItem}
             className="mx-auto mt-7 max-w-2xl text-balance text-xl leading-relaxed text-emerald-100/80 sm:text-2xl"
           >
-          Loan Operations shouldn’t run on spreadsheets
+            Loan Operations shouldn’t run on spreadsheets
           </motion.p>
 
           <motion.div
