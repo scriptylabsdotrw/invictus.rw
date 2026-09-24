@@ -1,0 +1,89 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: light;
+    --background: #ffffff;
+    --foreground: #18181b;
+    --border: #e4e4e7;
+    --input: #e4e4e7;
+    --ring: #059669;
+    --muted-foreground: #71717a;
+    --radius: 0.625rem;
+    --popover: #ffffff;
+    --popover-foreground: #18181b;
+  }
+
+  html {
+    @apply scroll-smooth font-sans;
+    /* Offset anchor scrolling for the sticky navbar */
+    scroll-padding-top: 104px;
+  }
+
+  body {
+    @apply bg-white text-zinc-600 antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-semibold tracking-tight text-zinc-900;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  * {
+    @apply border-border;
+    outline-color: color-mix(in srgb, var(--ring) 50%, transparent);
+  }
+}
+
+@layer components {
+  .container-page {
+    @apply mx-auto w-full max-w-6xl px-6;
+  }
+  .container-narrow {
+    @apply mx-auto w-full max-w-5xl px-6;
+  }
+  .section {
+    @apply py-20 sm:py-28;
+  }
+
+  /* Soft fade on the left/right edges of horizontal marquees. */
+  .mask-fade-x {
+    -webkit-mask-image: linear-gradient(to right, transparent, #000 10%, #000 90%, transparent);
+    mask-image: linear-gradient(to right, transparent, #000 10%, #000 90%, transparent);
+  }
+
+  /* Long-form legal/prose copy. */
+  .prose-legal {
+    @apply space-y-4 text-[15px] leading-relaxed text-zinc-600;
+  }
+  .prose-legal strong {
+    @apply font-semibold text-zinc-900;
+  }
+  .prose-legal a {
+    @apply font-medium text-primary-700 underline underline-offset-2 hover:text-primary-800;
+  }
+  .prose-legal ul {
+    @apply list-disc space-y-2 pl-5 marker:text-zinc-400;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .animate-marquee,
+  .animate-marquee-reverse {
+    animation: none;
+  }
+}

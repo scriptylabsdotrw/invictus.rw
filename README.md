@@ -6,7 +6,7 @@ The public-facing marketing website for **Invictus**, a loan management platform
 
 ## Overview
 
-Invictus is a product of **ScriptyLabs Inc** (`scriptylabs.com`). This repository contains the marketing site — a fast, fully responsive Vite + React Router application covering the product's features, pricing, how it works, and a contact/demo request flow.
+Invictus is a product of **ScriptyLabs Inc** (`scriptylabs.com`). This repository contains the marketing site — a fast, fully responsive Next.js application covering the product's features, pricing, how it works, and a contact/demo request flow.
 
 ---
 
@@ -14,9 +14,15 @@ Invictus is a product of **ScriptyLabs Inc** (`scriptylabs.com`). This repositor
 
 | Route | Description |
 |---|---|
-| `/` | Homepage with animated hero, dashboard preview, features strip, clients marquee, and CTA |
-| `/pricing` | Plan comparison table |
-| `/contact` | Demo request form (Cal.com integration) |
+| `/` | Homepage with animated hero, dashboard preview, features strip, clients marquee, testimonials, and CTA |
+| `/features` | Full capabilities showcase across four pillars |
+| `/how-it-works` | Four-step onboarding flow explained |
+| `/pricing` | Plan comparison table with FAQ |
+| `/contact` | Demo request form |
+| `/login` | Institution admin login (wired to platform API) |
+| `/faq` | Standalone FAQ |
+| `/privacy` | Privacy Policy — aligned with Rwanda Law N° 058/2021 |
+| `/terms` | Terms & Conditions |
 
 ---
 
@@ -24,11 +30,12 @@ Invictus is a product of **ScriptyLabs Inc** (`scriptylabs.com`). This repositor
 
 | Layer | Technology |
 |---|---|
-| Framework / Bundler | Vite 8 + React Router 7 |
+| Framework | Next.js 16 (App Router) |
 | Language | TypeScript |
 | Styling | Tailwind CSS v3 |
 | Animations | Framer Motion |
 | Icons | HugeIcons (`@hugeicons/core-free-icons`) |
+| Charts | Recharts |
 | Runtime | React 19 |
 
 ---
@@ -37,46 +44,75 @@ Invictus is a product of **ScriptyLabs Inc** (`scriptylabs.com`). This repositor
 
 ```
 invictus.rw/
-├── index.html
-├── src/
-│   ├── App.tsx               # Route definitions
-│   ├── main.tsx              # Application entry point
-│   ├── index.css             # Tailwind CSS & global styles
-│   ├── components/           # UI components & sections
-│   │   ├── ui/               # Reusable primitives (Icon, Logo, Highlight, etc.)
-│   │   └── ...
-│   ├── pages/                # Page route components
-│   │   ├── Home.tsx
-│   │   ├── Pricing.tsx
-│   │   └── Contact.tsx
-│   └── lib/                  # Utilities and constants
-├── public/                   # Static assets & brand logos
-├── tailwind.config.ts
-├── vite.config.ts
-└── tsconfig.json
+├── app/                    # Next.js App Router pages and layouts
+│   ├── page.tsx            # Homepage
+│   ├── features/
+│   ├── how-it-works/
+│   ├── pricing/
+│   ├── contact/
+│   ├── login/
+│   ├── faq/
+│   ├── privacy/
+│   └── terms/
+├── components/             # Page-level section components
+│   ├── ui/                 # Reusable primitives (Icon, Logo, Highlight, etc.)
+│   └── ...
+├── lib/
+│   └── icons.ts            # Central HugeIcons registry
+├── public/
+│   └── logos/              # Brand assets (full logos + icon variants)
+└── tailwind.config.ts
 ```
 
 ---
 
 ## Getting Started
 
-**Prerequisites:** Node.js 20+, pnpm
+**Prerequisites:** Node.js 20+, npm
 
 ```bash
 # Install dependencies
-pnpm install
+npm install
 
 # Start development server
-pnpm dev
+npm run dev
 ```
 
-The site runs at `http://localhost:5173`.
+The site runs at `http://localhost:3000`.
 
 ```bash
-# Production build & preview
-pnpm build
-pnpm preview
+# Production build
+npm run build
+npm start
 ```
+
+---
+
+## Design System
+
+**Colors**
+
+| Token | Value | Usage |
+|---|---|---|
+| `emerald-950` | `#022C22` | Hero backgrounds, sidebar |
+| `emerald-600` | `#059669` | Primary accent |
+| `orange-700` | `#C2410C` | Highlight underline accent |
+| `ink` | `#0F172A` | Body text |
+| `muted` | `#64748B` | Secondary text |
+| `line` | `#E2E8F0` | Borders and dividers |
+
+**Typography**
+
+- Display / headings — Space Grotesk
+- Body — Inter / SF Pro Text
+
+**Key components**
+
+- `Highlight` — Wraps a word in orange-700 with an artistic SVG wavy underline. Used in all page heroes.
+- `DashboardMockup` — Fully custom animated banking dashboard preview. No external screenshots. Animated counters, sparklines, staggered rows.
+- `PageHero` — Clean dark hero band for inner pages (title + subtitle, no extra widgets).
+- `PageHeader` — Legal-page variant with an icon badge above the title.
+- `Reveal` — Intersection Observer wrapper for scroll-triggered fade-ins.
 
 ---
 
@@ -95,7 +131,29 @@ public/logos/
 
 ---
 
+## Environment
+
+No environment variables are required to run the marketing site locally. The institution admin login at `/login` calls the Invictus platform API — configure the endpoint there if needed.
+
+---
+
 ## Legal
 
 - Privacy Policy complies with **Rwanda Law N° 058/2021** on the protection of personal data and privacy.
 - All content and branding are property of **ScriptyLabs Inc**.
+
+---
+
+## Docker & deployment
+
+The site is a fully static Next.js export: `pnpm build` writes plain HTML/CSS/JS to `out/`.
+
+```bash
+# Build and run the production image locally (served by Caddy on port 4000)
+docker compose up --build
+```
+
+- `Dockerfile` builds with pnpm and copies `out/` into a `caddy:alpine` image.
+- `Caddyfile` serves `/page` from `/page/index.html` and falls back to `404.html`.
+- CI (`.github/workflows/build.yaml`) runs `pnpm install --frozen-lockfile` and `pnpm build`;
+  `deploy.yaml` pushes the image to GHCR and deploys `docker-stack.yaml` after CI passes on `main`.
