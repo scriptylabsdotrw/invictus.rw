@@ -1,0 +1,10 @@
+:4000 {
+    root * /usr/share/caddy
+    encode gzip zstd
+    try_files {path} /index.html
+    @static {
+        path /assets/*
+    }
+    header @static Cache-Control "public, max-age=31536000, immutable"
+    file_server
+}
