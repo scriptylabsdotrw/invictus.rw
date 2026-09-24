@@ -1,19 +1,19 @@
-import Hero from "@/components/Hero";
-import Features from "@/components/Features";
-import HowItWorks from "@/components/HowItWorks";
-import Partners from "@/components/patners";
-import CTABand from "@/components/CTABand";
-import Clients from "@/components/clients";
+import Hero from '@/components/home/Hero'
+import TrustWall from '@/components/home/TrustWall'
+import PlatformCells from '@/components/home/PlatformCells'
+import HowItWorks from '@/components/HowItWorks'
+import FAQ from '@/components/FAQ'
+import CTABand from '@/components/CTABand'
 
 export default function HomePage() {
   return (
     <>
       <Hero />
-      <Partners />
-      <Features />
-      <Clients />
+      <TrustWall />
+      <PlatformCells />
       <HowItWorks />
+      <FAQ limit={5} />
       <CTABand />
     </>
-  );
+  )
 }

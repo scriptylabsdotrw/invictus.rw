@@ -65,7 +65,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#065F46",
+  themeColor: "#00120d",
 };
 
 const jsonLd = {
@@ -77,16 +77,17 @@ const jsonLd = {
   description: "Modern loan management system for microfinance institutions.",
   url: SITE_URL,
   offers: {
-    "@type": "Offer",
-    price: "0",
-    priceCurrency: "USD",
-    description: "Contact sales for pricing",
+    "@type": "AggregateOffer",
+    lowPrice: "100000",
+    highPrice: "200000",
+    priceCurrency: "RWF",
+    description: "Monthly plans from RWF 100K. Enterprise pricing on request.",
   },
 };
 
 const geist = Geist({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "500", "600", "700", "900"],
   variable: "--font-geist",
 });
 
@@ -104,7 +105,7 @@ export default function RootLayout({
       <body
         className={cn(
           geist.variable,
-          "font-sans min-h-screen bg-white antialiased",
+          "min-h-screen font-sans",
         )}
       >
         <Navbar />

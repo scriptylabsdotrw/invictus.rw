@@ -1,45 +1,30 @@
-import Link from "next/link";
-import Reveal from "./ui/Reveal";
-import Icon from "./ui/Icon";
-import { ArrowRight01Icon } from "@hugeicons/core-free-icons";
+import Button from './ui/Button'
+import Reveal from './ui/Reveal'
 
-export default function CTABand() {
+interface CTABandProps {
+  title?: string
+  body?: string
+  cta?: { label: string; href: string }
+}
+
+export default function CTABand({
+  title = 'Run your business on Invictus.',
+  body = 'See your own products, rates and approval steps in a private demo. No commitment.',
+  cta = { label: 'Request a demo', href: '/contact' },
+}: CTABandProps) {
   return (
-    <section className="section bg-white">
-      <div className="container-px">
+    <section className="bg-primary-1000">
+      <div className="container-narrow py-20 text-center sm:py-28">
         <Reveal>
-          <div className="relative overflow-hidden rounded-lg bg-emerald-950 px-6 py-14 text-center sm:px-12 sm:py-20">
-            <div className="pointer-events-none absolute inset-0 -z-0 opacity-60">
-              <div className="absolute -left-10 top-0 h-60 w-60 rounded-full bg-emerald-700/40 blur-3xl" />
-              <div className="absolute -right-10 bottom-0 h-60 w-60 rounded-full bg-emerald-600/30 blur-3xl" />
-            </div>
-            <div className="relative z-10 mx-auto max-w-2xl">
-              <div className="accent-line mx-auto mb-6" />
-              <h2 className="display text-3xl text-white sm:text-4xl lg:text-5xl">
-                Whats Next?
-              </h2>
-              <p className="mt-5 text-lg leading-relaxed text-emerald-100/80">
-                Request a private demo and see how Invictus manages customers,
-                loans, repayments, accounting, and portfolio performance.
-              </p>
-              <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-                <Link
-                  href="/contact"
-                  className="inline-flex w-full items-center justify-center gap-2 rounded-md bg-brand-orange px-6 py-3 text-sm font-semibold text-white transition-all hover:bg-brand-orange-soft sm:w-auto"
-                >
-                  Request a Demo <Icon icon={ArrowRight01Icon} size={18} />
-                </Link>
-                <Link
-                  href="/pricing"
-                  className="inline-flex w-full items-center justify-center rounded-md border border-white/20 bg-white/5 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-white/10 sm:w-auto"
-                >
-                  View Pricing
-                </Link>
-              </div>
-            </div>
+          <h2 className="mx-auto max-w-2xl text-4xl leading-[1.1] text-white sm:text-5xl">{title}</h2>
+          <p className="mx-auto mt-5 max-w-xl text-lg leading-relaxed text-zinc-400">{body}</p>
+          <div className="mt-9">
+            <Button href={cta.href} variant="accent" className="min-w-[14rem]">
+              {cta.label}
+            </Button>
           </div>
         </Reveal>
       </div>
     </section>
-  );
+  )
 }

@@ -1,25 +1,74 @@
 import type { IconSvgElement } from "@hugeicons/react";
 import {
-  UserMultipleIcon,
   BankIcon,
-  ArrowDataTransferHorizontalIcon,
   Layers01Icon,
   BookOpen01Icon,
   Rocket01Icon,
   ChartUpIcon,
   Globe02Icon,
   SecurityCheckIcon,
+  Notification01Icon,
 } from "@hugeicons/core-free-icons";
 
-export type ClientAccent = "orange" | "sky" | "emerald";
+/* ----------------------------------------------------------------------------
+ * Clients & partners — real institutions only. Add new ones here.
+ * ------------------------------------------------------------------------- */
+
+export type ClientCategory = "Microfinance" | "SACCO" | "Lender";
 
 export interface Client {
   name: string;
-  badge: string;
-  accent: ClientAccent;
+  category: ClientCategory;
   logo: string;
+  description: string;
   website?: string;
 }
+
+export const clients: Client[] = [
+  {
+    name: "Atlas Wealth",
+    category: "Microfinance",
+    logo: "/images/clients/atlas-wealth.webp",
+    description: "Manages its loans on Invictus.",
+    website: "https://atlaswealth.rw/",
+  },
+  {
+    name: "Fina Group",
+    category: "Microfinance",
+    logo: "/images/clients/fina-group.webp",
+    description: "Manages its loans on Invictus.",
+    website: "https://finagroup.co/",
+  },
+  {
+    name: "Giant Eagle Finance",
+    category: "Microfinance",
+    logo: "/images/clients/giant-eagle-finance.webp",
+    description: "Manages its loans on Invictus.",
+    website: "https://www.gianteaglefinance.rw/",
+  },
+  {
+    name: "Umurage Finance Solution",
+    category: "Microfinance",
+    logo: "/images/clients/umurage-finance-solution.webp",
+    description: "Manages its loans on Invictus.",
+  },
+];
+
+export interface Partner {
+  name: string;
+  logo: string;
+}
+
+export const partners: Partner[] = [
+  { name: "National Land Authority", logo: "/partners/NLA.png" },
+  { name: "National ID Agency", logo: "/partners/arms_Rwanda.png" },
+  { name: "Data Protection Office", logo: "/partners/logo.jpg" },
+  { name: "TransUnion", logo: "/partners/transunion-logo.png" },
+];
+
+/* ----------------------------------------------------------------------------
+ * FAQ
+ * ------------------------------------------------------------------------- */
 
 export interface Faq {
   question: string;
@@ -30,44 +79,48 @@ export const faqs: Faq[] = [
   {
     question: "What is Invictus?",
     answer:
-      "Invictus is a modern loan management system for financial institutions. It brings customer onboarding, loan applications, approvals, disbursements, repayments, penalties, accounting, reporting, and branded customer portals together in one secure platform.",
+      "Invictus is loan management software for financial institutions. Customer onboarding, applications, approvals, disbursements, repayments, penalties, accounting and reporting live in one secure platform.",
   },
   {
-    question: "Who is Invictus built for?",
+    question: "Who is it for?",
     answer:
-      "Invictus is designed for microfinance institutions, SACCOs and cooperatives, community banks, money lenders, SME lenders, and other financial service providers across Rwanda and East Africa.",
+      "Microfinance institutions, SACCOs and cooperatives, community banks, money lenders and SME lenders across Rwanda and East Africa.",
   },
   {
-    question: "What parts of the loan lifecycle does Invictus cover?",
+    question: "Which parts of the loan lifecycle does it cover?",
     answer:
-      "Invictus helps institutions manage loans from customer onboarding and application through approval, disbursement, repayment tracking, penalties, and portfolio reporting.",
+      "All of it. From onboarding and application, through approval and disbursement, to repayment tracking, penalties and portfolio reporting.",
   },
   {
-    question: "Can each institution get its own portal?",
+    question: "Do we get our own portal?",
     answer:
-      "Yes. Every institution can operate under its own branded subdomain or custom domain for example yourbank.invictus.rw or yourbank.co.rw while still being powered by the central Invictus platform.",
+      "Yes. On Standard and above, your institution runs on its own subdomain or custom domain — for example yourbank.invictus.rw — with your branding.",
   },
   {
-    question: "Does Invictus support multiple institutions?",
+    question: "Is our data kept separate from other institutions?",
     answer:
-      "Absolutely. Invictus is a multi-tenant platform. It can serve many institutions from one scalable system while keeping each tenant’s data cleanly separated.",
+      "Yes. Invictus is multi-tenant: many institutions share one platform, but each institution's data is isolated from every other.",
   },
   {
-    question: "Can staff roles and branches be managed?",
+    question: "Can we control what each staff member can do?",
     answer:
-      "You can control exactly what administrators, managers, and loan officers can do, and operate multiple branches with performance visibility across the network.",
+      "Yes. Set exactly what administrators, managers and loan officers can see and do. Multi-branch institutions also get performance visibility per branch.",
   },
   {
-    question: "How are accounting and reports handled?",
+    question: "How is accounting handled?",
     answer:
-      "Every loan transaction posts to a double-entry general ledger, while reports and dashboards help teams monitor their loan portfolio, repayments, and lending performance.",
+      "Every loan transaction posts to a double-entry general ledger. Income statement, trial balance and balance sheet are ready when you need them.",
   },
   {
-    question: "How can an institution request a demo?",
+    question: "How do we get started?",
     answer:
-      "Complete the demo request form in the Contact section. Tell us about your institution and the Invictus team will walk you through the platform.",
+      "Book a demo. We walk you through the platform, scope your setup, and send a quote that fits your institution.",
   },
 ];
+
+/* ----------------------------------------------------------------------------
+ * Core features
+ * ------------------------------------------------------------------------- */
 
 export interface Feature {
   icon: IconSvgElement;
@@ -77,52 +130,55 @@ export interface Feature {
 
 export const features: Feature[] = [
   {
-    icon: Globe02Icon,
-    title: "Client Portal App",
-    description:
-      "Client Portal for your Customers to track and Pay  Their Loans",
-  },
-  {
-    icon: Layers01Icon,
-    title: "Payment Reminders & Notifications",
-    description:
-      "Customers Receive automated payment reminders and notifications via SMS and email.",
-  },
-  {
     icon: BankIcon,
-    title: "Loans",
+    title: "Loans, end to end",
     description:
-      "Loan applications,approvals,payments,disbursements and Payment Tracking",
+      "Applications, approvals, disbursements and repayments in one flow. No spreadsheets in between.",
   },
-
+  {
+    icon: Globe02Icon,
+    title: "Borrower portal",
+    description:
+      "Your customers see their balance, schedule and history — and pay — from their own portal.",
+  },
+  {
+    icon: Notification01Icon,
+    title: "Automatic reminders",
+    description:
+      "SMS and email reminders go out before each due date. Fewer late payments, fewer calls.",
+  },
   {
     icon: BookOpen01Icon,
-    title: "Accounting",
+    title: "Built-in accounting",
     description:
-      "Double-entry general ledger, income statement,trial balance and balance sheet.",
+      "A double-entry ledger with income statement, trial balance and balance sheet. Always balanced.",
   },
   {
     icon: ChartUpIcon,
-    title: "Reporting & Analytics",
+    title: "Reports & analytics",
     description:
-      " Analytics and  performance reports, advanced/custom reporting.",
+      "Portfolio, repayment and performance reports on demand. Custom reports when you need more.",
   },
-
   {
     icon: SecurityCheckIcon,
-    title: "Audit Trail & Activity Logs",
+    title: "Full audit trail",
     description:
-      "Track who performed each action, what changed, and when it happened with detailed included.",
+      "Every action is logged: who did it, what changed and when. Ready for any audit.",
   },
 ];
+
+/* ----------------------------------------------------------------------------
+ * Pricing
+ * ------------------------------------------------------------------------- */
+
 export interface Plan {
   name: string;
   icon: IconSvgElement;
   price: string;
+  /** Billing period shown next to the price, e.g. "/ month". */
   cadence?: string;
-  priceNote?: string;
+  priceNote: string;
   tagline: string;
-  bestFor: string;
   popular?: boolean;
   inherits?: string;
   features: string[];
@@ -133,120 +189,148 @@ export const plans: Plan[] = [
   {
     name: "Basic",
     icon: Rocket01Icon,
-    price: "Contact Sales",
-    priceNote: "Tailored quote no setup fees",
-    tagline: "Single-branch lenders, manual ops.",
-    bestFor: "Small institutions going digital",
+    price: "RWF 100K",
+    cadence: "/ month",
+    priceNote: "No setup fees.",
+    tagline: "For single-branch lenders moving off paper.",
     features: [
-      "1 institution portal, up to 2 staff users",
+      "1 institution portal",
+      "Up to 2 staff users",
       "Customer profiles & KYC basics",
       "Loan applications & approvals",
       "Disbursements & repayments",
       "Interest, fees & penalties",
       "Standard support",
     ],
-    cta: "Get A Quote",
+    cta: "Get started",
   },
   {
     name: "Standard",
     icon: ChartUpIcon,
-    price: "Contact Sales",
-    priceNote: "Tailored quote scale as you grow",
-    tagline: "Growing lenders needing branding + finance.",
-    bestFor: "Active MFIs, SACCOs & lenders",
+    price: "RWF 150K",
+    cadence: "/ month",
+    priceNote: "Scales with you.",
+    tagline: "For growing lenders that need their own brand and books.",
     popular: true,
     inherits: "Everything in Basic",
     features: [
-      "Custom subdomain/domain",
-      "Up to 10 Staff Members",
+      "Custom subdomain or domain",
+      "Up to 10 staff users",
       "General ledger & accounting",
-      "Automated payment reminders & notifications",
-      "Analytics & Reports",
+      "Automated payment reminders",
+      "Analytics & reports",
+      "National ID (NIDA) verification",
+      "National Land Authority (NLA) lookups",
+      "Mobile money integration",
       "Priority support",
     ],
-    cta: "Get A Quote",
+    cta: "Get started",
   },
   {
     name: "Corporate",
     icon: Layers01Icon,
-    price: "Contact Sales",
-    priceNote: "Tailored quote for growing networks",
-    tagline: "Multi-branch institutions.",
-    bestFor: "Multi-branch MFIs & lenders",
+    price: "RWF 200K",
+    cadence: "/ month",
+    priceNote: "Built for branch networks.",
+    tagline: "For institutions running more than one branch.",
     inherits: "Everything in Standard",
     features: [
-      "Multiple branches ",
-      "Advanced staff roles & permissions",
-      "Branch performance Analytics",
+      "Multiple branches",
+      "Advanced roles & permissions",
+      "Branch performance analytics",
+      "National ID (NIDA) verification",
+      "National Land Authority (NLA) lookups",
+      "Mobile money integration",
       "Premium support",
     ],
-    cta: "Get A Quote",
+    cta: "Get started",
   },
   {
     name: "Enterprise",
     icon: BankIcon,
-    price: "Custom Quote",
-    priceNote: "Scoped to your institution",
-    tagline: "Regulated/large institutions.",
-    bestFor: "Banks & large financial groups",
+    price: "Custom quote",
+    priceNote: "Scoped to your institution.",
+    tagline: "For regulated and large institutions.",
     inherits: "Everything in Corporate",
     features: [
       "Dedicated onboarding",
-      "National ID & MOMO integrations",
+      "National ID (NIDA) verification",
+      "National Land Authority (NLA) lookups",
+      "Mobile money integration",
       "Dedicated support team",
       "Custom SLAs",
     ],
-    cta: "Talk to Sales",
+    cta: "Talk to sales",
   },
 ];
 
+/* ----------------------------------------------------------------------------
+ * Plan comparison — every row is derived from the plan lists above
+ * (each plan includes everything in the plan before it).
+ * Values are in plan order: Basic, Standard, Corporate, Enterprise.
+ * ------------------------------------------------------------------------- */
+
+export type ComparisonValue = boolean | string;
+
 export interface ComparisonRow {
   label: string;
-  values: (boolean | string)[];
+  info?: string;
+  values: [ComparisonValue, ComparisonValue, ComparisonValue, ComparisonValue];
 }
+
 export interface ComparisonGroup {
   category: string;
   rows: ComparisonRow[];
 }
+
 export const comparison: ComparisonGroup[] = [
   {
-    category: "Loan management",
+    category: "Loans & borrowers",
     rows: [
-      { label: "Customers & loan profiles", values: [true, true, true] },
-      { label: "Loan applications", values: [true, true, true] },
-      { label: "Repayment tracking", values: [true, true, true] },
-      { label: "Loans & repayments", values: ["Basic", "Full", "Advanced"] },
-      {
-        label: "General ledger & accounting",
-        values: [false, true, "Advanced"],
-      },
+      { label: "Customer profiles & KYC basics", info: "One profile per borrower with their details and documents.", values: [true, true, true, true] },
+      { label: "Loan applications & approvals", values: [true, true, true, true] },
+      { label: "Disbursements & repayments", values: [true, true, true, true] },
+      { label: "Interest, fees & penalties", info: "Configured per loan product and calculated automatically.", values: [true, true, true, true] },
+      { label: "Automated payment reminders", info: "Reminders sent to borrowers before each due date.", values: [false, true, true, true] },
     ],
   },
   {
-    category: "Operations",
+    category: "Portal & brand",
     rows: [
-      { label: "Staff users", values: ["Up to 2", "Up to 10", "Custom roles"] },
-      { label: "Branded subdomain portal", values: [false, true, true] },
-      { label: "Branch support", values: [false, "Single", "Multiple"] },
-      {
-        label: "Custom products & configuration",
-        values: [false, false, true],
-      },
-      {
-        label: "Reports & dashboards",
-        values: ["Basic", "Standard", "Advanced"],
-      },
+      { label: "Institution portal", values: [true, true, true, true] },
+      { label: "Custom subdomain or domain", info: "For example yourbank.invictus.rw, or a domain you own.", values: [false, true, true, true] },
     ],
   },
   {
-    category: "Integrations & support",
+    category: "Team & branches",
     rows: [
-      {
-        label: "National integrations (NIDA, NLA, credit)",
-        values: [false, false, true],
-      },
-      { label: "Dedicated onboarding", values: [false, false, true] },
-      { label: "Support", values: ["Standard", "Priority", "Premium"] },
+      { label: "Staff users", values: ["Up to 2", "Up to 10", "Scoped to you", "Scoped to you"] },
+      { label: "Multiple branches", values: [false, false, true, true] },
+      { label: "Advanced roles & permissions", info: "Control exactly what each administrator, manager and loan officer can see and do.", values: [false, false, true, true] },
+      { label: "Branch performance analytics", values: [false, false, true, true] },
+    ],
+  },
+  {
+    category: "Accounting & reporting",
+    rows: [
+      { label: "General ledger & accounting", info: "Double-entry ledger with income statement, trial balance and balance sheet.", values: [false, true, true, true] },
+      { label: "Analytics & reports", values: [false, true, true, true] },
+    ],
+  },
+  {
+    category: "Integrations",
+    rows: [
+      { label: "National ID (NIDA) verification", info: "Verify borrower identity against the national ID system during onboarding.", values: [false, true, true, true] },
+      { label: "National Land Authority (NLA) lookups", info: "Check land and property records for collateral.", values: [false, true, true, true] },
+      { label: "Mobile money", info: "Connect disbursements and repayments to mobile money.", values: [false, true, true, true] },
+    ],
+  },
+  {
+    category: "Onboarding & support",
+    rows: [
+      { label: "Support", values: ["Standard", "Priority", "Premium", "Dedicated team"] },
+      { label: "Dedicated onboarding", values: [false, false, false, true] },
+      { label: "Custom SLAs", info: "Service levels agreed in your contract.", values: [false, false, false, true] },
     ],
   },
 ];

@@ -14,16 +14,16 @@ const calConfig = {
 
 const config = {
   styles: {
-    branding: { brandColor: "#065F46" },
+    branding: { brandColor: "#059669" },
   },
   cssVarsPerTheme: {
     light: {
-      "cal-brand": "#065F46",
-      "cal-brand-emphasis": "#064E3B",
-      "cal-text": "#0F172A",
-      "cal-text-emphasis": "#022C22",
-      "cal-border": "#E2E8F0",
-      "cal-border-subtle": "#F1F5F9",
+      "cal-brand": "#059669",
+      "cal-brand-emphasis": "#047857",
+      "cal-text": "#18181b",
+      "cal-text-emphasis": "#18181b",
+      "cal-border": "#e4e4e7",
+      "cal-border-subtle": "#f4f4f5",
       "cal-bg": "#FFFFFF",
     },
     dark: {

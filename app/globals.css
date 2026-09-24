@@ -2,180 +2,88 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  color-scheme: light;
-}
-
-html {
-  scroll-behavior: smooth;
-  /* Offset anchor scrolling for the sticky navbar */
-  scroll-padding-top: 128px;
-}
-
-body {
-  font-family: var(--font-geist), 'Segoe UI', sans-serif;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  background-color: #ffffff;
-  color: #0f172a;
-  overflow-x: hidden;
-}
-
 @layer base {
+  :root {
+    color-scheme: light;
+    --background: #ffffff;
+    --foreground: #18181b;
+    --border: #e4e4e7;
+    --input: #e4e4e7;
+    --ring: #059669;
+    --muted-foreground: #71717a;
+    --radius: 0.625rem;
+    --popover: #ffffff;
+    --popover-foreground: #18181b;
+  }
+
+  html {
+    @apply scroll-smooth font-sans;
+    /* Offset anchor scrolling for the sticky navbar */
+    scroll-padding-top: 104px;
+  }
+
+  body {
+    @apply bg-white text-zinc-600 antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+
   h1,
   h2,
-  h3 {
-    @apply font-display font-bold tracking-tight text-ink;
+  h3,
+  h4 {
+    @apply font-semibold tracking-tight text-zinc-900;
+    text-wrap: balance;
   }
-  .theme {
-    --font-heading: var(--font-geist);
-    --font-sans: var(--font-geist);
+
+  p {
+    text-wrap: pretty;
   }
-  :root {
-    --background: oklch(1 0 0);
-    --foreground: oklch(0.145 0 0);
-    --card: oklch(1 0 0);
-    --card-foreground: oklch(0.145 0 0);
-    --popover: oklch(1 0 0);
-    --popover-foreground: oklch(0.145 0 0);
-    --primary: #065f46;
-    --primary-foreground: #ffffff;
-    --secondary: oklch(0.97 0 0);
-    --secondary-foreground: oklch(0.205 0 0);
-    --muted: oklch(0.97 0 0);
-    --muted-foreground: oklch(0.556 0 0);
-    --accent: oklch(0.97 0 0);
-    --accent-foreground: oklch(0.205 0 0);
-    --destructive: oklch(0.577 0.245 27.325);
-    --border: oklch(0.922 0 0);
-    --input: oklch(0.922 0 0);
-    --ring: #059669;
-    --chart-1: oklch(0.87 0 0);
-    --chart-2: oklch(0.556 0 0);
-    --chart-3: oklch(0.439 0 0);
-    --chart-4: oklch(0.371 0 0);
-    --chart-5: oklch(0.269 0 0);
-    --radius: 0.625rem;
-    --sidebar: oklch(0.985 0 0);
-    --sidebar-foreground: oklch(0.145 0 0);
-    --sidebar-primary: oklch(0.205 0 0);
-    --sidebar-primary-foreground: oklch(0.985 0 0);
-    --sidebar-accent: oklch(0.97 0 0);
-    --sidebar-accent-foreground: oklch(0.205 0 0);
-    --sidebar-border: oklch(0.922 0 0);
-    --sidebar-ring: oklch(0.708 0 0);
-  }
-  .dark {
-    --background: oklch(0.145 0 0);
-    --foreground: oklch(0.985 0 0);
-    --card: oklch(0.205 0 0);
-    --card-foreground: oklch(0.985 0 0);
-    --popover: oklch(0.205 0 0);
-    --popover-foreground: oklch(0.985 0 0);
-    --primary: oklch(0.922 0 0);
-    --primary-foreground: oklch(0.205 0 0);
-    --secondary: oklch(0.269 0 0);
-    --secondary-foreground: oklch(0.985 0 0);
-    --muted: oklch(0.269 0 0);
-    --muted-foreground: oklch(0.708 0 0);
-    --accent: oklch(0.269 0 0);
-    --accent-foreground: oklch(0.985 0 0);
-    --destructive: oklch(0.704 0.191 22.216);
-    --border: oklch(1 0 0 / 10%);
-    --input: oklch(1 0 0 / 15%);
-    --ring: oklch(0.556 0 0);
-    --chart-1: oklch(0.87 0 0);
-    --chart-2: oklch(0.556 0 0);
-    --chart-3: oklch(0.439 0 0);
-    --chart-4: oklch(0.371 0 0);
-    --chart-5: oklch(0.269 0 0);
-    --sidebar: oklch(0.205 0 0);
-    --sidebar-foreground: oklch(0.985 0 0);
-    --sidebar-primary: oklch(0.488 0.243 264.376);
-    --sidebar-primary-foreground: oklch(0.985 0 0);
-    --sidebar-accent: oklch(0.269 0 0);
-    --sidebar-accent-foreground: oklch(0.985 0 0);
-    --sidebar-border: oklch(1 0 0 / 10%);
-    --sidebar-ring: oklch(0.556 0 0);
-  }
+
   * {
     @apply border-border;
     outline-color: color-mix(in srgb, var(--ring) 50%, transparent);
   }
-  body {
-    @apply bg-background text-foreground;
-  }
-  html {
-    @apply font-sans;
-  }
 }
 
 @layer components {
-  /* Layout */
-  .container-px {
-    @apply mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-10;
+  .container-page {
+    @apply mx-auto w-full max-w-6xl px-6;
+  }
+  .container-narrow {
+    @apply mx-auto w-full max-w-5xl px-6;
   }
   .section {
-    @apply py-16 sm:py-20 lg:py-24;
+    @apply py-20 sm:py-28;
   }
 
-  /* Typography helpers — Apple-style large, tight, balanced display type */
-  .display {
-    @apply font-display font-bold tracking-[-0.025em] leading-[1.05];
-    text-wrap: balance;
-  }
-  .balance {
-    text-wrap: balance;
-  }
-  .eyebrow {
-    @apply inline-flex items-center gap-2 text-sm font-semibold tracking-tight text-emerald-700;
-  }
-  .lead {
-    @apply text-xl leading-relaxed text-muted sm:text-2xl;
-    text-wrap: balance;
-  }
-
-  .glass {
-    @apply border border-line bg-white/80 backdrop-blur-xl;
-  }
-  .pill {
-    @apply inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs font-semibold;
-  }
-  .accent-line {
-    @apply h-px w-10 bg-brand-orange;
-  }
-
-  /* Soft fade on the left/right edges of horizontal marquees (Apple/Hostinger style). */
+  /* Soft fade on the left/right edges of horizontal marquees. */
   .mask-fade-x {
-    -webkit-mask-image: linear-gradient(
-      to right,
-      transparent,
-      #000 8%,
-      #000 92%,
-      transparent
-    );
-    mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, #000 10%, #000 90%, transparent);
+    mask-image: linear-gradient(to right, transparent, #000 10%, #000 90%, transparent);
   }
 
-  .hero-bg {
-    background-image: url('/hero-bg.svg');
+  /* Long-form legal/prose copy. */
+  .prose-legal {
+    @apply space-y-4 text-[15px] leading-relaxed text-zinc-600;
   }
-
-  .icon-tile {
-    @apply flex h-12 w-12 items-center justify-center rounded-2xl bg-emerald-800 text-white;
+  .prose-legal strong {
+    @apply font-semibold text-zinc-900;
+  }
+  .prose-legal a {
+    @apply font-medium text-primary-700 underline underline-offset-2 hover:text-primary-800;
+  }
+  .prose-legal ul {
+    @apply list-disc space-y-2 pl-5 marker:text-zinc-400;
   }
 }
 
-/* Subtle scrollbar */
-::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
-}
-::-webkit-scrollbar-thumb {
-  background: #d1d9e0;
-  border-radius: 999px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: #b6c2cd;
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .animate-marquee,
+  .animate-marquee-reverse {
+    animation: none;
+  }
 }

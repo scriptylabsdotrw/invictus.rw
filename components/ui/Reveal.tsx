@@ -1,41 +1,49 @@
 'use client'
 
-import { motion } from 'framer-motion'
-import type { ReactNode } from 'react'
+import { useEffect, useRef, useState, type ReactNode } from 'react'
+import { cn } from '@/lib/utils'
 
 interface RevealProps {
   children: ReactNode
+  /** Stagger delay in milliseconds — use `index * 100` for grid items. */
   delay?: number
-  y?: number
   className?: string
+  as?: 'div' | 'li' | 'article'
 }
 
-export default function Reveal({ children, delay = 0, y = 24, className }: RevealProps) {
+/** Fades and slides content up once it scrolls into view. No animation library. */
+export default function Reveal({ children, delay = 0, className, as: Tag = 'div' }: RevealProps) {
+  const ref = useRef<HTMLElement>(null)
+  const [visible, setVisible] = useState(false)
+
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true)
+          observer.disconnect()
+        }
+      },
+      { rootMargin: '0px 0px -60px 0px', threshold: 0.1 },
+    )
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [])
+
   return (
-    <motion.div
-      className={className}
-      initial={{ opacity: 0, y }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-80px' }}
-      transition={{ duration: 0.7, delay, ease: [0.22, 1, 0.36, 1] }}
+    <Tag
+      // @ts-expect-error — ref type is shared across the allowed tags
+      ref={ref}
+      style={{ transitionDelay: visible ? `${delay}ms` : '0ms' }}
+      className={cn(
+        'transition-all duration-700 ease-out motion-reduce:transition-none',
+        visible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0 motion-reduce:translate-y-0 motion-reduce:opacity-100',
+        className,
+      )}
     >
       {children}
-    </motion.div>
+    </Tag>
   )
-}
-
-export const staggerContainer = {
-  hidden: {},
-  show: {
-    transition: { staggerChildren: 0.12, delayChildren: 0.1 },
-  },
-}
-
-export const staggerItem = {
-  hidden: { opacity: 0, y: 24 },
-  show: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] },
-  },
 }
