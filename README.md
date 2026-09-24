@@ -141,3 +141,19 @@ No environment variables are required to run the marketing site locally. The ins
 
 - Privacy Policy complies with **Rwanda Law N° 058/2021** on the protection of personal data and privacy.
 - All content and branding are property of **ScriptyLabs Inc**.
+
+---
+
+## Docker & deployment
+
+The site is a fully static Next.js export: `pnpm build` writes plain HTML/CSS/JS to `out/`.
+
+```bash
+# Build and run the production image locally (served by Caddy on port 4000)
+docker compose up --build
+```
+
+- `Dockerfile` builds with pnpm and copies `out/` into a `caddy:alpine` image.
+- `Caddyfile` serves `/page` from `/page/index.html` and falls back to `404.html`.
+- CI (`.github/workflows/build.yaml`) runs `pnpm install --frozen-lockfile` and `pnpm build`;
+  `deploy.yaml` pushes the image to GHCR and deploys `docker-stack.yaml` after CI passes on `main`.

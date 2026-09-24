@@ -10,3 +10,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: route === '' ? 1 : 0.8,
   }))
 }
+
+// Generated once at build time for the static export.
+export const dynamic = 'force-static'

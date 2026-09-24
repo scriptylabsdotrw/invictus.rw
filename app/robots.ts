@@ -6,3 +6,6 @@ export default function robots(): MetadataRoute.Robots {
     sitemap: 'https://invictus.rw/sitemap.xml',
   }
 }
+
+// Generated once at build time for the static export.
+export const dynamic = 'force-static'
