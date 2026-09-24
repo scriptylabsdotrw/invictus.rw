@@ -1,6 +1,4 @@
-"use client";
-
-import Link from "next/link";
+import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { plans } from "@/lib/constants";
 import Reveal from "./ui/Reveal";
@@ -78,7 +76,7 @@ export default function Pricing() {
                   </ul>
 
                   <Link
-                    href="/contact"
+                    to="/contact"
                     className={`mt-8 inline-flex items-center justify-between rounded-lg border px-5 py-3 text-sm font-semibold transition-colors ${
                       popular
                         ? "border-white/20 bg-white text-emerald-950 hover:bg-emerald-50"

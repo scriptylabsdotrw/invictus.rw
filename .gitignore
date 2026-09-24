@@ -3,25 +3,19 @@ node_modules
 .pnp
 .pnp.js
 
-# next.js
-.next/
-out/
-build
+# production
 dist
+dist-ssr
+*.local
 
 # misc
 .DS_Store
 *.pem
-*.local
 
 # debug
 npm-debug.log*
 yarn-debug.log*
-yarn-error.log*
-.next-dev.log
-
-# vercel
-.vercel
+pnpm-debug.log*
 
 # env
 .env
@@ -29,12 +23,9 @@ yarn-error.log*
 
 # typescript
 *.tsbuildinfo
-next-env.d.ts
 
 # editor
 .vscode/*
 !.vscode/extensions.json
 .idea
 *.sw?
-
-.vercel

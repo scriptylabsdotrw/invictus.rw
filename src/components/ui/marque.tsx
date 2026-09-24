@@ -1,4 +1,3 @@
-import Image from 'next/image'
 import Reveal from './Reveal'
 
 export interface Logo {
@@ -10,7 +9,7 @@ export interface Logo {
 function Logo({ item }: { item: Logo }) {
   const content = (
     <div className="group flex w-56 shrink-0 flex-col items-center gap-3 px-4 py-2 text-center sm:w-64">
-      <Image
+      <img
         src={item.logo}
         alt={item.name + ' logo'}
         width={180}
@@ -30,7 +29,7 @@ function Logo({ item }: { item: Logo }) {
   )
 }
 
-export  function Marquee({
+export function Marquee({
   label,
   items,
   direction = 'left',

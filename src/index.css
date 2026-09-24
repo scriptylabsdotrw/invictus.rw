@@ -1,8 +1,16 @@
+@import '@fontsource/geist-sans/400.css';
+@import '@fontsource/geist-sans/500.css';
+@import '@fontsource/geist-sans/600.css';
+@import '@fontsource/geist-sans/700.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
+  --font-geist: 'Geist', 'Geist Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-heading: var(--font-geist);
+  --font-sans: var(--font-geist);
   color-scheme: light;
 }
 
@@ -10,10 +18,11 @@ html {
   scroll-behavior: smooth;
   /* Offset anchor scrolling for the sticky navbar */
   scroll-padding-top: 128px;
+  font-family: var(--font-geist);
 }
 
 body {
-  font-family: var(--font-geist), 'Segoe UI', sans-serif;
+  font-family: var(--font-geist);
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

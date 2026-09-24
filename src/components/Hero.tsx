@@ -1,8 +1,5 @@
-"use client";
-
 import { useRef } from "react";
-import Image from "next/image";
-import Link from "next/link";
+import { Link } from "react-router-dom";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Icon from "./ui/Icon";
 import { ArrowRight01Icon } from "@hugeicons/core-free-icons";
@@ -64,7 +61,7 @@ export default function Hero() {
             className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row"
           >
             <MotionLink
-              href="/contact"
+              to="/contact"
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.98 }}
               className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-white px-7 py-3.5 text-sm font-semibold text-emerald-900 ring-1 ring-white/40 transition-colors hover:bg-emerald-50 sm:w-auto"
@@ -85,12 +82,11 @@ export default function Hero() {
             style={{ scale: previewScale }}
             className="origin-top"
           >
-            <Image
+            <img
               src="/demo.png"
               alt="Invictus loan management dashboard"
               width={2880}
               height={1800}
-              priority
               className="block h-auto w-full"
             />
           </motion.div>

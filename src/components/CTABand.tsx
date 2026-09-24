@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "react-router-dom";
 import Reveal from "./ui/Reveal";
 import Icon from "./ui/Icon";
 import { ArrowRight01Icon } from "@hugeicons/core-free-icons";
@@ -24,13 +24,13 @@ export default function CTABand() {
               </p>
               <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
                 <Link
-                  href="/contact"
+                  to="/contact"
                   className="inline-flex w-full items-center justify-center gap-2 rounded-md bg-brand-orange px-6 py-3 text-sm font-semibold text-white transition-all hover:bg-brand-orange-soft sm:w-auto"
                 >
                   Request a Demo <Icon icon={ArrowRight01Icon} size={18} />
                 </Link>
                 <Link
-                  href="/pricing"
+                  to="/pricing"
                   className="inline-flex w-full items-center justify-center rounded-md border border-white/20 bg-white/5 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-white/10 sm:w-auto"
                 >
                   View Pricing

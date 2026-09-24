@@ -1,7 +1,5 @@
-"use client";
-
 import { useRef, useState } from "react";
-import Link from "next/link";
+import { Link } from "react-router-dom";
 import {
   AnimatePresence,
   motion,
@@ -49,7 +47,6 @@ export default function HowItWorks() {
   });
 
   const step = steps[active];
-  const isLast = active === steps.length - 1;
 
   return (
     <section
@@ -114,7 +111,7 @@ export default function HowItWorks() {
                   <div className="mt-7">
                     <div className="flex flex-wrap items-center gap-4">
                       <Link
-                        href="/contact"
+                        to="/contact"
                         className="group inline-flex items-center gap-2 rounded-md bg-emerald-800 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-emerald-900"
                       >
                         Request a demo

@@ -1,8 +1,5 @@
-'use client'
-
 import { useEffect, useState } from 'react'
-import Link from 'next/link'
-import { usePathname } from 'next/navigation'
+import { Link, useLocation } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
 import Logo from './ui/Logo'
 import Icon from './ui/Icon'
@@ -16,7 +13,7 @@ export const navLinks = [
 
 export default function Navbar() {
   const [open, setOpen] = useState(false)
-  const pathname = usePathname()
+  const { pathname } = useLocation()
   useEffect(() => {
     setOpen(false)
   }, [pathname])
@@ -31,7 +28,7 @@ export default function Navbar() {
         transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
       >
         <div className="container-px flex h-20 items-center justify-between lg:h-[116px]">
-          <Link href="/" aria-label="Invictus home" className="shrink-0">
+          <Link to="/" aria-label="Invictus home" className="shrink-0">
             <Logo light className="h-16 lg:h-[104px]" />
           </Link>
 
@@ -39,7 +36,7 @@ export default function Navbar() {
             {navLinks.map((l) => (
               <Link
                 key={l.href}
-                href={l.href}
+                to={l.href}
                 className={`rounded-full px-3.5 py-2 text-sm font-medium transition-colors ${
                   isActive(l.href)
                     ? 'bg-white/15 text-white'
@@ -55,7 +52,7 @@ export default function Navbar() {
             <a href="https://lms.rw/en/auth/login" className="inline-flex items-center justify-center rounded-lg border border-white/30 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-white/10">
               Login
             </a>
-            <Link href="/contact" className="inline-flex items-center justify-center rounded-lg bg-white px-5 py-2.5 text-sm font-semibold text-emerald-900 transition-colors hover:bg-emerald-50">
+            <Link to="/contact" className="inline-flex items-center justify-center rounded-lg bg-white px-5 py-2.5 text-sm font-semibold text-emerald-900 transition-colors hover:bg-emerald-50">
               Request Demo
             </Link>
           </div>
@@ -84,7 +81,7 @@ export default function Navbar() {
               {navLinks.map((l) => (
                 <Link
                   key={l.href}
-                  href={l.href}
+                  to={l.href}
                   className={`block rounded-2xl px-4 py-3 text-base font-medium ${
                     isActive(l.href)
                       ? 'bg-emerald-50 text-emerald-800'
@@ -98,7 +95,7 @@ export default function Navbar() {
                 <a href="https://invictus.rw/en/auth/login" className="btn-secondary">
                   Login
                 </a>
-                <Link href="/contact" className="btn-primary">
+                <Link to="/contact" className="btn-primary">
                   Request Demo
                 </Link>
               </div>

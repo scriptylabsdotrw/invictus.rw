@@ -1,6 +1,4 @@
-"use client";
-
-import Link from "next/link";
+import { Link } from "react-router-dom";
 import Logo from "./ui/Logo";
 import { features } from "@/lib/constants";
 
@@ -55,8 +53,7 @@ export default function Footer() {
           <div className="max-w-xs">
             <Logo light className="h-24" />
             <p className="mt-5 text-sm leading-relaxed text-emerald-100/70">
-              Modern loan management for microfinance institutions, SACCOs,
-              and lenders.
+              Modern loan management for microfinance institutions
             </p>
             <div className="mt-6 flex gap-3">
               {socials.map((s) => (
@@ -88,7 +85,7 @@ export default function Footer() {
                 {col.links.map((l) => (
                   <li key={l.label}>
                     <Link
-                      href={l.href}
+                      to={l.href}
                       className="text-sm text-emerald-100/70 transition-colors hover:text-white"
                     >
                       {l.label}
@@ -126,22 +123,22 @@ export default function Footer() {
           <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-sm text-emerald-100/70 sm:justify-start">
             <span>© {new Date().getFullYear()} Invictus. All rights reserved.</span>
             <Link
-              href="/privacy"
+              to="/privacy"
               className="transition-colors hover:text-white"
             >
               Privacy Policy
             </Link>
-            <Link href="/terms" className="transition-colors hover:text-white">
+            <Link to="/terms" className="transition-colors hover:text-white">
               Terms &amp; Conditions
             </Link>
             <Link
-              href="/cookies"
+              to="/cookies"
               className="transition-colors hover:text-white"
             >
               Cookie Policy
             </Link>
             <Link
-              href="/acceptable-use"
+              to="/acceptable-use"
               className="transition-colors hover:text-white"
             >
               Acceptable Use
