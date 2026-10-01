@@ -43,7 +43,7 @@ export default function Navbar() {
 
         <div className="hidden items-center gap-5 md:flex">
           <a href={LOGIN_URL} className="text-sm font-medium text-zinc-600 transition-colors hover:text-zinc-900">
-            Log in
+            Sign Up
           </a>
           <Button href="/contact" variant="accent" size="sm">
             Request a demo

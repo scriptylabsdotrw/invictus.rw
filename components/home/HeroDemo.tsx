@@ -1054,12 +1054,12 @@ export default function HeroDemo() {
     >
       <div className="flex items-center gap-3 border-b border-zinc-200 bg-zinc-50 px-4 py-2.5">
         <span className="flex gap-1.5" aria-hidden="true">
-          <span className="h-2.5 w-2.5 rounded-full bg-zinc-300" />
-          <span className="h-2.5 w-2.5 rounded-full bg-zinc-300" />
-          <span className="h-2.5 w-2.5 rounded-full bg-zinc-300" />
+          <span className="h-2.5 w-2.5 rounded-full bg-[#ff5f57] " />
+          <span className="h-2.5 w-2.5 rounded-full bg-[#febc2e]" />
+          <span className="h-2.5 w-2.5 rounded-full bg-[#28c840]" />
         </span>
         <span className="mx-auto w-full max-w-sm truncate rounded-md border border-zinc-200 bg-white px-3 py-1 text-center text-[11px] text-zinc-500">
-          lms.rw<span className="text-zinc-400">{screen.path}</span>
+          invictus.rw<span className="text-zinc-400">{screen.path}</span>
         </span>
         <span className="w-[42px]" aria-hidden="true" />
       </div>
